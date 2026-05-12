@@ -1,4 +1,4 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚQ¯if (!("finalizeConstruction" in ViewPU.prototype)) {
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚƒJif (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 /*
@@ -28,6 +28,8 @@ class HomePage extends ViewPU {
         }
         this.__inputValue = new ObservedPropertySimplePU('', this, "inputValue");
         this.__calValue = new ObservedPropertySimplePU('', this, "calValue");
+        this.__isScientificMode = new ObservedPropertySimplePU(false, this, "isScientificMode");
+        this.__equationMode = new ObservedPropertySimplePU('', this, "equationMode");
         this.expressions = [];
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -39,6 +41,12 @@ class HomePage extends ViewPU {
         if (params.calValue !== undefined) {
             this.calValue = params.calValue;
         }
+        if (params.isScientificMode !== undefined) {
+            this.isScientificMode = params.isScientificMode;
+        }
+        if (params.equationMode !== undefined) {
+            this.equationMode = params.equationMode;
+        }
         if (params.expressions !== undefined) {
             this.expressions = params.expressions;
         }
@@ -48,10 +56,14 @@ class HomePage extends ViewPU {
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__inputValue.purgeDependencyOnElmtId(rmElmtId);
         this.__calValue.purgeDependencyOnElmtId(rmElmtId);
+        this.__isScientificMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__equationMode.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__inputValue.aboutToBeDeleted();
         this.__calValue.aboutToBeDeleted();
+        this.__isScientificMode.aboutToBeDeleted();
+        this.__equationMode.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -66,6 +78,18 @@ class HomePage extends ViewPU {
     }
     set calValue(newValue) {
         this.__calValue.set(newValue);
+    }
+    get isScientificMode() {
+        return this.__isScientificMode.get();
+    }
+    set isScientificMode(newValue) {
+        this.__isScientificMode.set(newValue);
+    }
+    get equationMode() {
+        return this.__equationMode.get();
+    }
+    set equationMode(newValue) {
+        this.__equationMode.set(newValue);
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -110,6 +134,101 @@ class HomePage extends ViewPU {
         }, Text);
         Text.pop();
         Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Scientific mode toggle button
+            Column.create();
+            // Scientific mode toggle button
+            Column.width(CommonConstants.FULL_PERCENT);
+            // Scientific mode toggle button
+            Column.margin({ bottom: '5vp' });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width(CommonConstants.FULL_PERCENT);
+            Row.height('40vp');
+            Row.backgroundColor('#4A90E2');
+            Row.justifyContent(FlexAlign.Center);
+            Row.onClick(() => {
+                this.isScientificMode = !this.isScientificMode;
+            });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isScientificMode ? 'æ ‡å‡†æ¨¡å¼' : 'ç§‘å­¦æ¨¡å¼');
+            Text.fontSize('14vp');
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        // Scientific mode toggle button
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // Scientific keys (shown when in scientific mode)
+            if (this.isScientificMode) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width(CommonConstants.FULL_PERCENT);
+                        Column.margin({ bottom: '5vp' });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width(CommonConstants.FULL_PERCENT);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, columnItemIndex) => {
+                            const columnItem = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width(CommonConstants.FULL_PERCENT);
+                                Column.justifyContent(FlexAlign.Center);
+                                Column.layoutWeight(1);
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                ForEach.create();
+                                const forEachItemGenFunction = (_item, keyItemIndex) => {
+                                    const keyItem = _item;
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Column.create();
+                                        Column.width('60vp');
+                                        Column.height('35vp');
+                                        Column.borderWidth(1);
+                                        Column.borderColor({ "id": 16777222, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.borderRadius({ "id": 16777229, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.backgroundColor('#E8E8E8');
+                                        Column.alignItems(HorizontalAlign.Center);
+                                        Column.justifyContent(FlexAlign.Center);
+                                        Column.onClick(() => {
+                                            this.inputScientificSymbol(keyItem.value);
+                                        });
+                                    }, Column);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(keyItem.value);
+                                        Text.fontSize('14vp');
+                                        Text.fontColor(Color.Black);
+                                    }, Text);
+                                    Text.pop();
+                                    Column.pop();
+                                };
+                                this.forEachUpdateFunction(elmtId, columnItem, forEachItemGenFunction, (keyItem) => JSON.stringify(keyItem), true, false);
+                            }, ForEach);
+                            ForEach.pop();
+                            Column.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, keysModel.getScientificKeys(), forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.layoutWeight(1);
@@ -222,11 +341,17 @@ class HomePage extends ViewPU {
             case Symbol.CLEAN:
                 this.expressions = [];
                 this.calValue = '';
+                this.equationMode = ''; // Exit equation mode
                 break;
             case Symbol.DEL:
                 this.inputDelete(len);
                 break;
             case Symbol.EQU:
+                // Check if in equation mode
+                if (this.equationMode !== '') {
+                    this.solveEquation();
+                    return;
+                }
                 if (len === 0) {
                     return;
                 }
@@ -255,23 +380,41 @@ class HomePage extends ViewPU {
         if (CheckEmptyUtil.isEmpty(value)) {
             return;
         }
+        // In equation mode, just append to input value
+        if (this.equationMode !== '') {
+            this.inputValue += value;
+            return;
+        }
         let len = this.expressions.length;
         let last = len > 0 ? this.expressions[len - 1] : '';
         let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
         if (!this.validateEnter(last, value)) {
             return;
         }
+        // Check if last element is an operator (including scientific operators)
+        let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
         if (!last) {
             this.expressions.push(value);
         }
-        else if (!secondLast) {
-            this.expressions[len - 1] += value;
-        }
-        if (secondLast && CalculateUtil.isSymbol(secondLast)) {
-            this.expressions[len - 1] += value;
-        }
-        if (secondLast && !CalculateUtil.isSymbol(secondLast)) {
+        else if (isLastOperator) {
+            // If last is an operator, push new number
             this.expressions.push(value);
+        }
+        else if (!secondLast) {
+            // If no second last, append to last number
+            this.expressions[len - 1] += value;
+        }
+        else {
+            // Check if second last is an operator
+            let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
+            if (isSecondLastOperator) {
+                // Append to last number
+                this.expressions[len - 1] += value;
+            }
+            else {
+                // Push new number
+                this.expressions.push(value);
+            }
         }
         this.formatInputValue();
         if (value !== CommonConstants.DOTS) {
@@ -461,6 +604,153 @@ class HomePage extends ViewPU {
         });
         this.inputValue = deepExpressions.join('');
     }
+    /**
+     * Input scientific symbols.
+     *
+     * @param value Scientific symbol.
+     */
+    inputScientificSymbol(value) {
+        if (CheckEmptyUtil.isEmpty(value)) {
+            return;
+        }
+        // In equation mode, handle comma and minus
+        if (this.equationMode !== '') {
+            if (value === ',') {
+                this.inputValue += ',';
+                return;
+            }
+            if (value === '-') {
+                this.inputValue += '-';
+                return;
+            }
+        }
+        // Handle special constants
+        if (value === 'Ï€') {
+            this.expressions.push(Math.PI.toString());
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        if (value === 'e') {
+            this.expressions.push(Math.E.toString());
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle equation mode
+        if (value === 'æ–¹ç¨‹') {
+            this.showEquationDialog();
+            return;
+        }
+        // Handle xÂ² (square)
+        if (value === 'xÂ²') {
+            this.expressions.push('^');
+            this.expressions.push('2');
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle 1/x (reciprocal)
+        if (value === '1/x') {
+            this.expressions.unshift('1');
+            this.expressions.push('Ã·');
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle parentheses
+        if (value === '(' || value === ')') {
+            this.expressions.push(value);
+            this.formatInputValue();
+            return;
+        }
+        // For unary scientific operators (sin, cos, tan, log, ln, âˆš)
+        // These are prefix operators, so they should be added before the operand
+        // But in our UI flow, user inputs number first, then clicks operator
+        // So we need to apply the operator to the last number in expressions
+        const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', 'âˆš', '!'];
+        if (unaryOperators.indexOf(value) !== -1) {
+            let len = this.expressions.length;
+            if (len > 0) {
+                let last = this.expressions[len - 1];
+                // If last element is a number, apply the operator
+                if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
+                    // For prefix operators like sin, cos, âˆš, we need to insert operator before the number
+                    // For postfix operators like !, we add after the number
+                    if (value === '!') {
+                        // Postfix operator (factorial)
+                        this.expressions.push(value);
+                    }
+                    else {
+                        // Prefix operator: insert before the last number
+                        this.expressions.splice(len - 1, 0, value);
+                    }
+                    this.formatInputValue();
+                    this.getResult();
+                    return;
+                }
+            }
+            // If no number before, just add the operator (user will input number next)
+            this.expressions.push(value);
+            this.formatInputValue();
+            return;
+        }
+        // For binary operators like ^
+        this.expressions.push(value);
+        this.formatInputValue();
+    }
+    /**
+     * Show equation solving dialog.
+     */
+    showEquationDialog() {
+        // Toggle equation mode
+        if (this.equationMode === '') {
+            this.equationMode = 'quadratic';
+            this.calValue = 'æ–¹ç¨‹æ¨¡å¼ï¼šè¾“å…¥ç³»æ•° a,b,c è§£ axÂ²+bx+c=0';
+            this.expressions = [];
+            this.inputValue = '';
+        }
+        else {
+            // Exit equation mode
+            this.equationMode = '';
+            this.calValue = '';
+            this.expressions = [];
+            this.inputValue = '';
+        }
+    }
+    /**
+     * Solve equation from input.
+     */
+    solveEquation() {
+        // Get the input string
+        let input = this.inputValue.trim();
+        // Parse coefficients (separated by comma or space)
+        let coefficients;
+        if (input.indexOf(',') !== -1) {
+            coefficients = input.split(',');
+        }
+        else {
+            coefficients = input.split(/\s+/);
+        }
+        // Trim each coefficient
+        coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
+        if (coefficients.length === 2) {
+            // Linear equation: ax + b = 0
+            let a = coefficients[0];
+            let b = coefficients[1];
+            this.calValue = CalculateUtil.solveLinearEquation(a, b);
+        }
+        else if (coefficients.length === 3) {
+            // Quadratic equation: axÂ² + bx + c = 0
+            let a = coefficients[0];
+            let b = coefficients[1];
+            let c = coefficients[2];
+            this.calValue = CalculateUtil.solveQuadraticEquation(a, b, c);
+        }
+        else {
+            this.calValue = 'é”™è¯¯ï¼šè¯·è¾“å…¥2ä¸ªç³»æ•°ï¼ˆä¸€æ¬¡æ–¹ç¨‹ï¼‰æˆ–3ä¸ªç³»æ•°ï¼ˆäºŒæ¬¡æ–¹ç¨‹ï¼‰';
+        }
+    }
     rerender() {
         this.updateDirtyElements();
     }
@@ -469,7 +759,7 @@ class HomePage extends ViewPU {
     }
 }
 registerNamedRoute(() => new HomePage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/HomePage", pageFullPath: "entry/src/main/ets/pages/HomePage", integratedHsp: "false", moduleType: "followWithHap" });
-//# sourceMappingURL=HomePage.js.mapÂ•ÙDD:\SimpleCalculator-master\entry\src\main\ets\common\util\Logger.etsÙKD:\SimpleCalculator-master\entry\src\main\ets\common\util\CalculateUtil.etsÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\CheckEmptyUtil.etsÙND:\SimpleCalculator-master\entry\src\main\ets\viewmodel\PresskeysViewModel.etsÙRD:\SimpleCalculator-master\entry\src\main\ets\common\constants\CommonConstants.etsÙ@D:\SimpleCalculator-master\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ D:\SimpleCalculator-master\entryºD:\SimpleCalculator-master¥entry¥1.0.0Ô  Ù D:\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ/G/*
+//# sourceMappingURL=HomePage.js.mapÂ•ÙDD:\SimpleCalculator-master\entry\src\main\ets\common\util\Logger.etsÙKD:\SimpleCalculator-master\entry\src\main\ets\common\util\CalculateUtil.etsÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\CheckEmptyUtil.etsÙND:\SimpleCalculator-master\entry\src\main\ets\viewmodel\PresskeysViewModel.etsÙRD:\SimpleCalculator-master\entry\src\main\ets\common\constants\CommonConstants.etsÙ@D:\SimpleCalculator-master\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ D:\SimpleCalculator-master\entryºD:\SimpleCalculator-master¥entry¥1.0.0Ô  Ù D:\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚL/*
  * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -496,6 +786,8 @@ import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
 struct HomePage {
   @State inputValue: string = '';
   @State calValue: string = '';
+  @State isScientificMode: boolean = false;
+  @State equationMode: string = ''; // 'linear' or 'quadratic'
   private expressions: Array<string> = [];
 
   build() {
@@ -532,6 +824,60 @@ struct HomePage {
         right: $r('app.float.text_margin_right'),
         bottom: $r('app.float.text_margin_bottom')
       })
+
+      // Scientific mode toggle button
+      Column() {
+        Row() {
+          Text(this.isScientificMode ? 'æ ‡å‡†æ¨¡å¼' : 'ç§‘å­¦æ¨¡å¼')
+            .fontSize('14vp')
+            .fontColor(Color.White)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .height('40vp')
+        .backgroundColor('#4A90E2')
+        .justifyContent(FlexAlign.Center)
+        .onClick(() => {
+          this.isScientificMode = !this.isScientificMode;
+        })
+      }
+      .width(CommonConstants.FULL_PERCENT)
+      .margin({ bottom: '5vp' })
+
+      // Scientific keys (shown when in scientific mode)
+      if (this.isScientificMode) {
+        Column() {
+          Row() {
+            ForEach(keysModel.getScientificKeys(), (columnItem: Array<PressKeysBean>, columnItemIndex?: number) => {
+              Column() {
+                ForEach(columnItem, (keyItem: PressKeysBean, keyItemIndex?: number) => {
+                  Column() {
+                    Text(keyItem.value)
+                      .fontSize('14vp')
+                      .fontColor(Color.Black)
+                  }
+                  .width('60vp')
+                  .height('35vp')
+                  .borderWidth(1)
+                  .borderColor($r('app.color.border_color'))
+                  .borderRadius($r('app.float.border_radius'))
+                  .backgroundColor('#E8E8E8')
+                  .alignItems(HorizontalAlign.Center)
+                  .justifyContent(FlexAlign.Center)
+                  .onClick(() => {
+                    this.inputScientificSymbol(keyItem.value);
+                  })
+                }, (keyItem: PressKeysBean) => JSON.stringify(keyItem))
+              }
+              .width(CommonConstants.FULL_PERCENT)
+              .justifyContent(FlexAlign.Center)
+              .layoutWeight(1)
+            })
+          }
+          .width(CommonConstants.FULL_PERCENT)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .margin({ bottom: '5vp' })
+      }
 
       Column() {
         Row() {
@@ -623,11 +969,17 @@ struct HomePage {
       case Symbol.CLEAN:
         this.expressions = [];
         this.calValue = '';
+        this.equationMode = '';  // Exit equation mode
         break;
       case Symbol.DEL:
         this.inputDelete(len);
         break;
       case Symbol.EQU:
+        // Check if in equation mode
+        if (this.equationMode !== '') {
+          this.solveEquation();
+          return;
+        }
         if (len === 0) {
           return;
         }
@@ -657,22 +1009,40 @@ struct HomePage {
     if (CheckEmptyUtil.isEmpty(value)) {
       return;
     }
+
+    // In equation mode, just append to input value
+    if (this.equationMode !== '') {
+      this.inputValue += value;
+      return;
+    }
+
     let len = this.expressions.length;
     let last = len > 0 ? this.expressions[len - 1] : '';
     let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
     if (!this.validateEnter(last, value)) {
       return;
     }
+    // Check if last element is an operator (including scientific operators)
+    let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
+
     if (!last) {
       this.expressions.push(value);
-    } else if (!secondLast) {
-      this.expressions[len - 1] += value;
-    }
-    if (secondLast && CalculateUtil.isSymbol(secondLast)) {
-      this.expressions[len -1] += value;
-    }
-    if (secondLast && !CalculateUtil.isSymbol(secondLast)) {
+    } else if (isLastOperator) {
+      // If last is an operator, push new number
       this.expressions.push(value);
+    } else if (!secondLast) {
+      // If no second last, append to last number
+      this.expressions[len - 1] += value;
+    } else {
+      // Check if second last is an operator
+      let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
+      if (isSecondLastOperator) {
+        // Append to last number
+        this.expressions[len - 1] += value;
+      } else {
+        // Push new number
+        this.expressions.push(value);
+      }
     }
     this.formatInputValue();
     if (value !== CommonConstants.DOTS) {
@@ -869,43 +1239,266 @@ struct HomePage {
     });
     this.inputValue = deepExpressions.join('');
   }
-}ÀÔrD•¿../viewmodel/PresskeysViewModelÙ#../common/constants/CommonConstantsµ../common/util/Logger½../common/util/CheckEmptyUtil¼../common/util/CalculateUtilÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙND:\SimpleCalculator-master\entry\src\main\ets\viewmodel\PresskeysViewModel.etsAÃªoh-resolveÂEAÂÙRD:\SimpleCalculator-master\entry\src\main\ets\common\constants\CommonConstants.etsAÃªoh-resolveÂEAÂÙDD:\SimpleCalculator-master\entry\src\main\ets\common\util\Logger.etsAÃªoh-resolveÂEAÂÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\CheckEmptyUtil.etsAÃªoh-resolveÂEAÂÙKD:\SimpleCalculator-master\entry\src\main\ets\common\util\CalculateUtil.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings«HomePage.js ‘¬HomePage.etsÜÏ‘”    ‘” –”   ” ” ” ”* *”+ +–”   ” ” ” ”8 8”9 9–”   ” ” ” ”: :”; ;–”   ” ” ” ”7 7”8 8š”   ” ”	 	” ” ”   ”" "”( (”ÌM ÌM”ÌN ÌN’” ” ‘”  ’”9 ”;  ’”7 ”9 ’” '” )‘” ÌN’” 	” ’” 	” ’” 	” ’” 	” ‘” ’” ” 
-˜” ” 
-” Ì‡” Ì‡” Ì‡”) Ì‡”* Ì‡”6 Ì‡(”” ” 
-” Ìˆ”" Ìˆ’” ” ˜” ” ” +” +” +”( +”) +”5 +)”” ” ” ,” ,˜” ” ” -” -” -”- -!”. -"”1 -%•” ” ” .” .” .“” /” /”Ì‰ /1“” 0” 0”Ì‡ 0-‘” 1Ÿ”  ”  ”  ”  ”#  ”%  ”)  ”*  ”6  +”7  ,”;  0”<  1”ÌF  ;”ÌG  <”ÌI  >˜”  ”  ” !” !” !”, !!”- !"”9 !.Ü ”  ”  ” "” "” #”  #”$ #”% #”/ #”0 #”6 ##”9 #&”ÌH #5”ÌI #6”ÌY #ÌF”ÌZ #ÌG”Ì[ #ÌH”Ì\ #ÌI”ÌĞ $-”ÌÑ $.”ÍD $ÌN–”  ”  ” &” &” &”# &˜”  ”  ” '” '”  '”% '”& '”+ ' ˜”  ”  ” (” (”  (”) (”* (”- ("””  ”  ” )”% )’” ” ’” 3” 3˜” 3” 3” 8” 8” 8”( 8”) 8”5 8)”” 3” 3” 9” 9˜” 3” 3” :” :” :”- :!”. :"”1 :%•” 3” 3” ;” ;” ;“” <” <”Ì‰ <0“” =” =”ÌŠ =2‘” >›” 4” 4” 4” 4” 4”) 4”* 4”. 4#”/ 4$”7 4,”8 4-”” 4” 4” 5” 5”” 4” 4” 6” 6’” 4” 4’” 3” 3’” Ì@” Ì@–” Ì@” Ì@” Ìƒ” Ìƒ”  Ìƒ”! Ìƒ˜” Ì@” Ì@” Ì„” Ì„” Ì„”( Ì„”) Ì„”5 Ì„)”” Ì@” Ì@” Ì…”" Ì…’” ÌA” ÌA˜” ÌA” ÌA” Ì|	” Ì|” Ì|”& Ì|”' Ì| ”3 Ì|,˜” ÌA” ÌA” Ì}	” Ì}” Ì}”( Ì}!”) Ì}"”, Ì}%•” ÌA” ÌA” Ì~	” Ì~” Ì~“” Ì
-” Ì”Ìˆ Ì+“” Ì€
-” Ì€”Ì‰ Ì€-‘” Ì	’” ÌB
-” ÌB’”3 ÌBÌO”ÌB ÌBÌg’” ÌC” ÌC–” ÌC” ÌC” Ìu”' Ìu”( Ìu”) Ìu•” ÌC” ÌC” Ìv”! Ìv”" Ìv“” Ìw” Ìw”Ì Ìw-“” Ìx” Ìx”Ì’ Ìx3‘” Ìy’” ÌD” ÌD’”; ÌD;”ÌG ÌDÌP’” ÌE”" ÌEÜ ” ÌE”" ÌE”# Ìm”/ Ìm”0 Ìn”1 Ìn”2 Ìn”ÌA Ìn#”ÌF Ìn(”ÌG Ìn)”ÌP Ìn2”ÌQ Ìn3”Ì] Ìn?”Ì_ ÌnÌA”Ì` ÌnÌB”Ìf ÌnÌH”Ìi ÌnÌK”Ìj ÌnÌL”Ìk ÌnÌM”Ìl ÌnÌNÜ ”  Ìo”! Ìo”- Ìo!”2 Ìo&”3 Ìo'”= Ìo1”> Ìo2”ÌD Ìo8”ÌG Ìo;”ÌH Ìo<”ÌI Ìo=”ÌJ Ìo>”ÌK Ìo?”ÌL ÌoÌ@”ÌM ÌoÌA”ÌN ÌoÌB”Ì] ÌoÌQ”Ì^ ÌoÌR”Ìa ÌoÌU”Ìb ÌoÌV”Ìc ÌoÌW”Ìd ÌoÌX”Ìe ÌoÌY˜” ÌE”" ÌE”# Ìq”( Ìq”) Ìq”8 Ìq&”9 Ìq'”ÌE Ìq3˜” ÌE”" ÌE”# Ìr”1 Ìr”2 Ìr ”; Ìr)”< Ìr*”ÌB Ìr0’” ÌF”" ÌF”” ÌF”" ÌF”# ÌU”( ÌUÜ ” ÌF”" ÌF”# ÌV”) ÌV”* ÌW”+ ÌW”, ÌW”; ÌW%”Ì@ ÌW*”ÌA ÌW+”ÌJ ÌW4”ÌK ÌW5”ÌW ÌWÌA”ÌY ÌWÌC”ÌZ ÌWÌD”Ì` ÌWÌJ”Ìc ÌWÌM”Ìd ÌWÌN”Ìe ÌWÌO”Ìf ÌWÌPÜ ”  ÌX”! ÌX”- ÌX#”2 ÌX(”3 ÌX)”= ÌX3”> ÌX4”ÌD ÌX:”ÌG ÌX=”ÌH ÌX>”ÌI ÌX?”ÌJ ÌXÌ@”ÌK ÌXÌA”ÌL ÌXÌB”ÌM ÌXÌC”ÌÁ ÌY4”ÌÂ ÌY5”Í5 ÌYÌP–” ÌF”" ÌF”# Ì[”. Ì[”/ Ì[”0 Ì[ ”” ÌF”" ÌF”# Ì\”. Ì\”” ÌF”" ÌF”# Ì]”/ Ì]Ü ” ÌF”" ÌF”# Ì^”2 Ì^"”3 Ì_”4 Ì_”5 Ì_”ÌD Ì_%”ÌI Ì_*”ÌJ Ì_+”ÌS Ì_4”ÌT Ì_5”Ì` Ì_ÌA”Ìb Ì_ÌC”Ìc Ì_ÌD”Ìi Ì_ÌJ”Ìl Ì_ÌM”Ìm Ì_ÌN”Ìn Ì_ÌO”Ìo Ì_ÌPÜ ”  Ì`”! Ì`”- Ì`#”2 Ì`(”3 Ì`)”= Ì`3”> Ì`4”ÌD Ì`:”ÌG Ì`=”ÌH Ì`>”ÌI Ì`?”ÌJ Ì`Ì@”ÌK Ì`ÌA”ÌL Ì`ÌB”ÌM Ì`ÌC”ÌÁ Ìa8”ÌÂ Ìa9”ÌÃ Ìa:”ÌÈ Ìa?”ÌÉ ÌaÌ@”ÌÎ ÌaÌE˜” ÌF”" ÌF”# Ìc”- Ìc”. Ìc”= Ìc-”> Ìc.”ÌD Ìc4˜” ÌF”" ÌF”# Ìd”1 Ìd!”2 Ìd"”; Ìd+”< Ìd,”ÌB Ìd2—” ÌF”" ÌF”# Ìe”* Ìe”+ Ìe”. Ìe”0 Ìe ˜”  Ìf”$ Ìf”+ Ìf”, Ìf ”0 Ìf$”5 Ìf)”6 Ìf*”8 Ìf,š”$ Ìg”( Ìg”) Ìg”4 Ìg&”5 Ìg'”< Ìg.”= Ìg/”ÌB Ìg4”ÌC Ìg5”ÌD Ìg6‘”! Ìh‘”% Ìhš”$ Ìi”( Ìi”) Ìi”4 Ìi&”5 Ìi'”< Ìi.”= Ìi/”ÌB Ìi4”ÌC Ìi5”ÌD Ìi6‘”! Ìj’” Ìk” Ìk˜” ÌG”  ÌG”' ÌG”( ÌG ”, ÌG$”1 ÌG)”2 ÌG*”4 ÌG,Ü ”( ÌH”- ÌH”5 ÌH”< ÌH#”= ÌH$”ÌC ÌH*”ÌH ÌH/”ÌQ ÌH8”ÌR ÌH9”ÌS ÌH:”ÌT ÌH;”Ì[ ÌHÌB”Ì\ ÌHÌC”Ìb ÌHÌI”Ìc ÌHÌJ”Ìd ÌHÌK”Ìe ÌHÌL”Ìg ÌHÌN˜”( ÌH”- ÌH”. ÌI”3 ÌI”4 ÌI”; ÌI&”< ÌI'”ÌA ÌI,˜”( ÌH”- ÌH”. ÌJ”4 ÌJ”5 ÌJ ”< ÌJ'”= ÌJ(”ÌC ÌJ.‘” ÌK‘”! ÌK–”( ÌL”, ÌL”4 ÌL”; ÌL"”< ÌL#”ÌA ÌL(Ü ”( ÌL”, ÌL”- ÌM”5 ÌM!”6 ÌN”7 ÌN”> ÌN"”? ÌN#”ÌD ÌN(”ÌI ÌN-”ÌX ÌN<”ÌY ÌN=”Ì] ÌNÌA”Ì^ ÌNÌB”Ì_ ÌNÌC”Ì` ÌNÌD”ÌÔ ÌO:”ÌÕ ÌO;”ÍH ÌOÌZ˜”( ÌL”, ÌL”- ÌQ”2 ÌQ”3 ÌQ”: ÌQ&”; ÌQ'”Ì@ ÌQ,˜”( ÌL”, ÌL”- ÌR”3 ÌR”4 ÌR ”; ÌR'”< ÌR(”ÌB ÌR.’”$ ÌL”( ÌL‘” ÌS’” ÌF” ÌF’” ÌE” ÌE”7 ÌD”ÌA ÌD ”Ì[ Ìs”Ì\ Ìs”Ìc Ìs(”Ìe Ìs*”Ìg Ìs,”Ìh Ìs-”Ìl Ìs1”Ìm Ìs2”Ìv Ìs;”Ìw Ìs<”Ì~ ÌsÌC”Ì ÌsÌD’” ÌD” ÌD’” ÌC” ÌCÜ ”/ ÌB”8 ÌB”9 ÌB”ÌE ÌB(”ÌG ÌB*”Ìa Ìz”Ìb Ìz”Ìf Ìz/”Ìh Ìz1”Ìj Ìz3”Ìk Ìz4”Ìo Ìz8”Ìp Ìz9”Ìy ÌzÌB”Ìz ÌzÌC”Ì~ ÌzÌG”Ì ÌzÌH’” ÌB
-” ÌB’” ÌA” ÌA’” Ì@” Ì@’” ” 
-‘” Ì‰‘” ÌŒ‘” Ì”” Ì‘” Ì‘” Ì‘” Ì‘™” Ì’” Ì’” Ì’” Ì’”" Ì’”# Ì’”( Ì’$”) Ì’%”+ Ì’'’” Ì“” Ì“‘”	 Ì”š” Ì•” Ì•” Ì•” Ì•” Ì•” Ì•”" Ì•”# Ì•”) Ì•%”* Ì•&”” Ì–” Ì–” Ì–” Ì–•” Ì—” Ì—” Ì—” Ì—” Ì——” Ì˜” Ì˜” Ì˜”  Ì˜”# Ì˜”% Ì˜”& Ì˜—” Ì™” Ì™” Ì™” Ì™”  Ì™”" Ì™”# Ì™’” Ìš” Ìš•” Ì›” Ì›” Ì›” Ì›” Ì›˜” Ìœ” Ìœ” Ìœ”  Ìœ”! Ìœ”$ Ìœ”% Ìœ”& Ìœ’” Ì” Ì•” Ì” Ì” Ì” Ì” Ì–” ÌŸ” ÌŸ” ÌŸ” ÌŸ” ÌŸ” ÌŸ’” Ì 
-” Ì ‘” Ì¡	œ” Ì¢” Ì¢” Ì¢” Ì¢”  Ì¢”! Ì¢”% Ì¢”& Ì¢”' Ì¢”- Ì¢.”/ Ì¢0”1 Ì¢2•” Ì£
-” Ì£” Ì£” Ì£”! Ì£’” Ì¤” Ì¤‘” Ì¥™” Ì¦
-” Ì¦” Ì¦”# Ì¦”& Ì¦”* Ì¦ ”+ Ì¦!”3 Ì¦)”4 Ì¦*—” Ì§
-” Ì§” Ì§”! Ì§”$ Ì§”& Ì§”' Ì§—” Ì¨
-” Ì¨” Ì¨”$ Ì¨”' Ì¨”) Ì¨”* Ì¨ œ” Ì©
-” Ì©” Ì©”$ Ì©”% Ì©”) Ì©”* Ì© ”. Ì©$”/ Ì©%”9 Ì©/”: Ì©0”; Ì©1”” Ìª” Ìª	” Ìª
-” Ìª
-’” Ì«” Ì«‘” Ì¬š” Ì­” Ì­” Ì­”# Ì­”$ Ì­”' Ì­”) Ì­!”. Ì­&”/ Ì­'”0 Ì­(’” Ì®” Ì®‘”	 Ì¯–” Ì°” Ì°” Ì°	” Ì°” Ì°”  Ì°’” Ì±” Ì±‘” Ì³‘” Ì·”” Ì¸” Ì¸” Ì¸” Ì¸™” Ì¹” Ì¹” Ì¹” Ì¹”" Ì¹”# Ì¹”( Ì¹$”) Ì¹%”+ Ì¹'’” Ìº” Ìº‘”	 Ì»š” Ì¼” Ì¼” Ì¼” Ì¼” Ì¼” Ì¼”" Ì¼”# Ì¼”) Ì¼%”* Ì¼&Ü ” Ì½” Ì½” Ì½” Ì½” Ì½” Ì½” Ì½” Ì½” Ì½” Ì½”! Ì½”" Ì½”- Ì½)”. Ì½*”1 Ì½-”4 Ì½0”5 Ì½1”6 Ì½2”7 Ì½3”8 Ì½4”9 Ì½5”; Ì½7”< Ì½8Ü ” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾”  Ì¾”! Ì¾”" Ì¾”# Ì¾”' Ì¾#”( Ì¾$”3 Ì¾/”4 Ì¾0”7 Ì¾3”: Ì¾6”ÌI Ì¾ÌE”ÌJ Ì¾ÌF”ÌM Ì¾ÌI”ÌN Ì¾ÌJ”ÌO Ì¾ÌK”ÌP Ì¾ÌL”ÌQ Ì¾ÌM”ÌZ Ì¾ÌV”Ì[ Ì¾ÌWœ” Ì¿” Ì¿” Ì¿	” Ì¿” Ì¿” Ì¿”  Ì¿”$ Ì¿ ”& Ì¿"”+ Ì¿'”, Ì¿(”. Ì¿*’” ÌÀ” ÌÀ‘”	 ÌÁ•” ÌÂ” ÌÂ” ÌÂ	” ÌÂ” ÌÂš” ÌÃ” ÌÃ
-” ÌÃ” ÌÃ” ÌÃ”! ÌÃ”" ÌÃ”' ÌÃ!”( ÌÃ"”) ÌÃ#‘”	 ÌÄ•” ÌÄ” ÌÄ” ÌÄ” ÌÄ” ÌÄœ” ÌÅ” ÌÅ
-” ÌÅ” ÌÅ” ÌÅ”  ÌÅ”# ÌÅ”$ ÌÅ”% ÌÅ”) ÌÅ#”. ÌÅ(”/ ÌÅ)‘”	 ÌÆ›” ÌÇ” ÌÇ” ÌÇ” ÌÇ”' ÌÇ#”( ÌÇ$”0 ÌÇ,”1 ÌÇ-”; ÌÇ7”< ÌÇ8”> ÌÇ:œ” ÌÈ” ÌÈ
-” ÌÈ” ÌÈ” ÌÈ”  ÌÈ”# ÌÈ”$ ÌÈ”% ÌÈ”) ÌÈ"”. ÌÈ'”/ ÌÈ(‘”	 ÌÉœ” ÌÊ” ÌÊ” ÌÊ” ÌÊ” ÌÊ”( ÌÊ$”) ÌÊ%”1 ÌÊ-”2 ÌÊ.”< ÌÊ8”= ÌÊ9”? ÌÊ;š” ÌË” ÌË
-” ÌË” ÌË” ÌË”! ÌË”" ÌË”' ÌË!”( ÌË"”) ÌË#‘”	 ÌÌ–” ÌÍ” ÌÍ” ÌÍ	” ÌÍ” ÌÍ”  ÌÍ˜” ÌÎ” ÌÎ” ÌÎ” ÌÎ”% ÌÎ!”& ÌÎ"”* ÌÎ&”, ÌÎ(–” ÌÏ” ÌÏ
-” ÌÏ” ÌÏ” ÌÏ” ÌÏ‘”	 ÌĞ’” ÌÑ” ÌÑ‘” ÌÓ‘” ÌÙ–” ÌÚ” ÌÚ” ÌÚ” ÌÚ” ÌÚ” ÌÚ+›” ÌÛ” ÌÛ” ÌÛ	” ÌÛ” ÌÛ” ÌÛ” ÌÛ”. ÌÛ*”/ ÌÛ+”; ÌÛ7”= ÌÛ9”” ÌÜ” ÌÜ” ÌÜ” ÌÜ‘”	 ÌİÜ ” ÌŞ” ÌŞ” ÌŞ	” ÌŞ” ÌŞ”% ÌŞ!”& ÌŞ"”) ÌŞ%”* ÌŞ&”. ÌŞ*”/ ÌŞ+”4 ÌŞ0”9 ÌŞ5”ÌH ÌŞÌD”ÌI ÌŞÌE”ÌU ÌŞÌQ”ÌV ÌŞÌR”ÌX ÌŞÌT”” Ìß” Ìß” Ìß” Ìß‘”	 Ìà›” Ìá” Ìá” Ìá” Ìá” Ìá” Ìá”) Ìá%”* Ìá&”6 Ìá2”7 Ìá3”9 Ìá5”” Ìâ” Ìâ” Ìâ” Ìâ‘”	 ÌãÜ ” Ìä” Ìä” Ìä	” Ìä” Ìä” Ìä” Ìä”) Ìä%”* Ìä&”. Ìä*”/ Ìä+”4 Ìä0”5 Ìä1”6 Ìä2”7 Ìä3”; Ìä7”< Ìä8”ÌA Ìä=”ÌF ÌäÌB”ÌU ÌäÌQ”ÌV ÌäÌR”ÌZ ÌäÌV”Ì[ ÌäÌW”Ì] ÌäÌY”” Ìå” Ìå” Ìå” Ìå‘”	 ÌæŸ” Ìç” Ìç” Ìç	” Ìç” Ìç” Ìç” Ìç” Ìç” Ìç”$ Ìç ”) Ìç%”8 Ìç4”9 Ìç5”= Ìç9”> Ìç:™” Ìè” Ìè” Ìè” Ìè”& Ìè ”' Ìè!”3 Ìè-”4 Ìè.”6 Ìè0”” Ìé” Ìé” Ìé” Ìé‘”	 Ìê”” Ìë” Ìë” Ìë” Ìë’” Ìì” Ìì‘” Ìî‘” Ìò”” Ìó” Ìó” Ìó” Ìó–” Ìô” Ìô” Ìô” Ìô” Ìô” Ìô’” Ìõ” Ìõ‘”	 Ìö” Ì÷” Ì÷” Ì÷” Ì÷” Ì÷” Ì÷”# Ì÷”$ Ì÷ ”' Ì÷#”* Ì÷&”+ Ì÷'”, Ì÷(”- Ì÷)˜” Ìø” Ìø” Ìø” Ìø” Ìø” Ìø”! Ìø”" Ìø–” Ìù” Ìù” Ìù” Ìù” Ìù” Ìù˜” Ìú” Ìú
-” Ìú” Ìú” Ìú”  Ìú”" Ìú”# Ìú™” Ìû” Ìû	” Ìû” Ìû” Ìû”" Ìû”# Ìû”) Ìû#”* Ìû$‘”	 Ìü‘” ÌüÜ ” Ìı” Ìı
-” Ìı” Ìı” Ìı”  Ìı”# Ìı”$ Ìı”% Ìı”( Ìı"”, Ìı&”- Ìı'”2 Ìı,”3 Ìı-”4 Ìı.”6 Ìı0”: Ìı4”; Ìı5”ÌA Ìı;”ÌD Ìı>”ÌE Ìı?”ÌF ÌıÌ@”ÌG ÌıÌA‘”	 Ìş–” Ìÿ” Ìÿ” Ìÿ” Ìÿ” Ìÿ” Ìÿ—” Í ” Í 
-” Í ” Í ” Í ”  Í ”! Í —” Í” Í
-” Í” Í” Í” Í” Í’” Í” Í‘”	 ÍÜ ” Í” Í” Í	” Í” Í”# Í”$ Í ”( Í$”) Í%”4 Í0”5 Í1”8 Í4”; Í7”< Í8”= Í9”> Í:”Ì@ Í<–” Í” Í
-” Í” Í” Í” Í‘”	 Í’” Í” Í‘” Í	‘” Í–” Í” Í” Í” Í” Í” Í+Ü ” Í” Í” Í” Í” Í” Í” Í” Í” Í” Í”! Í”" Í”- Í)”. Í*”1 Í-”4 Í0”5 Í1”6 Í2”7 Í3”8 Í4”9 Í5”ÌB Í>”ÌC Í?Ü ” Í” Í” Í” Í” Í” Í”  Í”! Í”" Í”# Í”' Í#”( Í$”3 Í/”4 Í0”7 Í3”: Í6”ÌI ÍÌE”ÌJ ÍÌF”ÌM ÍÌI”ÌN ÍÌJ”ÌO ÍÌK”ÌP ÍÌL”ÌQ ÍÌM”ÌZ ÍÌV”Ì[ ÍÌW” Í” Í” Í	” Í” Í” Í” Í”  Í”& Í"”' Í#”* Í&”+ Í'”- Í)Ÿ” Í” Í
-” Í” Í” Í”! Í”" Í”& Í ”' Í!”0 Í*”1 Í+”6 Í0”7 Í1”8 Í2”9 Í3’” Í” Í‘”	 Í•” Í” Í” Í	” Í” Í’” Í” Í‘”	 Íš” Í” Í” Í	” Í” Í”# Í”$ Í ”( Í$”) Í%”+ Í'Ÿ” Í” Í
-” Í” Í” Í”! Í”" Í”& Í ”' Í!”0 Í*”1 Í+”6 Í0”7 Í1”8 Í2”9 Í3’” Í” Í‘”	 Í™” Í” Í” Í	” Í” Í” Í” Í”! Í”" ÍŸ” Í” Í” Í” Í”% Í”& Í ”) Í#”- Í'”1 Í+”6 Í0”ÌE Í?”ÌF ÍÌ@”ÌI ÍÌC”ÌJ ÍÌD”ÌL ÍÌF˜” Í” Í
-” Í” Í” Í”  Í”" Í”# ÍŸ” Í ” Í 
-” Í ” Í ” Í ”! Í ”" Í ”& Í  ”' Í !”0 Í *”1 Í +”6 Í 0”7 Í 1”8 Í 2”9 Í 3’” Í!” Í!‘”	 Í"•” Í#” Í#” Í#	” Í#” Í#’” Í$” Í$‘”	 Í%˜” Í&” Í&” Í&” Í&” Í&” Í&”  Í&”" Í&˜” Í'” Í'
-” Í'” Í'” Í'”  Í'”" Í'”# Í'‘”	 Í(™” Í)” Í)” Í)” Í)”" Í)”# Í)”- Í))”. Í)*”0 Í),˜” Í*” Í*
-” Í*” Í*” Í*”  Í*”" Í*”# Í*‘”	 Í+Ÿ” Í,” Í,” Í,	” Í,” Í,” Í,” Í,”" Í,”# Í,”, Í,(”- Í,)”2 Í,.”3 Í,/”4 Í,0”5 Í,1’” Í-” Í-‘” Í/‘” Í4”” Í5” Í5” Í5” Í5™” Í6” Í6” Í6” Í6”" Í6”# Í6”( Í6$”) Í6%”+ Í6'”” Í7” Í7” Í7” Í7‘”	 Í8–” Í9” Í9” Í9” Í9” Í9” Í9”” Í:” Í:” Í:” Í:•” Í;” Í;” Í;” Í;” Í;—” Í<” Í<” Í<”( Í< ”) Í<!”, Í<$”- Í<%’” Í=” Í=•” Í>” Í>” Í>” Í>” Í>—” Í?” Í?” Í?”( Í? ”) Í?!”, Í?$”- Í?%’” Í@” Í@•” ÍA” ÍA” ÍA” ÍA” ÍA—” ÍB” ÍB” ÍB”( ÍB ”) ÍB!”, ÍB$”- ÍB%’” ÍC” ÍC•” ÍD” ÍD” ÍD” ÍD” ÍD—” ÍE” ÍE” ÍE”( ÍE ”) ÍE!”, ÍE$”- ÍE%’” ÍF” ÍF‘” ÍG’” ÍH” ÍH‘”	 ÍI”” ÍJ” ÍJ” ÍJ” ÍJ’” ÍK” ÍK‘” ÍM‘” ÍQ’” ÍR” ÍR
-” ÍS” ÍS” ÍS” ÍS)”# ÍS.”$ ÍS/”( ÍS3”) ÍS4”- ÍS8”. ÍS9”9 ÍSÌD”: ÍSÌE”; ÍSÌF”” ÍT” ÍT” ÍT” ÍT’” ÍU” ÍU‘” ÍW‘” Í[”” Í\”	 Í\”
- Í\” Í\” Í]” Í]” Í]” Í]”% Í]!”& Í]"”5 Í]1”6 Í]2”: Í]6”; Í]7”ÌC Í]?”ÌE Í]ÌA”ÌF Í]ÌB”ÌG Í]ÌC–” Í^” Í^” Í^” Í^” Í^”! Í^š” Í_” Í_
-” Í_” Í_” Í_”  Í_”! Í_”1 Í_+”Ì¥ Í_ÌC”Ì¦ Í_ÌD”” Í`” Í`” Í`” Í`‘”	 Ía—” Íb” Íb” Íb	” Íb” Íb”! Íb”" Íb”” Íc” Íc” Íc” Íc’” Íd” Íd‘” Íf‘” Ík”” Íl” Íl” Íl” ÍlÜ  ” Ím” Ím” Ím” Ím” Ím” Ím” Ím”  Ím”! Ím”$ Ím ”% Ím!”( Ím$”) Ím%”* Ím&”+ Ím'”, Ím(”- Ím)”. Ím*”2 Ím.”8 Ím4”9 Ím5”ÌP ÍmÌL”ÌQ ÍmÌM”ÌR ÍmÌN”ÌS ÍmÌO”ÌT ÍmÌP”ÌX ÍmÌT”Ì^ ÍmÌZ”Ì_ ÍmÌ[”Ìw ÍmÌs”Ìx ÍmÌt”Ìy ÍmÌu›” Ín” Ín” Ín” Ín” Ín” Ín”  Ín”" Ín”' Ín#”( Ín$”) Ín%’” Ío” Ío‘” Íq‘” Ív”” Íw” Íw” Íw” Íw%™” Íx” Íx” Íx” Íx”" Íx”# Íx”+ Íx'”, Íx(”. Íx*”” Íy” Íy” Íy” Íy‘”	 Íz–” Í{” Í{” Í{” Í{” Í{” Í{’” Í|” Í|›” Í}” Í}” Í}” Í}/”( Í}9”) Í}:”, Í}=”- Í}>”8 Í}ÌI”9 Í}ÌJ”: Í}ÌK™” Í~” Í~
-” Í~” Í~”# Í~”$ Í~”2 Í~-”4 Í~0”5 Í~1” Í” Í” Í” Í” Í”, Í&”- Í'”: Í4”; Í5”ÌC Í=”ÌD Í>”ÌF ÍÌ@”ÌG ÍÌA”ÌH ÍÌB‘”	 Í€”” Í€” Í€” Í€” Í€Ÿ” Í” Í” Í” Í” Í”ÌD Í>”ÌG ÍÌA”ÌK ÍÌE”ÌL ÍÌF”ÌU ÍÌO”ÌV ÍÌP”Ì[ ÍÌU”Ì\ ÍÌV”Ì] ÍÌW”Ì^ ÍÌW‘”	 Í‚”” Íƒ” Íƒ” Íƒ” Íƒ’” Í„” Í„‘” Í†‘” Íˆ’” Í‰” Í‰–” ÍŠ” ÍŠ” ÍŠ” ÍŠ)”  ÍŠ+”! ÍŠ,” Í‹” Í‹” Í‹	” Í‹” Í‹” Í‹” Í‹”  Í‹”! Í‹”% Í‹)”' Í‹+”, Í‹8”. Í‹:”0 Í‹<” ÍŒ” ÍŒ” ÍŒ”! ÍŒ”" ÍŒ”% ÍŒ”) ÍŒ#”* ÍŒ$”6 ÍŒ0”7 ÍŒ1”; ÍŒ5”< ÍŒ6”= ÍŒ7”” Í”	 Í”
- Í” Íœ” Í” Í” Í	” Í” Í”) Í%”* Í&”. Í*”/ Í+”1 Í-”2 Í.”3 Í/’” Í” ÍÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜØ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+
+  /**
+   * Input scientific symbols.
+   *
+   * @param value Scientific symbol.
+   */
+  inputScientificSymbol(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return;
+    }
+
+    // In equation mode, handle comma and minus
+    if (this.equationMode !== '') {
+      if (value === ',') {
+        this.inputValue += ',';
+        return;
+      }
+      if (value === '-') {
+        this.inputValue += '-';
+        return;
+      }
+    }
+
+    // Handle special constants
+    if (value === 'Ï€') {
+      this.expressions.push(Math.PI.toString());
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    if (value === 'e') {
+      this.expressions.push(Math.E.toString());
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle equation mode
+    if (value === 'æ–¹ç¨‹') {
+      this.showEquationDialog();
+      return;
+    }
+
+    // Handle xÂ² (square)
+    if (value === 'xÂ²') {
+      this.expressions.push('^');
+      this.expressions.push('2');
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle 1/x (reciprocal)
+    if (value === '1/x') {
+      this.expressions.unshift('1');
+      this.expressions.push('Ã·');
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle parentheses
+    if (value === '(' || value === ')') {
+      this.expressions.push(value);
+      this.formatInputValue();
+      return;
+    }
+
+    // For unary scientific operators (sin, cos, tan, log, ln, âˆš)
+    // These are prefix operators, so they should be added before the operand
+    // But in our UI flow, user inputs number first, then clicks operator
+    // So we need to apply the operator to the last number in expressions
+    const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', 'âˆš', '!'];
+    if (unaryOperators.indexOf(value) !== -1) {
+      let len = this.expressions.length;
+      if (len > 0) {
+        let last = this.expressions[len - 1];
+        // If last element is a number, apply the operator
+        if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
+          // For prefix operators like sin, cos, âˆš, we need to insert operator before the number
+          // For postfix operators like !, we add after the number
+          if (value === '!') {
+            // Postfix operator (factorial)
+            this.expressions.push(value);
+          } else {
+            // Prefix operator: insert before the last number
+            this.expressions.splice(len - 1, 0, value);
+          }
+          this.formatInputValue();
+          this.getResult();
+          return;
+        }
+      }
+      // If no number before, just add the operator (user will input number next)
+      this.expressions.push(value);
+      this.formatInputValue();
+      return;
+    }
+
+    // For binary operators like ^
+    this.expressions.push(value);
+    this.formatInputValue();
+  }
+
+  /**
+   * Show equation solving dialog.
+   */
+  showEquationDialog() {
+    // Toggle equation mode
+    if (this.equationMode === '') {
+      this.equationMode = 'quadratic';
+      this.calValue = 'æ–¹ç¨‹æ¨¡å¼ï¼šè¾“å…¥ç³»æ•° a,b,c è§£ axÂ²+bx+c=0';
+      this.expressions = [];
+      this.inputValue = '';
+    } else {
+      // Exit equation mode
+      this.equationMode = '';
+      this.calValue = '';
+      this.expressions = [];
+      this.inputValue = '';
+    }
+  }
+
+  /**
+   * Solve equation from input.
+   */
+  solveEquation() {
+    // Get the input string
+    let input = this.inputValue.trim();
+
+    // Parse coefficients (separated by comma or space)
+    let coefficients: string[];
+    if (input.indexOf(',') !== -1) {
+      coefficients = input.split(',');
+    } else {
+      coefficients = input.split(/\s+/);
+    }
+
+    // Trim each coefficient
+    coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
+
+    if (coefficients.length === 2) {
+      // Linear equation: ax + b = 0
+      let a = coefficients[0];
+      let b = coefficients[1];
+      this.calValue = CalculateUtil.solveLinearEquation(a, b);
+    } else if (coefficients.length === 3) {
+      // Quadratic equation: axÂ² + bx + c = 0
+      let a = coefficients[0];
+      let b = coefficients[1];
+      let c = coefficients[2];
+      this.calValue = CalculateUtil.solveQuadraticEquation(a, b, c);
+    } else {
+      this.calValue = 'é”™è¯¯ï¼šè¯·è¾“å…¥2ä¸ªç³»æ•°ï¼ˆä¸€æ¬¡æ–¹ç¨‹ï¼‰æˆ–3ä¸ªç³»æ•°ï¼ˆäºŒæ¬¡æ–¹ç¨‹ï¼‰';
+    }
+  }
+}ÀÔrD•¿../viewmodel/PresskeysViewModelÙ#../common/constants/CommonConstants¼../common/util/CalculateUtilµ../common/util/Logger½../common/util/CheckEmptyUtilÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙND:\SimpleCalculator-master\entry\src\main\ets\viewmodel\PresskeysViewModel.etsAÃªoh-resolveÂEAÂÙRD:\SimpleCalculator-master\entry\src\main\ets\common\constants\CommonConstants.etsAÃªoh-resolveÂEAÂÙKD:\SimpleCalculator-master\entry\src\main\ets\common\util\CalculateUtil.etsAÃªoh-resolveÂEAÂÙDD:\SimpleCalculator-master\entry\src\main\ets\common\util\Logger.etsAÃªoh-resolveÂEAÂÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\CheckEmptyUtil.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings«HomePage.js ‘¬HomePage.etsÜñ‘”    ‘” –”   ” ” ” ”* *”+ +–”   ” ” ” ”8 8”9 9–”   ” ” ” ”: :”; ;–”   ” ” ” ”7 7”8 8š”   ” ”	 	” ” ”   ”" "”( (”ÌM ÌM”ÌN ÌN’” ” ‘”  ’”9 ”;  ’”7 ”9 ’”? %”ÌD *’”;  ”= "’” '” )‘” ÌN’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ‘” ’”  ”  
+˜”  ”  
+” Ì¿” Ì¿” Ì¿”) Ì¿”* Ì¿”6 Ì¿(””  ”  
+” ÌÀ”" ÌÀ’” !” !˜” !” !” -” -” -”( -”) -”5 -)”” !” !” .” .˜” !” !” /” /” /”- /!”. /"”1 /%•” !” !” 0” 0” 0“” 1” 1”Ì‰ 11“” 2” 2”Ì‡ 2-‘” 3Ÿ” "” "” "” "”# "”% "”) "”* "”6 "+”7 ",”; "0”< "1”ÌF ";”ÌG "<”ÌI ">˜” "” "” #” #” #”, #!”- #"”9 #.Ü ” "” "” $” $” %”  %”$ %”% %”/ %”0 %”6 %#”9 %&”ÌH %5”ÌI %6”ÌY %ÌF”ÌZ %ÌG”Ì[ %ÌH”Ì\ %ÌI”ÌĞ &-”ÌÑ &.”ÍD &ÌN–” "” "” (” (” (”# (˜” "” "” )” )”  )”% )”& )”+ ) ˜” "” "” *” *”  *”) *”* *”- *"”” "” "” +”% +’” !” !’” 5” 5˜” 5” 5” :” :” :”( :”) :”5 :)”” 5” 5” ;” ;˜” 5” 5” <” <” <”- <!”. <"”1 <%•” 5” 5” =” =” =“” >” >”Ì‰ >0“” ?” ?”ÌŠ ?2‘” Ì@›” 6” 6” 6” 6” 6”) 6”* 6”. 6#”/ 6$”7 6,”8 6-”” 6” 6” 7” 7”” 6” 6” 8” 8’” 6” 6’” 5” 5’” ÌB”, ÌB&’” ÌC” ÌC’” ÌB”, ÌB&˜” ÌC” ÌC” ÌQ” ÌQ” ÌQ”( ÌQ”) ÌQ”5 ÌQ)’” ÌB”, ÌB&š” ÌC” ÌC” ÌR” ÌR” ÌR” ÌR”" ÌR”$ ÌR”) ÌR”+ ÌR’” ÌD” ÌD˜” ÌD” ÌD” ÌI	” ÌI” ÌI”% ÌI”& ÌI”2 ÌI+–” ÌD” ÌD” ÌJ	” ÌJ” ÌJ” ÌJ–” ÌD” ÌD” ÌK	” ÌK”  ÌK”) ÌK"˜” ÌD” ÌD” ÌL	” ÌL” ÌL”( ÌL!”) ÌL"”/ ÌL(—” ÌD” ÌD” ÌM	” ÌM” ÌM” ÌM” ÌMš” ÌN
+” ÌN” ÌN”% ÌN”( ÌN"”) ÌN#”- ÌN'”. ÌN(”> ÌN8”? ÌN9’” ÌO” ÌO	” ÌE
+” ÌE” ÌE” ÌE” ÌE”- ÌE$”. ÌE%”/ ÌE&”0 ÌE'”6 ÌE-”7 ÌE.”8 ÌE/”9 ÌE0”? ÌE6–” ÌE
+” ÌE” ÌF” ÌF” ÌF”  ÌF˜” ÌE
+” ÌE” ÌG” ÌG” ÌG”  ÌG”! ÌG”& ÌG"’” ÌE
+” ÌE’” ÌD” ÌD’” ÌB”( ÌB&’” ÌC” ÌC’” ÌT”> ÌT8–” ÌU” ÌU
+” ÌU” ÌU”% ÌU”' ÌU!’” ÌV” ÌV˜” ÌV” ÌV” Ìt	”$ Ìt”% Ìt”4 Ìt”5 Ìt”ÌA Ìt+š” ÌV” ÌV” Ìu	”% Ìu”& Ìu”( Ìu”. Ìu”0 Ìu”5 Ìu”7 Ìu!’” ÌW
+” ÌW˜” ÌW
+” ÌW” Ìr”! Ìr”" Ìr”1 Ìr ”2 Ìr!”> Ìr-’” ÌX” ÌX’”? ÌXÌV”ÌN ÌXÌn’”  ÌY”& ÌY˜”  ÌY”& ÌY”' Ìm”, Ìm”- Ìm”< Ìm$”= Ìm%”ÌI Ìm1˜”  ÌY”& ÌY”' Ìn”5 Ìn”6 Ìn”? Ìn'”Ì@ Ìn(”ÌF Ìn.–”  ÌY”& ÌY”' Ìo”3 Ìo”4 Ìo”5 Ìo’”  ÌZ”' ÌZ’”ÌG ÌZ=”ÌS ÌZÌR’”( Ì[”. Ì[–”( Ì[”. Ì[”/ Ì`”4 Ì`”5 Ì`”; Ì`–”( Ì[”. Ì[”/ Ìa”5 Ìa”6 Ìa”< Ìa –”( Ì[”. Ì[”/ Ìb”: Ìb”; Ìb”< Ìb ””( Ì[”. Ì[”/ Ìc”: Ìc””( Ì[”. Ì[”/ Ìd”; Ìd–”( Ì[”. Ì[”/ Ìe”> Ìe"”? Ìe#”ÌH Ìe,˜”( Ì[”. Ì[”/ Ìf”9 Ìf”: Ìf”ÌI Ìf-”ÌJ Ìf.”ÌP Ìf4˜”( Ì[”. Ì[”/ Ìg”= Ìg!”> Ìg"”ÌG Ìg+”ÌH Ìg,”ÌN Ìg2—”( Ì[”. Ì[”/ Ìh”6 Ìh”7 Ìh”: Ìh”< Ìh š”, Ìi”0 Ìi”1 Ìi”ÌF Ìi.”ÌG Ìi/”ÌN Ìi6”ÌO Ìi7”ÌT Ìi<”ÌU Ìi=”ÌV Ìi>’”( Ìj”) Ìj–”( Ì\”, Ì\”4 Ì\”; Ì\ ”< Ì\!”ÌA Ì\&–”( Ì\”, Ì\”- Ì]”5 Ì]”6 Ì] ”< Ì]&˜”( Ì\”, Ì\”- Ì^”6 Ì^ ”7 Ì^!”< Ì^&”= Ì^'”ÌB Ì^,’”$ Ì\”( Ì\’”$ Ì[”* Ì[”ÌC ÌZ”ÌM ÌZ"”Ìg Ìk”Ìh Ìk”Ìo Ìk*”Ìq Ìk,”Ìs Ìk.”Ìt Ìk/”Ìx Ìk3”Ìy Ìk4”Ì‚ Ìk=”Ìƒ Ìk>”ÌŠ ÌkÌE”Ì‹ ÌkÌF’” ÌZ”# ÌZ’” ÌY”" ÌY•”; ÌX”ÌD ÌX”ÌE ÌX”ÌV ÌX/”ÌX ÌX1’” ÌX” ÌX’” ÌW
+” ÌW’” ÌV” ÌV‘” Ìv‘” Ìv’” Ìx” Ìx–” Ìx” Ìx” Ì»” Ì»”  Ì»”! Ì»˜” Ìx” Ìx” Ì¼” Ì¼” Ì¼”( Ì¼”) Ì¼”5 Ì¼)”” Ìx” Ìx” Ì½”" Ì½’” Ìy” Ìy˜” Ìy” Ìy” Ì´	” Ì´” Ì´”& Ì´”' Ì´ ”3 Ì´,˜” Ìy” Ìy” Ìµ	” Ìµ” Ìµ”( Ìµ!”) Ìµ"”, Ìµ%•” Ìy” Ìy” Ì¶	” Ì¶” Ì¶“” Ì·
+” Ì·”Ìˆ Ì·+“” Ì¸
+” Ì¸”Ì‰ Ì¸-‘” Ì¹	’” Ìz
+” Ìz’”3 ÌzÌO”ÌB ÌzÌg’” Ì{” Ì{–” Ì{” Ì{” Ì­”' Ì­”( Ì­”) Ì­•” Ì{” Ì{” Ì®”! Ì®”" Ì®“” Ì¯” Ì¯”Ì Ì¯-“” Ì°” Ì°”Ì’ Ì°3‘” Ì±’” Ì|” Ì|’”; Ì|;”ÌG Ì|ÌP’” Ì}”" Ì}Ü ” Ì}”" Ì}”# Ì¥”/ Ì¥”0 Ì¦”1 Ì¦”2 Ì¦”ÌA Ì¦#”ÌF Ì¦(”ÌG Ì¦)”ÌP Ì¦2”ÌQ Ì¦3”Ì] Ì¦?”Ì_ Ì¦ÌA”Ì` Ì¦ÌB”Ìf Ì¦ÌH”Ìi Ì¦ÌK”Ìj Ì¦ÌL”Ìk Ì¦ÌM”Ìl Ì¦ÌNÜ ”  Ì§”! Ì§”- Ì§!”2 Ì§&”3 Ì§'”= Ì§1”> Ì§2”ÌD Ì§8”ÌG Ì§;”ÌH Ì§<”ÌI Ì§=”ÌJ Ì§>”ÌK Ì§?”ÌL Ì§Ì@”ÌM Ì§ÌA”ÌN Ì§ÌB”Ì] Ì§ÌQ”Ì^ Ì§ÌR”Ìa Ì§ÌU”Ìb Ì§ÌV”Ìc Ì§ÌW”Ìd Ì§ÌX”Ìe Ì§ÌY˜” Ì}”" Ì}”# Ì©”( Ì©”) Ì©”8 Ì©&”9 Ì©'”ÌE Ì©3˜” Ì}”" Ì}”# Ìª”1 Ìª”2 Ìª ”; Ìª)”< Ìª*”ÌB Ìª0’” Ì~”" Ì~”” Ì~”" Ì~”# Ì”( ÌÜ ” Ì~”" Ì~”# Ì”) Ì”* Ì”+ Ì”, Ì”; Ì%”Ì@ Ì*”ÌA Ì+”ÌJ Ì4”ÌK Ì5”ÌW ÌÌA”ÌY ÌÌC”ÌZ ÌÌD”Ì` ÌÌJ”Ìc ÌÌM”Ìd ÌÌN”Ìe ÌÌO”Ìf ÌÌPÜ ”  Ì”! Ì”- Ì#”2 Ì(”3 Ì)”= Ì3”> Ì4”ÌD Ì:”ÌG Ì=”ÌH Ì>”ÌI Ì?”ÌJ ÌÌ@”ÌK ÌÌA”ÌL ÌÌB”ÌM ÌÌC”ÌÁ Ì‘4”ÌÂ Ì‘5”Í5 Ì‘ÌP–” Ì~”" Ì~”# Ì“”. Ì“”/ Ì“”0 Ì“ ”” Ì~”" Ì~”# Ì””. Ì””” Ì~”" Ì~”# Ì•”/ Ì•Ü ” Ì~”" Ì~”# Ì–”2 Ì–"”3 Ì—”4 Ì—”5 Ì—”ÌD Ì—%”ÌI Ì—*”ÌJ Ì—+”ÌS Ì—4”ÌT Ì—5”Ì` Ì—ÌA”Ìb Ì—ÌC”Ìc Ì—ÌD”Ìi Ì—ÌJ”Ìl Ì—ÌM”Ìm Ì—ÌN”Ìn Ì—ÌO”Ìo Ì—ÌPÜ ”  Ì˜”! Ì˜”- Ì˜#”2 Ì˜(”3 Ì˜)”= Ì˜3”> Ì˜4”ÌD Ì˜:”ÌG Ì˜=”ÌH Ì˜>”ÌI Ì˜?”ÌJ Ì˜Ì@”ÌK Ì˜ÌA”ÌL Ì˜ÌB”ÌM Ì˜ÌC”ÌÁ Ì™8”ÌÂ Ì™9”ÌÃ Ì™:”ÌÈ Ì™?”ÌÉ Ì™Ì@”ÌÎ Ì™ÌE˜” Ì~”" Ì~”# Ì›”- Ì›”. Ì›”= Ì›-”> Ì›.”ÌD Ì›4˜” Ì~”" Ì~”# Ìœ”1 Ìœ!”2 Ìœ"”; Ìœ+”< Ìœ,”ÌB Ìœ2—” Ì~”" Ì~”# Ì”* Ì”+ Ì”. Ì”0 Ì ˜”  Ì”$ Ì”+ Ì”, Ì ”0 Ì$”5 Ì)”6 Ì*”8 Ì,š”$ ÌŸ”( ÌŸ”) ÌŸ”4 ÌŸ&”5 ÌŸ'”< ÌŸ.”= ÌŸ/”ÌB ÌŸ4”ÌC ÌŸ5”ÌD ÌŸ6‘”! Ì ‘”% Ì š”$ Ì¡”( Ì¡”) Ì¡”4 Ì¡&”5 Ì¡'”< Ì¡.”= Ì¡/”ÌB Ì¡4”ÌC Ì¡5”ÌD Ì¡6‘”! Ì¢’” Ì£” Ì£˜” Ì”  Ì”' Ì”( Ì ”, Ì$”1 Ì)”2 Ì*”4 Ì,Ü ”( Ì€”- Ì€”5 Ì€”< Ì€#”= Ì€$”ÌC Ì€*”ÌH Ì€/”ÌQ Ì€8”ÌR Ì€9”ÌS Ì€:”ÌT Ì€;”Ì[ Ì€ÌB”Ì\ Ì€ÌC”Ìb Ì€ÌI”Ìc Ì€ÌJ”Ìd Ì€ÌK”Ìe Ì€ÌL”Ìg Ì€ÌN˜”( Ì€”- Ì€”. Ì”3 Ì”4 Ì”; Ì&”< Ì'”ÌA Ì,˜”( Ì€”- Ì€”. Ì‚”4 Ì‚”5 Ì‚ ”< Ì‚'”= Ì‚(”ÌC Ì‚.‘” Ìƒ‘”! Ìƒ–”( Ì„”, Ì„”4 Ì„”; Ì„"”< Ì„#”ÌA Ì„(Ü ”( Ì„”, Ì„”- Ì…”5 Ì…!”6 Ì†”7 Ì†”> Ì†"”? Ì†#”ÌD Ì†(”ÌI Ì†-”ÌX Ì†<”ÌY Ì†=”Ì] Ì†ÌA”Ì^ Ì†ÌB”Ì_ Ì†ÌC”Ì` Ì†ÌD”ÌÔ Ì‡:”ÌÕ Ì‡;”ÍH Ì‡ÌZ˜”( Ì„”, Ì„”- Ì‰”2 Ì‰”3 Ì‰”: Ì‰&”; Ì‰'”Ì@ Ì‰,˜”( Ì„”, Ì„”- ÌŠ”3 ÌŠ”4 ÌŠ ”; ÌŠ'”< ÌŠ(”ÌB ÌŠ.’”$ Ì„”( Ì„‘” Ì‹’” Ì~” Ì~’” Ì}” Ì}”7 Ì|”ÌA Ì| ”Ì[ Ì«”Ì\ Ì«”Ìc Ì«(”Ìe Ì«*”Ìg Ì«,”Ìh Ì«-”Ìl Ì«1”Ìm Ì«2”Ìv Ì«;”Ìw Ì«<”Ì~ Ì«ÌC”Ì Ì«ÌD’” Ì|” Ì|’” Ì{” Ì{Ü ”/ Ìz”8 Ìz”9 Ìz”ÌE Ìz(”ÌG Ìz*”Ìa Ì²”Ìb Ì²”Ìf Ì²/”Ìh Ì²1”Ìj Ì²3”Ìk Ì²4”Ìo Ì²8”Ìp Ì²9”Ìy Ì²ÌB”Ìz Ì²ÌC”Ì~ Ì²ÌG”Ì Ì²ÌH’” Ìz
+” Ìz’” Ìy” Ìy’” Ìx” Ìx’”  ”  
+‘” ÌÁ‘” ÌÄ‘” ÌÈ”” ÌÉ” ÌÉ” ÌÉ” ÌÉ™” ÌÊ” ÌÊ” ÌÊ” ÌÊ”" ÌÊ”# ÌÊ”( ÌÊ$”) ÌÊ%”+ ÌÊ'’” ÌË” ÌË‘”	 ÌÌš” ÌÍ” ÌÍ” ÌÍ” ÌÍ” ÌÍ” ÌÍ”" ÌÍ”# ÌÍ”) ÌÍ%”* ÌÍ&”” ÌÎ” ÌÎ” ÌÎ” ÌÎ•” ÌÏ” ÌÏ” ÌÏ” ÌÏ” ÌÏ—” ÌĞ” ÌĞ” ÌĞ”  ÌĞ”# ÌĞ”% ÌĞ”& ÌĞ—” ÌÑ” ÌÑ” ÌÑ” ÌÑ”  ÌÑ”" ÌÑ”# ÌÑ™” ÌÒ” ÌÒ” ÌÒ”! ÌÒ”$ ÌÒ”& ÌÒ”' ÌÒ”( ÌÒ!”= ÌÒ6’” ÌÓ” ÌÓ•” ÌÔ” ÌÔ” ÌÔ” ÌÔ” ÌÔ˜” ÌÕ” ÌÕ” ÌÕ”  ÌÕ”! ÌÕ”$ ÌÕ”% ÌÕ”& ÌÕ’” ÌÖ” ÌÖ•” Ì×” Ì×” Ì×” Ì×” Ì×’” ÌØ”, ÌØ$˜” ÌÙ” ÌÙ” ÌÙ” ÌÙ”% ÌÙ”* ÌÙ"”, ÌÙ$”. ÌÙ&–” ÌÚ
+” ÌÚ” ÌÚ”& ÌÚ”( ÌÚ”) ÌÚ’” ÌÛ
+” ÌÛ‘” ÌÜ	–” Ìİ” Ìİ” Ìİ” Ìİ” Ìİ” Ìİ’” ÌŞ
+” ÌŞ‘” Ìß	œ” Ìà” Ìà” Ìà” Ìà”  Ìà”! Ìà”% Ìà”& Ìà”' Ìà”- Ìà.”/ Ìà0”1 Ìà2•” Ìá
+” Ìá” Ìá” Ìá”! Ìá’” Ìâ” Ìâ‘” Ìã™” Ìä
+” Ìä” Ìä”# Ìä”& Ìä”* Ìä ”+ Ìä!”3 Ìä)”4 Ìä*—” Ìå
+” Ìå” Ìå”! Ìå”$ Ìå”& Ìå”' Ìå—” Ìæ
+” Ìæ” Ìæ”$ Ìæ”' Ìæ”) Ìæ”* Ìæ œ” Ìç
+” Ìç” Ìç”$ Ìç”% Ìç”) Ìç”* Ìç ”. Ìç$”/ Ìç%”9 Ìç/”: Ìç0”; Ìç1”” Ìè” Ìè	” Ìè
+” Ìè
+’” Ìé” Ìé‘” Ìêš” Ìë” Ìë” Ìë”# Ìë”$ Ìë”' Ìë”) Ìë!”. Ìë&”/ Ìë'”0 Ìë(’” Ìì” Ìì‘”	 Ìí–” Ìî” Ìî” Ìî	” Ìî” Ìî”  Ìî’” Ìï” Ìï‘” Ìñ‘” Ìõ”” Ìö” Ìö” Ìö” Ìö™” Ì÷” Ì÷” Ì÷” Ì÷”" Ì÷”# Ì÷”( Ì÷$”) Ì÷%”+ Ì÷'’” Ìø” Ìø‘”	 Ìù’” Ìû”7 Ìû3˜” Ìü” Ìü” Ìü” Ìü” Ìü”" Ìü”$ Ìü ”& Ìü"—” Ìı” Ìı
+” Ìı” Ìı” Ìı”$ Ìı”% Ìı’” Ìş” Ìş‘”	 Ìÿš” Í” Í” Í” Í” Í” Í”" Í”# Í”) Í%”* Í&Ü ” Í” Í” Í” Í” Í” Í” Í” Í” Í” Í”! Í”" Í”- Í)”. Í*”1 Í-”4 Í0”5 Í1”6 Í2”7 Í3”8 Í4”9 Í5”; Í7”< Í8Ü ” Í” Í” Í” Í” Í” Í”  Í”! Í”" Í”# Í”' Í#”( Í$”3 Í/”4 Í0”7 Í3”: Í6”ÌI ÍÌE”ÌJ ÍÌF”ÌM ÍÌI”ÌN ÍÌJ”ÌO ÍÌK”ÌP ÍÌL”ÌQ ÍÌM”ÌZ ÍÌV”Ì[ ÍÌWœ” Í” Í” Í	” Í” Í” Í”  Í”$ Í ”& Í"”+ Í'”, Í(”. Í*’” Í” Í‘”	 Í’” Í”ÌP ÍÌLÜ ” Í” Í” Í” Í”* Í&”+ Í'”3 Í/”4 Í0”8 Í4”9 Í5”= Í9”ÌJ ÍÌF”ÌK ÍÌG”Ì] ÍÌY”Ì^ ÍÌZ”Ìb ÍÌ^”Ìc ÍÌ_”Ìd ÍÌ`•” Í
+” Í
+” Í
+	” Í
+” Í
+š” Í” Í
+” Í” Í” Í”! Í”" Í”' Í!”( Í"”) Í#‘”	 Í”” Í” Í” Í”! Í’” Í”6 Í0š” Í” Í
+” Í” Í” Í”! Í”" Í”' Í!”( Í"”) Í#‘”	 Í•” Í” Í” Í” Í” Í’” Í”7 Í1œ” Í” Í
+” Í” Í” Í”  Í”# Í”$ Í”% Í”) Í#”. Í(”/ Í)‘”	 Í‘” Í’” Í”2 Í,Ü ” Í” Í
+”$ Í”' Í!”4 Í.”5 Í/”= Í7”> Í8”ÌH ÍÌB”ÌI ÍÌC”ÌM ÍÌG”ÌZ ÍÌT”Ì[ ÍÌU”Ìm ÍÌg”Ìn ÍÌh”Ìx ÍÌr”Ìy ÍÌs”Ìz ÍÌt”” Í” Í
+”$ Í”& Í ’” Í”( Í œ” Í” Í” Í”  Í”! Í”$ Í”' Í”( Í ”) Í!”- Í%”2 Í*”3 Í+‘” Í‘” Í’” Í”" Íš” Í” Í” Í”  Í”! Í”% Í”& Í”+ Í#”, Í$”- Í%‘” Í‘”	 Í–” Í” Í” Í	” Í” Í”  Í˜” Í” Í” Í” Í”% Í!”& Í"”* Í&”, Í(–” Í” Í
+” Í” Í” Í” Í‘”	 Í ’” Í!” Í!‘” Í#‘” Í)–” Í*” Í*” Í*” Í*” Í*” Í*+›” Í+” Í+” Í+	” Í+” Í+” Í+” Í+”. Í+*”/ Í++”; Í+7”= Í+9”” Í,” Í,” Í,” Í,‘”	 Í-Ü ” Í.” Í.” Í.	” Í.” Í.”% Í.!”& Í."”) Í.%”* Í.&”. Í.*”/ Í.+”4 Í.0”9 Í.5”ÌH Í.ÌD”ÌI Í.ÌE”ÌU Í.ÌQ”ÌV Í.ÌR”ÌX Í.ÌT”” Í/” Í/” Í/” Í/‘”	 Í0›” Í1” Í1” Í1” Í1” Í1” Í1”) Í1%”* Í1&”6 Í12”7 Í13”9 Í15”” Í2” Í2” Í2” Í2‘”	 Í3Ü ” Í4” Í4” Í4	” Í4” Í4” Í4” Í4”) Í4%”* Í4&”. Í4*”/ Í4+”4 Í40”5 Í41”6 Í42”7 Í43”; Í47”< Í48”ÌA Í4=”ÌF Í4ÌB”ÌU Í4ÌQ”ÌV Í4ÌR”ÌZ Í4ÌV”Ì[ Í4ÌW”Ì] Í4ÌY”” Í5” Í5” Í5” Í5‘”	 Í6Ÿ” Í7” Í7” Í7	” Í7” Í7” Í7” Í7” Í7” Í7”$ Í7 ”) Í7%”8 Í74”9 Í75”= Í79”> Í7:™” Í8” Í8” Í8” Í8”& Í8 ”' Í8!”3 Í8-”4 Í8.”6 Í80”” Í9” Í9” Í9” Í9‘”	 Í:”” Í;” Í;” Í;” Í;’” Í<” Í<‘” Í>‘” ÍB”” ÍC” ÍC” ÍC” ÍC–” ÍD” ÍD” ÍD” ÍD” ÍD” ÍD’” ÍE” ÍE‘”	 ÍF” ÍG” ÍG” ÍG” ÍG” ÍG” ÍG”# ÍG”$ ÍG ”' ÍG#”* ÍG&”+ ÍG'”, ÍG(”- ÍG)˜” ÍH” ÍH” ÍH” ÍH” ÍH” ÍH”! ÍH”" ÍH–” ÍI” ÍI” ÍI” ÍI” ÍI” ÍI˜” ÍJ” ÍJ
+” ÍJ” ÍJ” ÍJ”  ÍJ”" ÍJ”# ÍJ™” ÍK” ÍK	” ÍK” ÍK” ÍK”" ÍK”# ÍK”) ÍK#”* ÍK$‘”	 ÍL‘” ÍLÜ ” ÍM” ÍM
+” ÍM” ÍM” ÍM”  ÍM”# ÍM”$ ÍM”% ÍM”( ÍM"”, ÍM&”- ÍM'”2 ÍM,”3 ÍM-”4 ÍM.”6 ÍM0”: ÍM4”; ÍM5”ÌA ÍM;”ÌD ÍM>”ÌE ÍM?”ÌF ÍMÌ@”ÌG ÍMÌA‘”	 ÍN–” ÍO” ÍO” ÍO” ÍO” ÍO” ÍO—” ÍP” ÍP
+” ÍP” ÍP” ÍP”  ÍP”! ÍP—” ÍQ” ÍQ
+” ÍQ” ÍQ” ÍQ” ÍQ” ÍQ’” ÍR” ÍR‘”	 ÍSÜ ” ÍT” ÍT” ÍT	” ÍT” ÍT”# ÍT”$ ÍT ”( ÍT$”) ÍT%”4 ÍT0”5 ÍT1”8 ÍT4”; ÍT7”< ÍT8”= ÍT9”> ÍT:”Ì@ ÍT<–” ÍU” ÍU
+” ÍU” ÍU” ÍU” ÍU‘”	 ÍV’” ÍW” ÍW‘” ÍY‘” Í^–” Í_” Í_” Í_” Í_” Í_” Í_+Ü ” Í`” Í`” Í`” Í`” Í`” Í`” Í`” Í`” Í`” Í`”! Í`”" Í`”- Í`)”. Í`*”1 Í`-”4 Í`0”5 Í`1”6 Í`2”7 Í`3”8 Í`4”9 Í`5”ÌB Í`>”ÌC Í`?Ü ” Ía” Ía” Ía” Ía” Ía” Ía”  Ía”! Ía”" Ía”# Ía”' Ía#”( Ía$”3 Ía/”4 Ía0”7 Ía3”: Ía6”ÌI ÍaÌE”ÌJ ÍaÌF”ÌM ÍaÌI”ÌN ÍaÌJ”ÌO ÍaÌK”ÌP ÍaÌL”ÌQ ÍaÌM”ÌZ ÍaÌV”Ì[ ÍaÌW” Íb” Íb” Íb	” Íb” Íb” Íb” Íb”  Íb”& Íb"”' Íb#”* Íb&”+ Íb'”- Íb)Ÿ” Íc” Íc
+” Íc” Íc” Íc”! Íc”" Íc”& Íc ”' Íc!”0 Íc*”1 Íc+”6 Íc0”7 Íc1”8 Íc2”9 Íc3’” Íd” Íd‘”	 Íe•” Íf” Íf” Íf	” Íf” Íf’” Íg” Íg‘”	 Íhš” Íi” Íi” Íi	” Íi” Íi”# Íi”$ Íi ”( Íi$”) Íi%”+ Íi'Ÿ” Íj” Íj
+” Íj” Íj” Íj”! Íj”" Íj”& Íj ”' Íj!”0 Íj*”1 Íj+”6 Íj0”7 Íj1”8 Íj2”9 Íj3’” Ík” Ík‘”	 Íl™” Ím” Ím” Ím	” Ím” Ím” Ím” Ím”! Ím”" ÍmŸ” Ín” Ín” Ín” Ín”% Ín”& Ín ”) Ín#”- Ín'”1 Ín+”6 Ín0”ÌE Ín?”ÌF ÍnÌ@”ÌI ÍnÌC”ÌJ ÍnÌD”ÌL ÍnÌF˜” Ío” Ío
+” Ío” Ío” Ío”  Ío”" Ío”# ÍoŸ” Íp” Íp
+” Íp” Íp” Íp”! Íp”" Íp”& Íp ”' Íp!”0 Íp*”1 Íp+”6 Íp0”7 Íp1”8 Íp2”9 Íp3’” Íq” Íq‘”	 Ír•” Ís” Ís” Ís	” Ís” Ís’” Ít” Ít‘”	 Íu˜” Ív” Ív” Ív” Ív” Ív” Ív”  Ív”" Ív˜” Íw” Íw
+” Íw” Íw” Íw”  Íw”" Íw”# Íw‘”	 Íx™” Íy” Íy” Íy” Íy”" Íy”# Íy”- Íy)”. Íy*”0 Íy,˜” Íz” Íz
+” Íz” Íz” Íz”  Íz”" Íz”# Íz‘”	 Í{Ÿ” Í|” Í|” Í|	” Í|” Í|” Í|” Í|”" Í|”# Í|”, Í|(”- Í|)”2 Í|.”3 Í|/”4 Í|0”5 Í|1’” Í}” Í}‘” Í‘” Í„”” Í…” Í…” Í…” Í…™” Í†” Í†” Í†” Í†”" Í†”# Í†”( Í†$”) Í†%”+ Í†'”” Í‡” Í‡” Í‡” Í‡‘”	 Íˆ–” Í‰” Í‰” Í‰” Í‰” Í‰” Í‰”” ÍŠ” ÍŠ” ÍŠ” ÍŠ•” Í‹” Í‹” Í‹” Í‹” Í‹—” ÍŒ” ÍŒ” ÍŒ”( ÍŒ ”) ÍŒ!”, ÍŒ$”- ÍŒ%’” Í” Í•” Í” Í” Í” Í” Í—” Í” Í” Í”( Í ”) Í!”, Í$”- Í%’” Í” Í•” Í‘” Í‘” Í‘” Í‘” Í‘—” Í’” Í’” Í’”( Í’ ”) Í’!”, Í’$”- Í’%’” Í“” Í“•” Í”” Í”” Í”” Í”” Í”—” Í•” Í•” Í•”( Í• ”) Í•!”, Í•$”- Í•%’” Í–” Í–‘” Í—’” Í˜” Í˜‘”	 Í™”” Íš” Íš” Íš” Íš’” Í›” Í›‘” Í‘” Í¡’” Í¢” Í¢
+” Í£” Í£” Í£” Í£)”# Í£.”$ Í£/”( Í£3”) Í£4”- Í£8”. Í£9”9 Í£ÌD”: Í£ÌE”; Í£ÌF”” Í¤” Í¤” Í¤” Í¤’” Í¥” Í¥‘” Í§‘” Í«”” Í¬”	 Í¬”
+ Í¬” Í¬” Í­” Í­” Í­” Í­”% Í­!”& Í­"”5 Í­1”6 Í­2”: Í­6”; Í­7”ÌC Í­?”ÌE Í­ÌA”ÌF Í­ÌB”ÌG Í­ÌC–” Í®” Í®” Í®” Í®” Í®”! Í®š” Í¯” Í¯
+” Í¯” Í¯” Í¯”  Í¯”! Í¯”1 Í¯+”Ì¥ Í¯ÌC”Ì¦ Í¯ÌD”” Í°” Í°” Í°” Í°‘”	 Í±—” Í²” Í²” Í²	” Í²” Í²”! Í²”" Í²”” Í³” Í³” Í³” Í³’” Í´” Í´‘” Í¶‘” Í»”” Í¼” Í¼” Í¼” Í¼Ü  ” Í½” Í½” Í½” Í½” Í½” Í½” Í½”  Í½”! Í½”$ Í½ ”% Í½!”( Í½$”) Í½%”* Í½&”+ Í½'”, Í½(”- Í½)”. Í½*”2 Í½.”8 Í½4”9 Í½5”ÌP Í½ÌL”ÌQ Í½ÌM”ÌR Í½ÌN”ÌS Í½ÌO”ÌT Í½ÌP”ÌX Í½ÌT”Ì^ Í½ÌZ”Ì_ Í½Ì[”Ìw Í½Ìs”Ìx Í½Ìt”Ìy Í½Ìu›” Í¾” Í¾” Í¾” Í¾” Í¾” Í¾”  Í¾”" Í¾”' Í¾#”( Í¾$”) Í¾%’” Í¿” Í¿‘” ÍÁ‘” ÍÆ”” ÍÇ” ÍÇ” ÍÇ” ÍÇ%™” ÍÈ” ÍÈ” ÍÈ” ÍÈ”" ÍÈ”# ÍÈ”+ ÍÈ'”, ÍÈ(”. ÍÈ*”” ÍÉ” ÍÉ” ÍÉ” ÍÉ‘”	 ÍÊ–” ÍË” ÍË” ÍË” ÍË” ÍË” ÍË’” ÍÌ” ÍÌ›” ÍÍ” ÍÍ” ÍÍ” ÍÍ/”( ÍÍ9”) ÍÍ:”, ÍÍ=”- ÍÍ>”8 ÍÍÌI”9 ÍÍÌJ”: ÍÍÌK™” ÍÎ” ÍÎ
+” ÍÎ” ÍÎ”# ÍÎ”$ ÍÎ”2 ÍÎ-”4 ÍÎ0”5 ÍÎ1” ÍÏ” ÍÏ” ÍÏ” ÍÏ” ÍÏ”, ÍÏ&”- ÍÏ'”: ÍÏ4”; ÍÏ5”ÌC ÍÏ=”ÌD ÍÏ>”ÌF ÍÏÌ@”ÌG ÍÏÌA”ÌH ÍÏÌB‘”	 ÍĞ”” ÍĞ” ÍĞ” ÍĞ” ÍĞŸ” ÍÑ” ÍÑ” ÍÑ” ÍÑ” ÍÑ”ÌD ÍÑ>”ÌG ÍÑÌA”ÌK ÍÑÌE”ÌL ÍÑÌF”ÌU ÍÑÌO”ÌV ÍÑÌP”Ì[ ÍÑÌU”Ì\ ÍÑÌV”Ì] ÍÑÌW”Ì^ ÍÑÌW‘”	 ÍÒ”” ÍÓ” ÍÓ” ÍÓ” ÍÓ’” ÍÔ” ÍÔ‘” ÍÖ‘” ÍØ’” ÍÙ” ÍÙ–” ÍÚ” ÍÚ” ÍÚ” ÍÚ)”  ÍÚ+”! ÍÚ,” ÍÛ” ÍÛ” ÍÛ	” ÍÛ” ÍÛ” ÍÛ” ÍÛ”  ÍÛ”! ÍÛ”% ÍÛ)”' ÍÛ+”, ÍÛ8”. ÍÛ:”0 ÍÛ<” ÍÜ” ÍÜ” ÍÜ”! ÍÜ”" ÍÜ”% ÍÜ”) ÍÜ#”* ÍÜ$”6 ÍÜ0”7 ÍÜ1”; ÍÜ5”< ÍÜ6”= ÍÜ7”” Íİ”	 Íİ”
+ Íİ” Íİœ” ÍŞ” ÍŞ” ÍŞ	” ÍŞ” ÍŞ”) ÍŞ%”* ÍŞ&”. ÍŞ*”/ ÍŞ+”1 ÍŞ-”2 ÍŞ.”3 ÍŞ/’” Íß” Íß‘” Íá‘” Íå”” Íæ” Íæ” Íæ” Íæ%™” Íç” Íç” Íç” Íç”" Íç”# Íç”( Íç$”) Íç%”+ Íç'’” Íè” Íè‘”	 Íé’” Íë”3 Íë/˜” Íì” Íì” Íì” Íì” Íì”" Íì”$ Íì ”& Íì"–” Íí” Íí
+” Íí” Íí” Íí” Íí—” Íî” Íî” Íî” Íî”# Íî”& Íî”' Íî’” Íï” Íï‘” Íğ–” Íñ” Íñ
+” Íñ” Íñ” Íñ” Íñ—” Íò” Íò” Íò” Íò”# Íò”& Íò”' Íò’” Íó” Íó‘” Íô‘”	 Íõ’” Í÷”# Í÷–” Íø” Íø” Íø” Íø” Íø” ÍøŸ” Íù” Íù
+” Íù” Íù” Íù”! Íù”" Íù”& Íù ”' Íù!”) Íù#”* Íù$”2 Íù,”4 Íù.”5 Íù/”6 Íù0–” Íú” Íú
+” Íú”! Íú”# Íú”$ Íú–” Íû” Íû
+” Íû” Íû” Íû” Íû’” Íü” Íü‘”	 Íı–” Íÿ” Íÿ” Íÿ” Íÿ” Íÿ” ÍÿŸ” Í ” Í 
+” Í ” Í ” Í ”! Í ”" Í ”& Í  ”' Í !”( Í "”) Í #”1 Í +”3 Í -”4 Í .”5 Í /–” Í” Í
+” Í”! Í”# Í”$ Í–” Í” Í
+” Í” Í” Í” Í’” Í” Í‘”	 Í’” Í” Í–” Í” Í” Í” Í” Í” Í–” Í” Í
+” Í”# Í”% Í”& Í ’” Í	” Í	‘”	 Í
+’” Í” Í–” Í” Í” Í” Í” Í” Íš” Í” Í
+” Í” Í” Í”! Í”" Í”% Í”& Í ”' Í!š” Í” Í
+” Í” Í” Í”! Í”" Í”% Í”& Í ”' Í!–” Í” Í
+” Í”! Í”# Í”$ Í–” Í” Í
+” Í” Í” Í” Í’” Í” Í‘”	 Í’” Í”" Í–” Í” Í” Í” Í” Í” Íš” Í” Í
+” Í” Í” Í”$ Í”% Í”( Í"”) Í#”* Í$š” Í” Í
+” Í” Í” Í”! Í”" Í”% Í”& Í ”' Í!–” Í” Í
+” Í”! Í”# Í”$ Í–” Í” Í
+” Í” Í” Í” Í’” Í” Í‘”	 Í’” Í” Íš” Í” Í” Í” Í” Í” Í”" Í”' Í#”* Í&”, Í(š” Í ” Í 
+” Í ” Í ” Í ”! Í ”" Í ”' Í !”( Í "”) Í #–” Í!” Í!
+” Í!”! Í!”# Í!”$ Í!’” Í"” Í"‘”	 Í#’” Í%”ÌE Í%ÌA’” Í&”ÌQ Í&ÌM’” Í'”ÌM Í'ÌI’” Í(”ÌM Í(ÌIÜ ” Í)” Í)
+” Í)” Í)”  Í)”% Í)!”' Í)#”, Í)(”. Í)*”3 Í)/”5 Í)1”: Í)6”< Í)8”Ì@ Í)<”ÌB Í)>”ÌE Í)ÌA”ÌG Í)ÌC”ÌJ Í)ÌF”ÌK Í)ÌG”ÌL Í)ÌHœ” Í*” Í*” Í*” Í*”" Í*”# Í*”( Í*$”) Í*%”. Í**”/ Í*+”0 Í*,”2 Í*.š” Í+” Í+
+” Í+” Í+” Í+” Í+”& Í+ ”' Í+!”- Í+'”. Í+(–” Í,” Í,
+” Í,” Í,” Í,” Í,” Í-” Í-” Í-” Í-” Í-”  Í-”+ Í-#”, Í-$”/ Í-'”2 Í-*”3 Í-+”4 Í-,”5 Í--’” Í.”ÌB Í.:Ü ” Í/” Í/” Í/”" Í/”# Í/”+ Í/#”, Í/$”0 Í/(”1 Í/)”5 Í/-”6 Í/.”ÌC Í/;”ÌD Í/<”ÌV Í/ÌN”ÌW Í/ÌO”Ì[ Í/ÌS”Ì\ Í/ÌT”Ì^ Í/ÌV’” Í0
+”Ìj Í0Ì`’” Í1
+”ÌL Í1ÌB–” Í2
+” Í2” Í2”" Í2”% Í2”' Í2’” Í3”7 Í3+š” Í4” Í4” Í4”( Í4”) Í4”- Í4!”. Í4"”3 Í4'”4 Í4(”5 Í4)‘” Í5‘” Í5’” Í6”ÌI Í6=Ü ” Í7” Í7” Í7”( Í7”) Í7”/ Í7#”0 Í7$”3 Í7'”6 Í7*”7 Í7+”9 Í7-”: Í7.”< Í70”ÌA Í75”ÌB Í76”ÌC Í77‘” Í8–” Í9
+” Í9” Í9”) Í9”+ Í9!”, Í9"–” Í:
+” Í:” Í:”" Í:”$ Í:”% Í:’” Í;
+” Í;‘” Í<	‘” Í=’” Í>”ÌW Í>ÌQš” Í?” Í?
+” Í?” Í?” Í?”! Í?”" Í?”' Í?!”( Í?"”) Í?#–” Í@” Í@
+” Í@”! Í@”# Í@”$ Í@’” ÍA” ÍA‘”	 ÍB’” ÍD”& ÍD"š” ÍE” ÍE” ÍE	” ÍE” ÍE” ÍE” ÍE”# ÍE”$ ÍE ”% ÍE!–” ÍF” ÍF” ÍF	” ÍF” ÍF”  ÍF’” ÍG” ÍG‘” ÍI‘” ÍK’” ÍL” ÍL’” ÍM” ÍM˜” ÍN” ÍN” ÍN” ÍN” ÍN”" ÍN”$ ÍN ”& ÍN"—” ÍO” ÍO
+” ÍO” ÍO”  ÍO”+ ÍO%”, ÍO&—” ÍP” ÍP
+” ÍP” ÍP” ÍP”: ÍP4”; ÍP5—” ÍQ” ÍQ
+” ÍQ” ÍQ” ÍQ”! ÍQ”" ÍQ—” ÍR” ÍR
+” ÍR” ÍR” ÍR”  ÍR”! ÍR‘”	 ÍS‘” ÍS’” ÍT”! ÍT—” ÍU” ÍU
+” ÍU” ÍU”  ÍU”" ÍU”# ÍU—” ÍV” ÍV
+” ÍV” ÍV” ÍV” ÍV” ÍV—” ÍW” ÍW
+” ÍW” ÍW” ÍW”! ÍW”" ÍW—” ÍX” ÍX
+” ÍX” ÍX” ÍX”  ÍX”! ÍX‘”	 ÍY’” ÍZ” ÍZ‘” Í\‘” Í^’” Í_” Í_’” Í`” Í`›” Ía” Ía” Ía” Ía” Ía” Ía”# Ía”$ Ía ”( Ía$”* Ía&”+ Ía'’” Íc”; Íc7”” Íd” Íd” Íd” Ídœ” Íe” Íe” Íe” Íe” Íe” Íe” Íe” Íe”# Íe”$ Íe ”% Íe!”' Íe#š” Íf” Íf” Íf”  Íf”! Íf”& Íf ”' Íf!”* Íf$”+ Íf%”, Íf&‘”	 Íg‘” Ígš” Íh” Íh” Íh”  Íh”! Íh”& Íh ”' Íh!”, Íh&”- Íh'”. Íh(‘”	 Íi’” Ík”  ÍkÜ ” Íl” Íl” Íl”# Íl”$ Íl ”' Íl#”( Íl$”) Íl%”* Íl&”, Íl(”- Íl)”. Íl*”/ Íl+”3 Íl/”5 Íl1”6 Íl2”7 Íl3”= Íl9”> Íl:”? Íl;”Ì@ Íl<”ÌB Íl>”ÌC Íl?”ÌD ÍlÌ@”ÌI ÍlÌE”ÌK ÍlÌG”ÌL ÍlÌH”ÌM ÍlÌI˜” Ín” Ín” Ín” Ín” Ín”$ Ín ”% Ín!”' Ín#’” Ío”* Ío$™” Íp” Íp
+” Íp” Íp”  Íp”! Íp”" Íp”# Íp”$ Íp™” Íq” Íq
+” Íq” Íq”  Íq”! Íq”" Íq”# Íq”$ Íq” Ír” Ír
+” Ír” Ír” Ír”) Ír#”* Ír$”= Ír7”> Ír8”? Ír9”ÌA Ír;”ÌB Ír<”ÌC Ír=”ÌD Ír>‘”	 Ís˜” Ís” Ís” Ís” Ís”$ Ís"”) Ís'”* Ís(”, Ís*’” Ít”3 Ít-™” Íu” Íu
+” Íu” Íu”  Íu”! Íu”" Íu”# Íu”$ Íu™” Ív” Ív
+” Ív” Ív”  Ív”! Ív”" Ív”# Ív”$ Ív™” Íw” Íw
+” Íw” Íw”  Íw”! Íw”" Íw”# Íw”$ ÍwÜ ” Íx” Íx
+” Íx” Íx” Íx”) Íx#”* Íx$”Ì@ Íx:”ÌA Íx;”ÌB Íx<”ÌD Íx>”ÌE Íx?”ÌG ÍxÌA”ÌH ÍxÌB”ÌI ÍxÌC”ÌJ ÍxÌD‘”	 Íy‘” Íy—” Íz” Íz
+” Íz” Íz” Íz”9 Íz3”: Íz4‘”	 Í{’” Í|” Í|ÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜú‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
  ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache•ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÍîÍ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÍõÍûÔrL”¤type¥start£end¤nameªIdentifierÍõÍû¦LoggerÔrM•¤type¥start£end¥value£raw§LiteralÍÍµ../common/util/Logger·'../common/util/Logger'J±ImportDeclarationÍÍT‘K¶ImportDefaultSpecifierÍ"Í/LªIdentifierÍ"Í/­CalculateUtilM§LiteralÍ5ÍS¼../common/util/CalculateUtil¾'../common/util/CalculateUtil'J±ImportDeclarationÍVÍ‘‘K¶ImportDefaultSpecifierÍ]ÍkLªIdentifierÍ]Ík®CheckEmptyUtilM§LiteralÍqÍ½../common/util/CheckEmptyUtil¿'../common/util/CheckEmptyUtil'J±ImportDeclarationÍ“ÍË‘K¶ImportDefaultSpecifierÍšÍ£LªIdentifierÍšÍ£©keysModelM§LiteralÍ©ÍÊ¿../viewmodel/PresskeysViewModelÙ!'../viewmodel/PresskeysViewModel'J±ImportDeclarationÍÍÍ’ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÍÖÍåLªIdentifierÍÖÍå¯CommonConstantsLªIdentifierÍÖÍå¯CommonConstantsN¯ImportSpecifierÍçÍíLªIdentifierÍçÍí¦SymbolLªIdentifierÍçÍí¦SymbolM§LiteralÍõÍÙ#../common/constants/CommonConstantsÙ%'../common/constants/CommonConstants'
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache•ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÍîÍ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÍõÍûÔrL”¤type¥start£end¤nameªIdentifierÍõÍû¦LoggerÔrM•¤type¥start£end¥value£raw§LiteralÍÍµ../common/util/Logger·'../common/util/Logger'J±ImportDeclarationÍÍT‘K¶ImportDefaultSpecifierÍ"Í/LªIdentifierÍ"Í/­CalculateUtilM§LiteralÍ5ÍS¼../common/util/CalculateUtil¾'../common/util/CalculateUtil'J±ImportDeclarationÍVÍ‘‘K¶ImportDefaultSpecifierÍ]ÍkLªIdentifierÍ]Ík®CheckEmptyUtilM§LiteralÍqÍ½../common/util/CheckEmptyUtil¿'../common/util/CheckEmptyUtil'J±ImportDeclarationÍ“ÍË‘K¶ImportDefaultSpecifierÍšÍ£LªIdentifierÍšÍ£©keysModelM§LiteralÍ©ÍÊ¿../viewmodel/PresskeysViewModelÙ!'../viewmodel/PresskeysViewModel'J±ImportDeclarationÍÍÍ’ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÍÖÍåLªIdentifierÍÖÍå¯CommonConstantsLªIdentifierÍÖÍå¯CommonConstantsN¯ImportSpecifierÍçÍíLªIdentifierÍçÍí¦SymbolLªIdentifierÍçÍí¦SymbolM§LiteralÍõÍÙ#../common/constants/CommonConstantsÙ%'../common/constants/CommonConstants'

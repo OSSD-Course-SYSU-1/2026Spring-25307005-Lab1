@@ -34,6 +34,41 @@ export class PressKeysBeanViewModel {
             ]
         ];
     }
+    /**
+     * Scientific keys array data.
+     */
+    getScientificKeys(): Array<Array<PressKeysBean>> {
+        return [
+            [
+                new PressKeysBean(1, '16vp', '35vp', 'sin'),
+                new PressKeysBean(1, '16vp', '35vp', 'cos'),
+                new PressKeysBean(1, '16vp', '35vp', 'tan'),
+                new PressKeysBean(1, '16vp', '35vp', 'log'),
+                new PressKeysBean(1, '16vp', '35vp', 'ln')
+            ],
+            [
+                new PressKeysBean(1, '16vp', '35vp', '√'),
+                new PressKeysBean(1, '16vp', '35vp', '^'),
+                new PressKeysBean(1, '16vp', '35vp', '!'),
+                new PressKeysBean(1, '16vp', '35vp', 'π'),
+                new PressKeysBean(1, '16vp', '35vp', 'e')
+            ],
+            [
+                new PressKeysBean(1, '16vp', '35vp', '('),
+                new PressKeysBean(1, '16vp', '35vp', ')'),
+                new PressKeysBean(1, '16vp', '35vp', 'x²'),
+                new PressKeysBean(1, '16vp', '35vp', '1/x'),
+                new PressKeysBean(1, '16vp', '35vp', '方程')
+            ],
+            [
+                new PressKeysBean(1, '16vp', '35vp', ','),
+                new PressKeysBean(1, '16vp', '35vp', '-'),
+                new PressKeysBean(1, '16vp', '35vp', ''),
+                new PressKeysBean(1, '16vp', '35vp', ''),
+                new PressKeysBean(1, '16vp', '35vp', '')
+            ]
+        ];
+    }
 }
 let keysModel = new PressKeysBeanViewModel();
 export default keysModel as PressKeysBeanViewModel;

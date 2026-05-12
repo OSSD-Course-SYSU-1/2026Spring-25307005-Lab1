@@ -25,6 +25,8 @@ import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
 struct HomePage {
   @State inputValue: string = '';
   @State calValue: string = '';
+  @State isScientificMode: boolean = false;
+  @State equationMode: string = ''; // 'linear' or 'quadratic'
   private expressions: Array<string> = [];
 
   build() {
@@ -61,6 +63,60 @@ struct HomePage {
         right: $r('app.float.text_margin_right'),
         bottom: $r('app.float.text_margin_bottom')
       })
+
+      // Scientific mode toggle button
+      Column() {
+        Row() {
+          Text(this.isScientificMode ? '标准模式' : '科学模式')
+            .fontSize('14vp')
+            .fontColor(Color.White)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .height('40vp')
+        .backgroundColor('#4A90E2')
+        .justifyContent(FlexAlign.Center)
+        .onClick(() => {
+          this.isScientificMode = !this.isScientificMode;
+        })
+      }
+      .width(CommonConstants.FULL_PERCENT)
+      .margin({ bottom: '5vp' })
+
+      // Scientific keys (shown when in scientific mode)
+      if (this.isScientificMode) {
+        Column() {
+          Row() {
+            ForEach(keysModel.getScientificKeys(), (columnItem: Array<PressKeysBean>, columnItemIndex?: number) => {
+              Column() {
+                ForEach(columnItem, (keyItem: PressKeysBean, keyItemIndex?: number) => {
+                  Column() {
+                    Text(keyItem.value)
+                      .fontSize('14vp')
+                      .fontColor(Color.Black)
+                  }
+                  .width('60vp')
+                  .height('35vp')
+                  .borderWidth(1)
+                  .borderColor($r('app.color.border_color'))
+                  .borderRadius($r('app.float.border_radius'))
+                  .backgroundColor('#E8E8E8')
+                  .alignItems(HorizontalAlign.Center)
+                  .justifyContent(FlexAlign.Center)
+                  .onClick(() => {
+                    this.inputScientificSymbol(keyItem.value);
+                  })
+                }, (keyItem: PressKeysBean) => JSON.stringify(keyItem))
+              }
+              .width(CommonConstants.FULL_PERCENT)
+              .justifyContent(FlexAlign.Center)
+              .layoutWeight(1)
+            })
+          }
+          .width(CommonConstants.FULL_PERCENT)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .margin({ bottom: '5vp' })
+      }
 
       Column() {
         Row() {
@@ -152,11 +208,17 @@ struct HomePage {
       case Symbol.CLEAN:
         this.expressions = [];
         this.calValue = '';
+        this.equationMode = '';  // Exit equation mode
         break;
       case Symbol.DEL:
         this.inputDelete(len);
         break;
       case Symbol.EQU:
+        // Check if in equation mode
+        if (this.equationMode !== '') {
+          this.solveEquation();
+          return;
+        }
         if (len === 0) {
           return;
         }
@@ -186,22 +248,40 @@ struct HomePage {
     if (CheckEmptyUtil.isEmpty(value)) {
       return;
     }
+
+    // In equation mode, just append to input value
+    if (this.equationMode !== '') {
+      this.inputValue += value;
+      return;
+    }
+
     let len = this.expressions.length;
     let last = len > 0 ? this.expressions[len - 1] : '';
     let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
     if (!this.validateEnter(last, value)) {
       return;
     }
+    // Check if last element is an operator (including scientific operators)
+    let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
+
     if (!last) {
       this.expressions.push(value);
-    } else if (!secondLast) {
-      this.expressions[len - 1] += value;
-    }
-    if (secondLast && CalculateUtil.isSymbol(secondLast)) {
-      this.expressions[len -1] += value;
-    }
-    if (secondLast && !CalculateUtil.isSymbol(secondLast)) {
+    } else if (isLastOperator) {
+      // If last is an operator, push new number
       this.expressions.push(value);
+    } else if (!secondLast) {
+      // If no second last, append to last number
+      this.expressions[len - 1] += value;
+    } else {
+      // Check if second last is an operator
+      let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
+      if (isSecondLastOperator) {
+        // Append to last number
+        this.expressions[len - 1] += value;
+      } else {
+        // Push new number
+        this.expressions.push(value);
+      }
     }
     this.formatInputValue();
     if (value !== CommonConstants.DOTS) {
@@ -397,5 +477,162 @@ struct HomePage {
       deepExpressions[index] = this.resultFormat(item);
     });
     this.inputValue = deepExpressions.join('');
+  }
+
+  /**
+   * Input scientific symbols.
+   *
+   * @param value Scientific symbol.
+   */
+  inputScientificSymbol(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return;
+    }
+
+    // In equation mode, handle comma and minus
+    if (this.equationMode !== '') {
+      if (value === ',') {
+        this.inputValue += ',';
+        return;
+      }
+      if (value === '-') {
+        this.inputValue += '-';
+        return;
+      }
+    }
+
+    // Handle special constants
+    if (value === 'π') {
+      this.expressions.push(Math.PI.toString());
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    if (value === 'e') {
+      this.expressions.push(Math.E.toString());
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle equation mode
+    if (value === '方程') {
+      this.showEquationDialog();
+      return;
+    }
+
+    // Handle x² (square)
+    if (value === 'x²') {
+      this.expressions.push('^');
+      this.expressions.push('2');
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle 1/x (reciprocal)
+    if (value === '1/x') {
+      this.expressions.unshift('1');
+      this.expressions.push('÷');
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle parentheses
+    if (value === '(' || value === ')') {
+      this.expressions.push(value);
+      this.formatInputValue();
+      return;
+    }
+
+    // For unary scientific operators (sin, cos, tan, log, ln, √)
+    // These are prefix operators, so they should be added before the operand
+    // But in our UI flow, user inputs number first, then clicks operator
+    // So we need to apply the operator to the last number in expressions
+    const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', '√', '!'];
+    if (unaryOperators.indexOf(value) !== -1) {
+      let len = this.expressions.length;
+      if (len > 0) {
+        let last = this.expressions[len - 1];
+        // If last element is a number, apply the operator
+        if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
+          // For prefix operators like sin, cos, √, we need to insert operator before the number
+          // For postfix operators like !, we add after the number
+          if (value === '!') {
+            // Postfix operator (factorial)
+            this.expressions.push(value);
+          } else {
+            // Prefix operator: insert before the last number
+            this.expressions.splice(len - 1, 0, value);
+          }
+          this.formatInputValue();
+          this.getResult();
+          return;
+        }
+      }
+      // If no number before, just add the operator (user will input number next)
+      this.expressions.push(value);
+      this.formatInputValue();
+      return;
+    }
+
+    // For binary operators like ^
+    this.expressions.push(value);
+    this.formatInputValue();
+  }
+
+  /**
+   * Show equation solving dialog.
+   */
+  showEquationDialog() {
+    // Toggle equation mode
+    if (this.equationMode === '') {
+      this.equationMode = 'quadratic';
+      this.calValue = '方程模式：输入系数 a,b,c 解 ax²+bx+c=0';
+      this.expressions = [];
+      this.inputValue = '';
+    } else {
+      // Exit equation mode
+      this.equationMode = '';
+      this.calValue = '';
+      this.expressions = [];
+      this.inputValue = '';
+    }
+  }
+
+  /**
+   * Solve equation from input.
+   */
+  solveEquation() {
+    // Get the input string
+    let input = this.inputValue.trim();
+
+    // Parse coefficients (separated by comma or space)
+    let coefficients: string[];
+    if (input.indexOf(',') !== -1) {
+      coefficients = input.split(',');
+    } else {
+      coefficients = input.split(/\s+/);
+    }
+
+    // Trim each coefficient
+    coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
+
+    if (coefficients.length === 2) {
+      // Linear equation: ax + b = 0
+      let a = coefficients[0];
+      let b = coefficients[1];
+      this.calValue = CalculateUtil.solveLinearEquation(a, b);
+    } else if (coefficients.length === 3) {
+      // Quadratic equation: ax² + bx + c = 0
+      let a = coefficients[0];
+      let b = coefficients[1];
+      let c = coefficients[2];
+      this.calValue = CalculateUtil.solveQuadraticEquation(a, b, c);
+    } else {
+      this.calValue = '错误：请输入2个系数（一次方程）或3个系数（二次方程）';
+    }
   }
 }

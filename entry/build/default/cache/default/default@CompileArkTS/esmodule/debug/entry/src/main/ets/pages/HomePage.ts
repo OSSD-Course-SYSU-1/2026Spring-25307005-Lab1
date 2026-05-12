@@ -4,6 +4,8 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 interface HomePage_Params {
     inputValue?: string;
     calValue?: string;
+    isScientificMode?: boolean;
+    equationMode?: string;
     expressions?: Array<string>;
 }
 import Logger from "@bundle:com.example.simplecalculator/entry/ets/common/util/Logger";
@@ -20,6 +22,8 @@ class HomePage extends ViewPU {
         }
         this.__inputValue = new ObservedPropertySimplePU('', this, "inputValue");
         this.__calValue = new ObservedPropertySimplePU('', this, "calValue");
+        this.__isScientificMode = new ObservedPropertySimplePU(false, this, "isScientificMode");
+        this.__equationMode = new ObservedPropertySimplePU('', this, "equationMode");
         this.expressions = [];
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -31,6 +35,12 @@ class HomePage extends ViewPU {
         if (params.calValue !== undefined) {
             this.calValue = params.calValue;
         }
+        if (params.isScientificMode !== undefined) {
+            this.isScientificMode = params.isScientificMode;
+        }
+        if (params.equationMode !== undefined) {
+            this.equationMode = params.equationMode;
+        }
         if (params.expressions !== undefined) {
             this.expressions = params.expressions;
         }
@@ -40,10 +50,14 @@ class HomePage extends ViewPU {
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__inputValue.purgeDependencyOnElmtId(rmElmtId);
         this.__calValue.purgeDependencyOnElmtId(rmElmtId);
+        this.__isScientificMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__equationMode.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__inputValue.aboutToBeDeleted();
         this.__calValue.aboutToBeDeleted();
+        this.__isScientificMode.aboutToBeDeleted();
+        this.__equationMode.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -60,6 +74,20 @@ class HomePage extends ViewPU {
     }
     set calValue(newValue: string) {
         this.__calValue.set(newValue);
+    }
+    private __isScientificMode: ObservedPropertySimplePU<boolean>;
+    get isScientificMode() {
+        return this.__isScientificMode.get();
+    }
+    set isScientificMode(newValue: boolean) {
+        this.__isScientificMode.set(newValue);
+    }
+    private __equationMode: ObservedPropertySimplePU<string>; // 'linear' or 'quadratic'
+    get equationMode() {
+        return this.__equationMode.get();
+    }
+    set equationMode(newValue: string) {
+        this.__equationMode.set(newValue);
     }
     private expressions: Array<string>;
     initialRender() {
@@ -105,6 +133,101 @@ class HomePage extends ViewPU {
         }, Text);
         Text.pop();
         Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Scientific mode toggle button
+            Column.create();
+            // Scientific mode toggle button
+            Column.width(CommonConstants.FULL_PERCENT);
+            // Scientific mode toggle button
+            Column.margin({ bottom: '5vp' });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width(CommonConstants.FULL_PERCENT);
+            Row.height('40vp');
+            Row.backgroundColor('#4A90E2');
+            Row.justifyContent(FlexAlign.Center);
+            Row.onClick(() => {
+                this.isScientificMode = !this.isScientificMode;
+            });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isScientificMode ? '标准模式' : '科学模式');
+            Text.fontSize('14vp');
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        // Scientific mode toggle button
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // Scientific keys (shown when in scientific mode)
+            if (this.isScientificMode) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width(CommonConstants.FULL_PERCENT);
+                        Column.margin({ bottom: '5vp' });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width(CommonConstants.FULL_PERCENT);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, columnItemIndex?: number) => {
+                            const columnItem = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width(CommonConstants.FULL_PERCENT);
+                                Column.justifyContent(FlexAlign.Center);
+                                Column.layoutWeight(1);
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                ForEach.create();
+                                const forEachItemGenFunction = (_item, keyItemIndex?: number) => {
+                                    const keyItem = _item;
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Column.create();
+                                        Column.width('60vp');
+                                        Column.height('35vp');
+                                        Column.borderWidth(1);
+                                        Column.borderColor({ "id": 16777222, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.borderRadius({ "id": 16777229, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.backgroundColor('#E8E8E8');
+                                        Column.alignItems(HorizontalAlign.Center);
+                                        Column.justifyContent(FlexAlign.Center);
+                                        Column.onClick(() => {
+                                            this.inputScientificSymbol(keyItem.value);
+                                        });
+                                    }, Column);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(keyItem.value);
+                                        Text.fontSize('14vp');
+                                        Text.fontColor(Color.Black);
+                                    }, Text);
+                                    Text.pop();
+                                    Column.pop();
+                                };
+                                this.forEachUpdateFunction(elmtId, columnItem, forEachItemGenFunction, (keyItem: PressKeysBean) => JSON.stringify(keyItem), true, false);
+                            }, ForEach);
+                            ForEach.pop();
+                            Column.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, keysModel.getScientificKeys(), forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.layoutWeight(1);
@@ -217,11 +340,17 @@ class HomePage extends ViewPU {
             case Symbol.CLEAN:
                 this.expressions = [];
                 this.calValue = '';
+                this.equationMode = ''; // Exit equation mode
                 break;
             case Symbol.DEL:
                 this.inputDelete(len);
                 break;
             case Symbol.EQU:
+                // Check if in equation mode
+                if (this.equationMode !== '') {
+                    this.solveEquation();
+                    return;
+                }
                 if (len === 0) {
                     return;
                 }
@@ -250,23 +379,41 @@ class HomePage extends ViewPU {
         if (CheckEmptyUtil.isEmpty(value)) {
             return;
         }
+        // In equation mode, just append to input value
+        if (this.equationMode !== '') {
+            this.inputValue += value;
+            return;
+        }
         let len = this.expressions.length;
         let last = len > 0 ? this.expressions[len - 1] : '';
         let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
         if (!this.validateEnter(last, value)) {
             return;
         }
+        // Check if last element is an operator (including scientific operators)
+        let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
         if (!last) {
             this.expressions.push(value);
         }
-        else if (!secondLast) {
-            this.expressions[len - 1] += value;
-        }
-        if (secondLast && CalculateUtil.isSymbol(secondLast)) {
-            this.expressions[len - 1] += value;
-        }
-        if (secondLast && !CalculateUtil.isSymbol(secondLast)) {
+        else if (isLastOperator) {
+            // If last is an operator, push new number
             this.expressions.push(value);
+        }
+        else if (!secondLast) {
+            // If no second last, append to last number
+            this.expressions[len - 1] += value;
+        }
+        else {
+            // Check if second last is an operator
+            let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
+            if (isSecondLastOperator) {
+                // Append to last number
+                this.expressions[len - 1] += value;
+            }
+            else {
+                // Push new number
+                this.expressions.push(value);
+            }
         }
         this.formatInputValue();
         if (value !== CommonConstants.DOTS) {
@@ -455,6 +602,153 @@ class HomePage extends ViewPU {
             deepExpressions[index] = this.resultFormat(item);
         });
         this.inputValue = deepExpressions.join('');
+    }
+    /**
+     * Input scientific symbols.
+     *
+     * @param value Scientific symbol.
+     */
+    inputScientificSymbol(value: string) {
+        if (CheckEmptyUtil.isEmpty(value)) {
+            return;
+        }
+        // In equation mode, handle comma and minus
+        if (this.equationMode !== '') {
+            if (value === ',') {
+                this.inputValue += ',';
+                return;
+            }
+            if (value === '-') {
+                this.inputValue += '-';
+                return;
+            }
+        }
+        // Handle special constants
+        if (value === 'π') {
+            this.expressions.push(Math.PI.toString());
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        if (value === 'e') {
+            this.expressions.push(Math.E.toString());
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle equation mode
+        if (value === '方程') {
+            this.showEquationDialog();
+            return;
+        }
+        // Handle x² (square)
+        if (value === 'x²') {
+            this.expressions.push('^');
+            this.expressions.push('2');
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle 1/x (reciprocal)
+        if (value === '1/x') {
+            this.expressions.unshift('1');
+            this.expressions.push('÷');
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle parentheses
+        if (value === '(' || value === ')') {
+            this.expressions.push(value);
+            this.formatInputValue();
+            return;
+        }
+        // For unary scientific operators (sin, cos, tan, log, ln, √)
+        // These are prefix operators, so they should be added before the operand
+        // But in our UI flow, user inputs number first, then clicks operator
+        // So we need to apply the operator to the last number in expressions
+        const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', '√', '!'];
+        if (unaryOperators.indexOf(value) !== -1) {
+            let len = this.expressions.length;
+            if (len > 0) {
+                let last = this.expressions[len - 1];
+                // If last element is a number, apply the operator
+                if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
+                    // For prefix operators like sin, cos, √, we need to insert operator before the number
+                    // For postfix operators like !, we add after the number
+                    if (value === '!') {
+                        // Postfix operator (factorial)
+                        this.expressions.push(value);
+                    }
+                    else {
+                        // Prefix operator: insert before the last number
+                        this.expressions.splice(len - 1, 0, value);
+                    }
+                    this.formatInputValue();
+                    this.getResult();
+                    return;
+                }
+            }
+            // If no number before, just add the operator (user will input number next)
+            this.expressions.push(value);
+            this.formatInputValue();
+            return;
+        }
+        // For binary operators like ^
+        this.expressions.push(value);
+        this.formatInputValue();
+    }
+    /**
+     * Show equation solving dialog.
+     */
+    showEquationDialog() {
+        // Toggle equation mode
+        if (this.equationMode === '') {
+            this.equationMode = 'quadratic';
+            this.calValue = '方程模式：输入系数 a,b,c 解 ax²+bx+c=0';
+            this.expressions = [];
+            this.inputValue = '';
+        }
+        else {
+            // Exit equation mode
+            this.equationMode = '';
+            this.calValue = '';
+            this.expressions = [];
+            this.inputValue = '';
+        }
+    }
+    /**
+     * Solve equation from input.
+     */
+    solveEquation() {
+        // Get the input string
+        let input = this.inputValue.trim();
+        // Parse coefficients (separated by comma or space)
+        let coefficients: string[];
+        if (input.indexOf(',') !== -1) {
+            coefficients = input.split(',');
+        }
+        else {
+            coefficients = input.split(/\s+/);
+        }
+        // Trim each coefficient
+        coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
+        if (coefficients.length === 2) {
+            // Linear equation: ax + b = 0
+            let a = coefficients[0];
+            let b = coefficients[1];
+            this.calValue = CalculateUtil.solveLinearEquation(a, b);
+        }
+        else if (coefficients.length === 3) {
+            // Quadratic equation: ax² + bx + c = 0
+            let a = coefficients[0];
+            let b = coefficients[1];
+            let c = coefficients[2];
+            this.calValue = CalculateUtil.solveQuadraticEquation(a, b, c);
+        }
+        else {
+            this.calValue = '错误：请输入2个系数（一次方程）或3个系数（二次方程）';
+        }
     }
     rerender() {
         this.updateDirtyElements();

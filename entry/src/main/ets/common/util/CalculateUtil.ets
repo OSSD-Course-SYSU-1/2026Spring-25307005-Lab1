@@ -31,6 +31,30 @@ class CalculateUtil {
   }
 
   /**
+   * Determines whether it is a scientific operator.
+   *
+   * @param value The symbol.
+   * @return Is Scientific Operator.
+   */
+  isScientificSymbol(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return false;
+    }
+    return (CommonConstants.SCIENTIFIC_OPERATORS.indexOf(value) !== -1);
+  }
+
+  /**
+   * Determines whether it is a function operator (sin, cos, tan, log, ln, sqrt).
+   *
+   * @param value The symbol.
+   * @return Is Function Operator.
+   */
+  isFunctionOperator(value: string) {
+    const functionOps = ['sin', 'cos', 'tan', 'log', 'ln', '√'];
+    return functionOps.indexOf(value) !== -1;
+  }
+
+  /**
    * Get Operator Precedence.
    *
    * @param value The symbol.
@@ -38,20 +62,32 @@ class CalculateUtil {
    */
   getPriority(value: string): number {
     if (CheckEmptyUtil.isEmpty(value)) {
-      return Priority.LOW;
+      return Priority.LOWEST;
     }
     let result = 0;
     switch (value) {
       case SymbolicEnumeration.ADD:
       case SymbolicEnumeration.MIN:
-        result = Priority.MEDIUM;
+        result = Priority.LOW;
         break;
       case SymbolicEnumeration.MUL:
       case SymbolicEnumeration.DIV:
+        result = Priority.MEDIUM;
+        break;
+      case SymbolicEnumeration.POW:
         result = Priority.HIGH;
         break;
+      case SymbolicEnumeration.SIN:
+      case SymbolicEnumeration.COS:
+      case SymbolicEnumeration.TAN:
+      case SymbolicEnumeration.LOG:
+      case SymbolicEnumeration.LN:
+      case SymbolicEnumeration.SQRT:
+      case SymbolicEnumeration.FACT:
+        result = Priority.HIGHEST;
+        break;
       default:
-        result = Priority.LOW;
+        result = Priority.LOWEST;
         break;
     }
     return result;
@@ -97,8 +133,15 @@ class CalculateUtil {
     while (expressions.length > 0) {
       let current: string | undefined = expressions.shift();
       if (current !== undefined) {
-        if (this.isSymbol(current)) {
-          // Processing addition, subtraction, multiplication and division.
+        // Check if it's a unary operator (prefix operators like sin, cos, √)
+        if (this.isFunctionOperator(current)) {
+          // For unary prefix operators, push to stack with special handling
+          outputStack.push(current);
+        } else if (current === '!') {
+          // Factorial is a postfix unary operator, add directly to queue
+          outputQueue.push(current);
+        } else if (this.isSymbol(current) || current === '^') {
+          // Processing binary operators.
           while (outputStack.length > 0 && this.comparePriority(current, outputStack[outputStack.length - 1])) {
             let popValue: string | undefined = outputStack.pop();
             if (popValue !== undefined) {
@@ -109,6 +152,13 @@ class CalculateUtil {
         } else {
           // Processing the numbers.
           outputQueue.push(current);
+          // After adding a number, check if there are unary operators in the stack
+          while (outputStack.length > 0 && this.isFunctionOperator(outputStack[outputStack.length - 1])) {
+            let popValue: string | undefined = outputStack.pop();
+            if (popValue !== undefined) {
+              outputQueue.push(popValue);
+            }
+          }
         }
       }
     }
@@ -135,9 +185,47 @@ class CalculateUtil {
     while (queue.length > 0) {
       let current: string | undefined = queue.shift();
       if (current !== undefined) {
-        if (!this.isSymbol(current)) {
+        if (!this.isSymbol(current) && !this.isScientificSymbol(current)) {
           outputStack.push(current);
+        } else if (this.isFunctionOperator(current)) {
+          // Handle unary scientific functions (sin, cos, tan, log, ln, sqrt)
+          let operand: string | undefined = outputStack.pop();
+          if (operand !== undefined) {
+            let result: number;
+            switch (current) {
+              case 'sin':
+                result = this.sin(operand);
+                break;
+              case 'cos':
+                result = this.cos(operand);
+                break;
+              case 'tan':
+                result = this.tan(operand);
+                break;
+              case 'log':
+                result = this.log(operand);
+                break;
+              case 'ln':
+                result = this.ln(operand);
+                break;
+              case '√':
+                result = this.sqrt(operand);
+                break;
+              default:
+                result = Number.NaN;
+                break;
+            }
+            outputStack.push(this.numberToScientificNotation(result));
+          }
+        } else if (current === '!') {
+          // Handle factorial
+          let operand: string | undefined = outputStack.pop();
+          if (operand !== undefined) {
+            let result = this.factorial(operand);
+            outputStack.push(this.numberToScientificNotation(result));
+          }
         } else {
+          // Handle binary operators
           let second: string | undefined = outputStack.pop();
           let first: string | undefined = outputStack.pop();
           if (first !== undefined && second !== undefined) {
@@ -150,8 +238,13 @@ class CalculateUtil {
     if (outputStack.length !== 1) {
       return 'NaN';
     } else {
-      let end: string = outputStack[0]?.endsWith(CommonConstants.DOTS) ?
-        outputStack[0].substring(0, outputStack[0].length - 1) : outputStack[0];
+      let end: string | undefined = outputStack[0];
+      if (end === undefined || end === null) {
+        return 'NaN';
+      }
+      if (end.endsWith(CommonConstants.DOTS)) {
+        end = end.substring(0, end.length - 1);
+      }
       return end;
     }
   }
@@ -181,6 +274,9 @@ class CalculateUtil {
         break;
       case SymbolicEnumeration.DIV:
         result = this.mulOrDiv(arg1, arg2, CommonConstants.DIV);
+        break;
+      case SymbolicEnumeration.POW:
+        result = this.power(arg1, arg2);
         break;
       default:
         break;
@@ -263,19 +359,185 @@ class CalculateUtil {
     if (result === Number.NEGATIVE_INFINITY || result === Number.POSITIVE_INFINITY) {
       return 'NaN';
     }
+    if (Number.isNaN(result)) {
+      return 'NaN';
+    }
     let resultStr = JSON.stringify(result);
     if (this.containScientificNotation(resultStr)) {
       return resultStr;
     }
     let prefixNumber = (resultStr.indexOf(CommonConstants.MIN) === -1) ? 1 : -1;
-    result *= prefixNumber;
+    let absResult = Math.abs(result);
     if (resultStr.replace(CommonConstants.DOTS, '').replace(CommonConstants.MIN, '').length <
       CommonConstants.NUM_MAX_LEN) {
       return resultStr;
     }
-    let suffix = (Math.floor(Math.log(result) / Math.LN10));
-    let prefix = (result * Math.pow(CommonConstants.TEN, -suffix) * prefixNumber);
+    let suffix = (Math.floor(Math.log(absResult) / Math.LN10));
+    let prefix = (absResult * Math.pow(CommonConstants.TEN, -suffix) * prefixNumber);
     return (prefix + CommonConstants.E + suffix);
+  }
+
+  /**
+   * Power operation (exponentiation).
+   *
+   * @param base Base number.
+   * @param exponent Exponent.
+   * @return Power result.
+   */
+  power(base: string, exponent: string): number {
+    let baseNum = Number(base);
+    let expNum = Number(exponent);
+    return Math.pow(baseNum, expNum);
+  }
+
+  /**
+   * Sine function.
+   *
+   * @param angle Angle in radians.
+   * @return Sine value.
+   */
+  sin(angle: string): number {
+    return Math.sin(Number(angle));
+  }
+
+  /**
+   * Cosine function.
+   *
+   * @param angle Angle in radians.
+   * @return Cosine value.
+   */
+  cos(angle: string): number {
+    return Math.cos(Number(angle));
+  }
+
+  /**
+   * Tangent function.
+   *
+   * @param angle Angle in radians.
+   * @return Tangent value.
+   */
+  tan(angle: string): number {
+    return Math.tan(Number(angle));
+  }
+
+  /**
+   * Logarithm (base 10).
+   *
+   * @param value Input value.
+   * @return Logarithm result.
+   */
+  log(value: string): number {
+    let num = Number(value);
+    if (num <= 0) {
+      return Number.NaN;
+    }
+    return Math.log10(num);
+  }
+
+  /**
+   * Natural logarithm (base e).
+   *
+   * @param value Input value.
+   * @return Natural logarithm result.
+   */
+  ln(value: string): number {
+    let num = Number(value);
+    if (num <= 0) {
+      return Number.NaN;
+    }
+    return Math.log(num);
+  }
+
+  /**
+   * Square root.
+   *
+   * @param value Input value.
+   * @return Square root result.
+   */
+  sqrt(value: string): number {
+    let num = Number(value);
+    if (num < 0) {
+      return Number.NaN;
+    }
+    return Math.sqrt(num);
+  }
+
+  /**
+   * Factorial.
+   *
+   * @param value Input value (must be non-negative integer).
+   * @return Factorial result.
+   */
+  factorial(value: string): number {
+    let num = Number(value);
+    if (num < 0 || !Number.isInteger(num)) {
+      return Number.NaN;
+    }
+    if (num === 0 || num === 1) {
+      return 1;
+    }
+    let result = 1;
+    for (let i = 2; i <= num; i++) {
+      result *= i;
+    }
+    return result;
+  }
+
+  /**
+   * Solve simple linear equation (ax + b = 0).
+   *
+   * @param a Coefficient of x.
+   * @param b Constant term.
+   * @return Solution x = -b/a.
+   */
+  solveLinearEquation(a: string, b: string): string {
+    let aNum = Number(a);
+    let bNum = Number(b);
+    if (aNum === 0) {
+      if (bNum === 0) {
+        return '无穷多解';
+      }
+      return '无解';
+    }
+    let result = -bNum / aNum;
+    return this.numberToScientificNotation(result);
+  }
+
+  /**
+   * Solve quadratic equation (ax² + bx + c = 0).
+   *
+   * @param a Coefficient of x².
+   * @param b Coefficient of x.
+   * @param c Constant term.
+   * @return Solutions as string.
+   */
+  solveQuadraticEquation(a: string, b: string, c: string): string {
+    let aNum = Number(a);
+    let bNum = Number(b);
+    let cNum = Number(c);
+
+    if (aNum === 0) {
+      // Linear equation
+      return this.solveLinearEquation(b, c);
+    }
+
+    let discriminant = bNum * bNum - 4 * aNum * cNum;
+
+    if (discriminant < 0) {
+      // Complex roots
+      let realPart = -bNum / (2 * aNum);
+      let imagPart = Math.sqrt(-discriminant) / (2 * aNum);
+      return `x₁ = ${realPart.toFixed(4)} + ${imagPart.toFixed(4)}i, x₂ = ${realPart.toFixed(4)} - ${imagPart.toFixed(4)}i`;
+    } else if (discriminant === 0) {
+      // One real root
+      let root = -bNum / (2 * aNum);
+      return `x = ${root.toFixed(4)}`;
+    } else {
+      // Two real roots
+      let root1 = (-bNum + Math.sqrt(discriminant)) / (2 * aNum);
+      let root2 = (-bNum - Math.sqrt(discriminant)) / (2 * aNum);
+      return `x₁ = ${root1.toFixed(4)}, x₂ = ${root2.toFixed(4)}`;
+    }
   }
 }
 

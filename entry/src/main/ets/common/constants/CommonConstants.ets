@@ -33,6 +33,11 @@ export class CommonConstants {
   static readonly OPERATORS_PRIORITY: string = '×÷';
 
   /**
+   * Scientific operators Collection.
+   */
+  static readonly SCIENTIFIC_OPERATORS: string = 'sincostanlogln√^!';
+
+  /**
    * Addition.
    */
   static readonly ADD: string = '+';
@@ -106,6 +111,16 @@ export class CommonConstants {
    * zero point.
    */
   static readonly ZERO_DOTS: string = '0.'
+
+  /**
+   * PI constant.
+   */
+  static readonly PI: number = Math.PI;
+
+  /**
+   * E constant (Euler's number).
+   */
+  static readonly EULER: number = Math.E;
 }
 
 /**
@@ -118,16 +133,30 @@ export enum Symbol {
   DIV = 'div',
   CLEAN = 'clean',
   DEL = 'del',
-  EQU = 'equ'
+  EQU = 'equ',
+  SIN = 'sin',
+  COS = 'cos',
+  TAN = 'tan',
+  LOG = 'log',
+  LN = 'ln',
+  SQRT = 'sqrt',
+  POW = 'pow',
+  FACT = 'fact',
+  PI = 'pi',
+  E = 'e',
+  LEFT_PAREN = 'left_paren',
+  RIGHT_PAREN = 'right_paren'
 }
 
 /**
  * Operator Precedence Enumeration.
  */
 export enum Priority {
-  HIGH = 2,
-  MEDIUM = 1,
-  LOW = 0
+  HIGHEST = 4,  // Scientific functions (sin, cos, tan, log, ln, sqrt, !)
+  HIGH = 3,     // Power (^)
+  MEDIUM = 2,   // Multiplication and division (×, ÷)
+  LOW = 1,      // Addition and subtraction (+, -)
+  LOWEST = 0
 }
 
 /**
@@ -137,5 +166,15 @@ export enum SymbolicEnumeration {
   ADD = '+',
   MIN = '-',
   MUL = '×',
-  DIV = '÷'
+  DIV = '÷',
+  SIN = 'sin',
+  COS = 'cos',
+  TAN = 'tan',
+  LOG = 'log',
+  LN = 'ln',
+  SQRT = '√',
+  POW = '^',
+  FACT = '!',
+  LEFT_PAREN = '(',
+  RIGHT_PAREN = ')'
 }

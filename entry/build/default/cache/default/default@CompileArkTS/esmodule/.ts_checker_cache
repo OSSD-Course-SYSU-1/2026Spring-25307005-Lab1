@@ -1507,10 +1507,11 @@
       "error": false
     },
     "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets": {
-      "mtimeMs": 1778587150696.9036,
+      "mtimeMs": 1779211777760.4282,
       "children": [
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\constants\\CommonConstants.ets",
-        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CheckEmptyUtil.ets"
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CheckEmptyUtil.ets",
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\FractionUtil.ets"
       ],
       "parent": [
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
@@ -1555,11 +1556,13 @@
       "error": false
     },
     "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1778588629513.827,
+      "mtimeMs": 1779291276714.9868,
       "children": [
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\Logger.ets",
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets",
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CheckEmptyUtil.ets",
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\HistoryManager.ets",
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\FractionUtil.ets",
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PresskeysViewModel.ets",
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PressKeysItem.ets",
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\constants\\CommonConstants.ets"
@@ -2032,6 +2035,26 @@
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts"
       ],
       "error": false
+    },
+    "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\HistoryManager.ets": {
+      "mtimeMs": 1779211405509.7227,
+      "children": [],
+      "parent": [
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+      ],
+      "error": false
+    },
+    "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\FractionUtil.ets": {
+      "mtimeMs": 1779213444640.837,
+      "children": [],
+      "parent": [
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets"
+      ],
+      "error": false,
+      "errorCodes": [
+        38
+      ]
     }
   }
 }

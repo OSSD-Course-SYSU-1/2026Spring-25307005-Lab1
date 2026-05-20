@@ -16,6 +16,8 @@
 import Logger from '../common/util/Logger';
 import CalculateUtil from '../common/util/CalculateUtil';
 import CheckEmptyUtil from '../common/util/CheckEmptyUtil';
+import HistoryManager, { HistoryItem } from '../common/util/HistoryManager';
+import FractionUtil, { Fraction } from '../common/util/FractionUtil';
 import keysModel from '../viewmodel/PresskeysViewModel';
 import { PressKeysBean } from '../viewmodel/PressKeysItem';
 import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
@@ -27,6 +29,9 @@ struct HomePage {
   @State calValue: string = '';
   @State isScientificMode: boolean = false;
   @State equationMode: string = ''; // 'linear' or 'quadratic'
+  @State showHistory: boolean = false; // Show history panel
+  @State isFractionMode: boolean = false; // Fraction output mode
+  @State historyList: Array<HistoryItem> = []; // History records
   private expressions: Array<string> = [];
 
   build() {
@@ -64,23 +69,156 @@ struct HomePage {
         bottom: $r('app.float.text_margin_bottom')
       })
 
-      // Scientific mode toggle button
+      // Top control buttons
       Column() {
         Row() {
-          Text(this.isScientificMode ? '标准模式' : '科学模式')
-            .fontSize('14vp')
-            .fontColor(Color.White)
+          // History button
+          Column() {
+            Text('历史')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('25%')
+          .height('40vp')
+          .backgroundColor('#6C7B8B')
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(5)
+          .onClick(() => {
+            this.showHistory = !this.showHistory;
+            if (this.showHistory) {
+              this.historyList = HistoryManager.getHistory();
+            }
+          })
+
+          Blank().width('5%')
+
+          // Fraction/Decimal toggle button
+          Column() {
+            Text(this.isFractionMode ? '小数模式' : '分数模式')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('25%')
+          .height('40vp')
+          .backgroundColor(this.isFractionMode ? '#FF6B6B' : '#4ECDC4')
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(5)
+          .onClick(() => {
+            this.isFractionMode = !this.isFractionMode;
+            // Re-calculate display if there's a result
+            if (this.calValue && this.calValue !== 'NaN') {
+              this.updateDisplayFormat();
+            }
+          })
+
+          Blank().width('5%')
+
+          // Scientific mode toggle button
+          Column() {
+            Text(this.isScientificMode ? '标准模式' : '科学模式')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('35%')
+          .height('40vp')
+          .backgroundColor('#4A90E2')
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(5)
+          .onClick(() => {
+            this.isScientificMode = !this.isScientificMode;
+          })
         }
         .width(CommonConstants.FULL_PERCENT)
-        .height('40vp')
-        .backgroundColor('#4A90E2')
         .justifyContent(FlexAlign.Center)
-        .onClick(() => {
-          this.isScientificMode = !this.isScientificMode;
-        })
       }
       .width(CommonConstants.FULL_PERCENT)
       .margin({ bottom: '5vp' })
+
+      // History panel
+      if (this.showHistory) {
+        Column() {
+          // History header
+          Row() {
+            Text('计算历史')
+              .fontSize('16vp')
+              .fontColor(Color.Black)
+              .fontWeight(FontWeight.Bold)
+            
+            Blank()
+            
+            Text('清空')
+              .fontSize('14vp')
+              .fontColor('#FF0000')
+              .onClick(() => {
+                HistoryManager.clearHistory();
+                this.historyList = [];
+              })
+          }
+          .width('95%')
+          .padding({ top: '10vp', bottom: '10vp' })
+          
+          // History list
+          if (this.historyList.length === 0) {
+            Column() {
+              Text('暂无历史记录')
+                .fontSize('14vp')
+                .fontColor('#999999')
+            }
+            .width('95%')
+            .height('150vp')
+            .justifyContent(FlexAlign.Center)
+          } else {
+            List() {
+              ForEach(this.historyList, (item: HistoryItem, index: number) => {
+                ListItem() {
+                  Column() {
+                    Row() {
+                      Text(item.expression)
+                        .fontSize('14vp')
+                        .fontColor('#333333')
+                        .layoutWeight(1)
+                      
+                      Text('=')
+                        .fontSize('14vp')
+                        .fontColor('#666666')
+                        .margin({ left: '5vp', right: '5vp' })
+                      
+                      Text(item.result)
+                        .fontSize('14vp')
+                        .fontColor('#4A90E2')
+                        .fontWeight(FontWeight.Bold)
+                    }
+                    .width('100%')
+                    
+                    Text(HistoryManager.formatTime(item.timestamp))
+                      .fontSize('12vp')
+                      .fontColor('#999999')
+                      .margin({ top: '3vp' })
+                  }
+                  .width('95%')
+                  .padding('8vp')
+                  .backgroundColor(index % 2 === 0 ? '#FFFFFF' : '#F5F5F5')
+                  .borderRadius(5)
+                  .onClick(() => {
+                    // Click to use this history record
+                    this.inputValue = item.expression;
+                    this.calValue = item.result;
+                    this.showHistory = false;
+                  })
+                }
+              }, (item: HistoryItem) => JSON.stringify(item))
+            }
+            .width('95%')
+            .height('200vp')
+            .divider({ strokeWidth: 1, color: '#E0E0E0' })
+          }
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .backgroundColor('#F9F9F9')
+        .border({ width: 1, color: '#E0E0E0' })
+        .borderRadius(10)
+        .margin({ bottom: '5vp' })
+      }
 
       // Scientific keys (shown when in scientific mode)
       if (this.isScientificMode) {
@@ -113,6 +251,63 @@ struct HomePage {
             })
           }
           .width(CommonConstants.FULL_PERCENT)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .margin({ bottom: '5vp' })
+        
+        // Fraction input buttons
+        Column() {
+          Row() {
+            Column() {
+              Text('分数输入')
+                .fontSize('12vp')
+                .fontColor('#666666')
+            }
+            .width('100%')
+            .margin({ bottom: '5vp' })
+          }
+          
+          Row() {
+            // Fraction format button: a/b
+            Column() {
+              Text('a/b')
+                .fontSize('14vp')
+                .fontColor(Color.Black)
+            }
+            .width('60vp')
+            .height('35vp')
+            .borderWidth(1)
+            .borderColor($r('app.color.border_color'))
+            .borderRadius($r('app.float.border_radius'))
+            .backgroundColor('#FFE4B5')
+            .alignItems(HorizontalAlign.Center)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.inputFractionSymbol('/');
+            })
+            
+            Blank().width('10vp')
+            
+            // Mixed number format button: a b/c
+            Column() {
+              Text('a b/c')
+                .fontSize('14vp')
+                .fontColor(Color.Black)
+            }
+            .width('60vp')
+            .height('35vp')
+            .borderWidth(1)
+            .borderColor($r('app.color.border_color'))
+            .borderRadius($r('app.float.border_radius'))
+            .backgroundColor('#FFE4B5')
+            .alignItems(HorizontalAlign.Center)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.inputFractionSymbol(' ');
+            })
+          }
+          .width('100%')
+          .justifyContent(FlexAlign.Center)
         }
         .width(CommonConstants.FULL_PERCENT)
         .margin({ bottom: '5vp' })
@@ -226,6 +421,11 @@ struct HomePage {
           if (!result) {
             return;
           }
+          // Save to history
+          const expression = this.inputValue;
+          const resultValue = this.calValue;
+          HistoryManager.addHistory(expression, resultValue);
+          
           this.inputValue = this.calValue;
           this.calValue = '';
           this.expressions = [];
@@ -261,6 +461,33 @@ struct HomePage {
     if (!this.validateEnter(last, value)) {
       return;
     }
+
+    // Check if we're in fraction input mode (last element is '/' for fraction)
+    if (last === '/' && len >= 2) {
+      // We're completing a fraction: numerator/denominator
+      // Merge into a single fraction element
+      let numerator = secondLast;
+      if (numerator && !CalculateUtil.isSymbol(numerator) && !CalculateUtil.isScientificSymbol(numerator)) {
+        // Remove the last two elements (numerator and '/')
+        this.expressions.pop(); // Remove '/'
+        this.expressions.pop(); // Remove numerator
+        // Add the complete fraction
+        this.expressions.push(numerator + '/' + value);
+        this.formatInputValue();
+        this.getResult();
+        return;
+      }
+    }
+
+    // Check if last element is a fraction (contains '/') - append to denominator
+    if (last && last.indexOf('/') !== -1) {
+      // Append to the denominator of the fraction
+      this.expressions[len - 1] += value;
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
     // Check if last element is an operator (including scientific operators)
     let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
 
@@ -432,8 +659,77 @@ struct HomePage {
       this.calValue = this.resourceToString($r('app.string.error'));
       return false;
     }
+    
+    // Convert to fraction if in fraction mode
+    if (this.isFractionMode) {
+      calResult = this.convertToFraction(calResult);
+    }
+    
     this.calValue = calResult;
     return true;
+  }
+
+  /**
+   * Convert decimal result to fraction
+   *
+   * @param decimalStr Decimal string
+   * @return Fraction string or original decimal
+   */
+  convertToFraction(decimalStr: string): string {
+    if (!decimalStr || decimalStr === 'NaN') {
+      return decimalStr;
+    }
+    
+    // Check if already a fraction
+    if (decimalStr.indexOf('/') !== -1) {
+      return decimalStr;
+    }
+    
+    try {
+      const decimal = parseFloat(decimalStr);
+      if (isNaN(decimal)) {
+        return decimalStr;
+      }
+      
+      const fraction = FractionUtil.decimalToFraction(decimal);
+      const fractionStr = FractionUtil.fractionToString(fraction);
+      
+      // Only return fraction if it's reasonable (denominator not too large)
+      if (fraction.denominator <= 1000 && fractionStr !== 'NaN') {
+        return fractionStr;
+      }
+    } catch (e) {
+      Logger.error('[HomePage] convertToFraction error: ' + JSON.stringify(e));
+    }
+    
+    return decimalStr;
+  }
+
+  /**
+   * Update display format when switching between fraction and decimal modes
+   */
+  updateDisplayFormat() {
+    if (!this.calValue || this.calValue === 'NaN') {
+      return;
+    }
+    
+    if (this.isFractionMode) {
+      // Convert decimal to fraction
+      this.calValue = this.convertToFraction(this.calValue);
+    } else {
+      // Convert fraction to decimal
+      if (this.calValue.indexOf('/') !== -1) {
+        try {
+          const fraction = FractionUtil.parseFraction(this.calValue);
+          const decimal = FractionUtil.fractionToDecimal(fraction);
+          if (!isNaN(decimal)) {
+            this.calValue = decimal.toString();
+          }
+        } catch (e) {
+          Logger.error('[HomePage] updateDisplayFormat error: ' + JSON.stringify(e));
+        }
+      }
+    }
   }
 
   /**
@@ -634,5 +930,19 @@ struct HomePage {
     } else {
       this.calValue = '错误：请输入2个系数（一次方程）或3个系数（二次方程）';
     }
+  }
+
+  /**
+   * Input fraction symbol (for fraction input mode)
+   *
+   * @param symbol Fraction symbol ('/' or ' ')
+   */
+  inputFractionSymbol(symbol: string) {
+    // Add the symbol to input
+    this.inputValue += symbol;
+    this.expressions.push(symbol);
+    this.formatInputValue();
+    // Don't call getResult() here - wait for complete fraction input
+    // The calculation will be triggered when user inputs the denominator
   }
 }

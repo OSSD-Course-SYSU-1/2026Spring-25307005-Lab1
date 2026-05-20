@@ -1,5 +1,6 @@
 import { CommonConstants, Priority, SymbolicEnumeration } from "@bundle:com.example.simplecalculator/entry/ets/common/constants/CommonConstants";
 import CheckEmptyUtil from "@bundle:com.example.simplecalculator/entry/ets/common/util/CheckEmptyUtil";
+import FractionUtil from "@bundle:com.example.simplecalculator/entry/ets/common/util/FractionUtil";
 class CalculateUtil {
     /**
      * Determines whether it is an operator.
@@ -98,7 +99,13 @@ class CalculateUtil {
         let len = expressions.length;
         let outputStack: string[] = [];
         let outputQueue: string[] = [];
+        // Pre-process: convert fractions to decimals and handle %
         expressions.forEach((item: string, index: number) => {
+            // Handle fractions
+            if (this.isFraction(item)) {
+                const decimal = this.parseValue(item);
+                expressions[index] = decimal.toString();
+            }
             // Handle % in the expression
             if (item.indexOf(CommonConstants.PERCENT_SIGN) !== -1) {
                 expressions[index] = (this.mulOrDiv(item.slice(0, item.length - 1), CommonConstants.ONE_HUNDRED, CommonConstants.DIV)).toString();
@@ -506,6 +513,42 @@ class CalculateUtil {
             let root2 = (-bNum - Math.sqrt(discriminant)) / (2 * aNum);
             return `x₁ = ${root1.toFixed(4)}, x₂ = ${root2.toFixed(4)}`;
         }
+    }
+    /**
+     * Check if a string is a fraction format (e.g., "3/4", "-5/6")
+     *
+     * @param value String to check
+     * @return Whether it's a fraction
+     */
+    isFraction(value: string): boolean {
+        return FractionUtil.isFraction(value);
+    }
+    /**
+     * Parse a value that might be a fraction or decimal
+     *
+     * @param value Value string
+     * @return Numeric value
+     */
+    parseValue(value: string): number {
+        if (this.isFraction(value)) {
+            const fraction = FractionUtil.parseFraction(value);
+            return FractionUtil.fractionToDecimal(fraction);
+        }
+        return Number(value);
+    }
+    /**
+     * Convert a number to fraction string if it's a simple fraction
+     *
+     * @param num Number to convert
+     * @return Fraction string or decimal string
+     */
+    numberToFraction(num: number): string {
+        const fraction = FractionUtil.decimalToFraction(num);
+        // Only return fraction if denominator is reasonable
+        if (fraction.denominator <= 100) {
+            return FractionUtil.fractionToString(fraction);
+        }
+        return num.toString();
     }
 }
 export default new CalculateUtil();

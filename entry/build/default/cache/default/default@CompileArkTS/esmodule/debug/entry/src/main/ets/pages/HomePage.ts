@@ -139,42 +139,42 @@ class HomePage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.height(CommonConstants.FULL_PERCENT);
-            Column.backgroundColor({ "id": 16777223, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Column.backgroundColor({ "id": 50331655, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.width(CommonConstants.FULL_PERCENT);
-            Column.height({ "id": 16777235, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Column.height({ "id": 50331667, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
             Column.alignItems(HorizontalAlign.End);
             Column.margin({
-                right: { "id": 16777236, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
-                top: { "id": 16777237, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+                right: { "id": 50331668, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                top: { "id": 50331669, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             TextInput.create({ text: this.resultFormat(this.inputValue) });
             TextInput.height(CommonConstants.FULL_PERCENT);
-            TextInput.fontSize((this.inputValue.length > CommonConstants.INPUT_LENGTH_MAX) ? { "id": 16777234, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 16777233, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            TextInput.fontSize((this.inputValue.length > CommonConstants.INPUT_LENGTH_MAX) ? { "id": 50331666, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 50331665, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
             TextInput.enabled(false);
             TextInput.fontColor(Color.Black);
             TextInput.textAlign(TextAlign.End);
-            TextInput.backgroundColor({ "id": 16777225, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            TextInput.backgroundColor({ "id": 50331657, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
         }, TextInput);
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
             Column.width(CommonConstants.FULL_PERCENT);
-            Column.height({ "id": 16777244, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Column.height({ "id": 50331676, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
             Column.alignItems(HorizontalAlign.End);
             Column.margin({
-                right: { "id": 16777246, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
-                bottom: { "id": 16777245, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+                right: { "id": 50331678, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                bottom: { "id": 50331677, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.resultFormat(this.calValue));
-            Text.fontSize({ "id": 16777234, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
-            Text.fontColor({ "id": 16777228, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Text.fontSize({ "id": 50331666, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Text.fontColor({ "id": 50331660, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
         }, Text);
         Text.pop();
         Column.pop();
@@ -184,7 +184,7 @@ class HomePage extends ViewPU {
             // Top control buttons
             Column.width(CommonConstants.FULL_PERCENT);
             // Top control buttons
-            Column.margin({ bottom: '5vp' });
+            Column.margin({ bottom: '3vp' });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
@@ -222,7 +222,7 @@ class HomePage extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.width('5%');
+            Blank.width('3%');
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -257,7 +257,7 @@ class HomePage extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Blank.create();
-            Blank.width('5%');
+            Blank.width('3%');
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -458,7 +458,7 @@ class HomePage extends ViewPU {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
                         Column.width(CommonConstants.FULL_PERCENT);
-                        Column.margin({ bottom: '5vp' });
+                        Column.margin({ bottom: '3vp' });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Row.create();
@@ -480,11 +480,11 @@ class HomePage extends ViewPU {
                                     const keyItem = _item;
                                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                                         Column.create();
-                                        Column.width('60vp');
-                                        Column.height('35vp');
+                                        Column.width('55vp');
+                                        Column.height('30vp');
                                         Column.borderWidth(1);
-                                        Column.borderColor({ "id": 16777222, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
-                                        Column.borderRadius({ "id": 16777229, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.borderRadius(15);
                                         Column.backgroundColor('#E8E8E8');
                                         Column.alignItems(HorizontalAlign.Center);
                                         Column.justifyContent(FlexAlign.Center);
@@ -516,7 +516,7 @@ class HomePage extends ViewPU {
                         // Fraction input buttons
                         Column.width(CommonConstants.FULL_PERCENT);
                         // Fraction input buttons
-                        Column.margin({ bottom: '5vp' });
+                        Column.margin({ bottom: '3vp' });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Row.create();
@@ -524,7 +524,7 @@ class HomePage extends ViewPU {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
                         Column.width('100%');
-                        Column.margin({ bottom: '5vp' });
+                        Column.margin({ bottom: '3vp' });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Text.create('分数输入');
@@ -543,15 +543,15 @@ class HomePage extends ViewPU {
                         // Fraction format button: a/b
                         Column.create();
                         // Fraction format button: a/b
-                        Column.width('60vp');
+                        Column.width('55vp');
                         // Fraction format button: a/b
-                        Column.height('35vp');
+                        Column.height('30vp');
                         // Fraction format button: a/b
                         Column.borderWidth(1);
                         // Fraction format button: a/b
-                        Column.borderColor({ "id": 16777222, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                        Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
                         // Fraction format button: a/b
-                        Column.borderRadius({ "id": 16777229, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                        Column.borderRadius(15);
                         // Fraction format button: a/b
                         Column.backgroundColor('#FFE4B5');
                         // Fraction format button: a/b
@@ -573,22 +573,22 @@ class HomePage extends ViewPU {
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Blank.create();
-                        Blank.width('10vp');
+                        Blank.width('8vp');
                     }, Blank);
                     Blank.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         // Mixed number format button: a b/c
                         Column.create();
                         // Mixed number format button: a b/c
-                        Column.width('60vp');
+                        Column.width('55vp');
                         // Mixed number format button: a b/c
-                        Column.height('35vp');
+                        Column.height('30vp');
                         // Mixed number format button: a b/c
                         Column.borderWidth(1);
                         // Mixed number format button: a b/c
-                        Column.borderColor({ "id": 16777222, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                        Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
                         // Mixed number format button: a b/c
-                        Column.borderRadius({ "id": 16777229, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                        Column.borderRadius(15);
                         // Mixed number format button: a b/c
                         Column.backgroundColor('#FFE4B5');
                         // Mixed number format button: a b/c
@@ -623,15 +623,15 @@ class HomePage extends ViewPU {
             Column.create();
             Column.layoutWeight(1);
             Column.width(CommonConstants.FULL_PERCENT);
-            Column.backgroundColor({ "id": 16777226, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Column.backgroundColor({ "id": 50331658, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
             Row.height(CommonConstants.FULL_PERCENT);
             Row.alignItems(VerticalAlign.Top);
             Row.margin({
-                left: { "id": 16777241, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
-                right: { "id": 16777242, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+                left: { "id": 50331673, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                right: { "id": 50331674, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
             });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -642,8 +642,8 @@ class HomePage extends ViewPU {
                     Column.create();
                     Column.layoutWeight(1);
                     Column.margin({
-                        top: { "id": 16777243, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
-                        bottom: { "id": 16777240, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+                        top: { "id": 50331675, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                        bottom: { "id": 50331672, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
                     });
                 }, Column);
                 this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -652,21 +652,18 @@ class HomePage extends ViewPU {
                         const keyItem = _item;
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Column.create();
-                            Column.layoutWeight(((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                                (keyItemIndex === (columnItem.length - 1))) ? CommonConstants.TWO : 1);
+                            Column.layoutWeight((keyItem.value === 'equ') ? CommonConstants.TWO : 1);
                             Column.width(CommonConstants.FULL_PERCENT);
                             Column.justifyContent(FlexAlign.Center);
                         }, Column);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Column.create();
-                            Column.width({ "id": 16777239, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
-                            Column.height(((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                                (keyItemIndex === (columnItem.length - 1))) ? { "id": 16777230, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 16777238, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.width({ "id": 50331671, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.height(((columnItemIndex === 2) && (keyItem.value === 'equ')) ? { "id": 50331662, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 50331670, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
                             Column.borderWidth(1);
-                            Column.borderColor({ "id": 16777222, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
-                            Column.borderRadius({ "id": 16777229, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
-                            Column.backgroundColor(((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                                (keyItemIndex === (columnItem.length - 1))) ? { "id": 16777224, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : Color.White);
+                            Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.borderRadius({ "id": 50331661, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.backgroundColor((keyItem.value === 'equ') ? { "id": 50331656, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : Color.White);
                             Column.alignItems(HorizontalAlign.Center);
                             Column.justifyContent(FlexAlign.Center);
                             Column.onClick(() => {
@@ -693,7 +690,7 @@ class HomePage extends ViewPU {
                                 this.ifElseBranchUpdateFunction(1, () => {
                                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                                         Text.create(keyItem.value);
-                                        Text.fontSize((keyItem.value === CommonConstants.DOTS) ? { "id": 16777232, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 16777234, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Text.fontSize((keyItem.value === CommonConstants.DOTS) ? { "id": 50331664, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 50331666, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
                                         Text.width(keyItem.width);
                                         Text.height(keyItem.height);
                                     }, Text);
@@ -975,7 +972,7 @@ class HomePage extends ViewPU {
     async getResult() {
         let calResult = CalculateUtil.parseExpression(this.deepCopy());
         if (calResult === 'NaN') {
-            this.calValue = this.resourceToString({ "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            this.calValue = this.resourceToString({ "id": 50331652, "type": 10003, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
             return false;
         }
         // Convert to fraction if in fraction mode

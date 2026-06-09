@@ -1,11 +1,10 @@
 {
   "modelVersion": "5.0.5",
   "license": "",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "author": "",
   "name": "simplecalculator",
-  "description": "Please describe the basic information.",
+  "description": "SimpleCalculator - Multi-device calculator application",
   "main": "",
   "version": "1.0.0",
   "dependencies": {}

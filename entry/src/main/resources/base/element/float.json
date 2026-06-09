@@ -26,7 +26,7 @@
     },
     {
       "name": "input_margin_top",
-      "value": "121.96vp"
+      "value": "80vp"
     },
     {
       "name": "text_height",
@@ -38,7 +38,7 @@
     },
     {
       "name": "text_margin_bottom",
-      "value": "64vp"
+      "value": "30vp"
     },
     {
       "name": "key_width",
@@ -58,11 +58,11 @@
     },
     {
       "name": "margin_top",
-      "value": "70vp"
+      "value": "40vp"
     },
     {
       "name": "margin_bottom",
-      "value": "40vp"
+      "value": "20vp"
     },
     {
       "name": "margin_left",

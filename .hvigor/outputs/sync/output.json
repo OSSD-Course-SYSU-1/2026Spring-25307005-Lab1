@@ -46,6 +46,226 @@
     },
     "BUILD_CACHE_DIR": ""
   },
+  "ohos-module-common": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\common\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\common\\src\\main",
+        "RESOURCES_PATH": [
+          "D:\\SimpleCalculator-master\\common\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\hsp_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default",
+          "runtimeOS": "HarmonyOS"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-calculator": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\features\\calculator\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\features\\calculator\\src\\main",
+        "RESOURCES_PATH": [
+          "D:\\SimpleCalculator-master\\features\\calculator\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\hsp_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default",
+          "runtimeOS": "HarmonyOS"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-phone": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\products\\phone\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\products\\phone\\src\\main",
+        "RESOURCES_PATH": [
+          "D:\\SimpleCalculator-master\\products\\phone\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default",
+          "runtimeOS": "HarmonyOS"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-tablet": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\products\\tablet\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\products\\tablet\\src\\main",
+        "RESOURCES_PATH": [
+          "D:\\SimpleCalculator-master\\products\\tablet\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {},
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default",
+          "runtimeOS": "HarmonyOS"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-pc": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\products\\pc\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\products\\pc\\src\\main",
+        "RESOURCES_PATH": [
+          "D:\\SimpleCalculator-master\\products\\pc\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {},
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {},
+      "targets": [
+        {
+          "name": "default",
+          "runtimeOS": "HarmonyOS"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
   "ohos-project": {
     "SELECT_PRODUCT_NAME": "default",
     "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\build",
@@ -63,7 +283,80 @@
           {
             "name": "default",
             "applyToProducts": [
-              "default"
+              "default",
+              "phone"
+            ]
+          }
+        ],
+        "belongProjectPath": "D:\\SimpleCalculator-master"
+      },
+      {
+        "name": "common",
+        "srcPath": "D:\\SimpleCalculator-master\\common",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default",
+              "phone",
+              "tablet",
+              "pc"
+            ]
+          }
+        ],
+        "belongProjectPath": "D:\\SimpleCalculator-master"
+      },
+      {
+        "name": "calculator",
+        "srcPath": "D:\\SimpleCalculator-master\\features\\calculator",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default",
+              "phone",
+              "tablet",
+              "pc"
+            ]
+          }
+        ],
+        "belongProjectPath": "D:\\SimpleCalculator-master"
+      },
+      {
+        "name": "phone",
+        "srcPath": "D:\\SimpleCalculator-master\\products\\phone",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default",
+              "phone"
+            ]
+          }
+        ],
+        "belongProjectPath": "D:\\SimpleCalculator-master"
+      },
+      {
+        "name": "tablet",
+        "srcPath": "D:\\SimpleCalculator-master\\products\\tablet",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "tablet"
+            ]
+          }
+        ],
+        "belongProjectPath": "D:\\SimpleCalculator-master"
+      },
+      {
+        "name": "pc",
+        "srcPath": "D:\\SimpleCalculator-master\\products\\pc",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "pc"
             ]
           }
         ],
@@ -80,6 +373,27 @@
             "targetSdkVersion": "6.0.2(22)",
             "compatibleSdkVersion": "5.0.5(17)",
             "runtimeOS": "HarmonyOS"
+          },
+          {
+            "name": "phone",
+            "signingConfig": "default",
+            "targetSdkVersion": "6.0.2(22)",
+            "compatibleSdkVersion": "5.0.5(17)",
+            "runtimeOS": "HarmonyOS"
+          },
+          {
+            "name": "tablet",
+            "signingConfig": "default",
+            "targetSdkVersion": "6.0.2(22)",
+            "compatibleSdkVersion": "5.0.5(17)",
+            "runtimeOS": "HarmonyOS"
+          },
+          {
+            "name": "pc",
+            "signingConfig": "default",
+            "targetSdkVersion": "6.0.2(22)",
+            "compatibleSdkVersion": "5.0.5(17)",
+            "runtimeOS": "HarmonyOS"
           }
         ]
       },
@@ -91,7 +405,75 @@
             {
               "name": "default",
               "applyToProducts": [
-                "default"
+                "default",
+                "phone"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "common",
+          "srcPath": "./common",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default",
+                "phone",
+                "tablet",
+                "pc"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "calculator",
+          "srcPath": "./features/calculator",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default",
+                "phone",
+                "tablet",
+                "pc"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "phone",
+          "srcPath": "./products/phone",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default",
+                "phone"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tablet",
+          "srcPath": "./products/tablet",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "tablet"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "pc",
+          "srcPath": "./products/pc",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "pc"
               ]
             }
           ]

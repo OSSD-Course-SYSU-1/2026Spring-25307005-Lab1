@@ -8,6 +8,27 @@
         "targetSdkVersion": "6.0.2(22)",
         "compatibleSdkVersion": "5.0.5(17)",
         "runtimeOS": "HarmonyOS"
+      },
+      {
+        "name": "phone",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS"
+      },
+      {
+        "name": "tablet",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS"
+      },
+      {
+        "name": "pc",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS"
       }
     ]
   },
@@ -19,7 +40,75 @@
         {
           "name": "default",
           "applyToProducts": [
-            "default"
+            "default",
+            "phone"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./common",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default",
+            "phone",
+            "tablet",
+            "pc"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "calculator",
+      "srcPath": "./features/calculator",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default",
+            "phone",
+            "tablet",
+            "pc"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "phone",
+      "srcPath": "./products/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default",
+            "phone"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tablet",
+      "srcPath": "./products/tablet",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "tablet"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pc",
+      "srcPath": "./products/pc",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "pc"
           ]
         }
       ]

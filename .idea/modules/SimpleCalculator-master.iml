@@ -17,6 +17,36 @@
       <excludeFolder url="file://$MODULE_DIR$/../../entry/oh_modules" />
       <excludeFolder url="file://$MODULE_DIR$/../../node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/../../oh_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../common/.cxx" />
+      <excludeFolder url="file://$MODULE_DIR$/../../common/.preview" />
+      <excludeFolder url="file://$MODULE_DIR$/../../common/.test" />
+      <excludeFolder url="file://$MODULE_DIR$/../../common/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../common/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../common/oh_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../features/calculator/.cxx" />
+      <excludeFolder url="file://$MODULE_DIR$/../../features/calculator/.preview" />
+      <excludeFolder url="file://$MODULE_DIR$/../../features/calculator/.test" />
+      <excludeFolder url="file://$MODULE_DIR$/../../features/calculator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../features/calculator/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../features/calculator/oh_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/pc/.cxx" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/pc/.preview" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/pc/.test" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/pc/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/pc/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/pc/oh_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/phone/.cxx" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/phone/.preview" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/phone/.test" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/phone/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/phone/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/phone/oh_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/tablet/.cxx" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/tablet/.preview" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/tablet/.test" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/tablet/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/tablet/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/../../products/tablet/oh_modules" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="" scope="PROVIDED">

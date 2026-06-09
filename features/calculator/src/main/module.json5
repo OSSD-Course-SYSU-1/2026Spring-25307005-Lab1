@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "calculator",
+    "type": "shared",
+    "description": "$string:calculator_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true
+  }
+}

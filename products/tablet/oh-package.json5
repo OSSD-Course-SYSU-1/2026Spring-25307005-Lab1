@@ -1,0 +1,13 @@
+{
+  "license": "",
+  "devDependencies": {},
+  "author": "",
+  "name": "tablet",
+  "description": "Tablet entry module for SimpleCalculator",
+  "main": "",
+  "version": "1.0.0",
+  "dependencies": {
+    "common": "file:../../common",
+    "calculator": "file:../../features/calculator"
+  }
+}

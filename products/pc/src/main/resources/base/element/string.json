@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "PC module description"
+    },
+    {
+      "name": "PcAbility_desc",
+      "value": "SimpleCalculator for PC"
+    },
+    {
+      "name": "PcAbility_label",
+      "value": "SimpleCalculator"
+    }
+  ]
+}

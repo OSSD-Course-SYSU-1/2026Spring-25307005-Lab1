@@ -1,6 +1,11 @@
 {
   "modulePathMap": {
-    "entry": "D:\\SimpleCalculator-master\\entry"
+    "entry": "D:\\SimpleCalculator-master\\entry",
+    "common": "D:\\SimpleCalculator-master\\common",
+    "calculator": "D:\\SimpleCalculator-master\\features\\calculator",
+    "phone": "D:\\SimpleCalculator-master\\products\\phone",
+    "tablet": "D:\\SimpleCalculator-master\\products\\tablet",
+    "pc": "D:\\SimpleCalculator-master\\products\\pc"
   },
   "compileMode": "esmodule",
   "projectRootPath": "D:\\SimpleCalculator-master",

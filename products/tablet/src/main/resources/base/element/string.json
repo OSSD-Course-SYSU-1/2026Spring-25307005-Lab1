@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Tablet module description"
+    },
+    {
+      "name": "TabletAbility_desc",
+      "value": "SimpleCalculator for Tablet"
+    },
+    {
+      "name": "TabletAbility_label",
+      "value": "SimpleCalculator"
+    }
+  ]
+}

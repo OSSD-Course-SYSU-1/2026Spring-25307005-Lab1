@@ -1,0 +1,37 @@
+{
+  "module": {
+    "name": "tablet",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "TabletAbility",
+    "deviceTypes": [
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "TabletAbility",
+        "srcEntry": "./ets/entryability/TabletAbility.ts",
+        "description": "$string:TabletAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:TabletAbility_label",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "continuable": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -24,7 +24,8 @@
 		"description": "$string:module_desc",
 		"mainElement": "EntryAbility",
 		"deviceTypes": [
-			"phone"
+			"phone",
+			"tablet"
 		],
 		"deliveryWithInstall": true,
 		"installationFree": false,
@@ -39,6 +40,7 @@
 				"startWindowIcon": "$media:icon",
 				"startWindowBackground": "$color:start_window_background",
 				"exported": true,
+				"continuable": true,
 				"skills": [
 					{
 						"entities": [

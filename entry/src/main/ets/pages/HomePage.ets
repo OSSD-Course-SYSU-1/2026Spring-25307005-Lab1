@@ -90,7 +90,7 @@ struct HomePage {
             }
           })
 
-          Blank().width('5%')
+          Blank().width('3%')
 
           // Fraction/Decimal toggle button
           Column() {
@@ -111,7 +111,7 @@ struct HomePage {
             }
           })
 
-          Blank().width('5%')
+          Blank().width('3%')
 
           // Scientific mode toggle button
           Column() {
@@ -132,7 +132,7 @@ struct HomePage {
         .justifyContent(FlexAlign.Center)
       }
       .width(CommonConstants.FULL_PERCENT)
-      .margin({ bottom: '5vp' })
+      .margin({ bottom: '3vp' })
 
       // History panel
       if (this.showHistory) {
@@ -232,11 +232,11 @@ struct HomePage {
                       .fontSize('14vp')
                       .fontColor(Color.Black)
                   }
-                  .width('60vp')
-                  .height('35vp')
+                  .width('55vp')
+                  .height('30vp')
                   .borderWidth(1)
                   .borderColor($r('app.color.border_color'))
-                  .borderRadius($r('app.float.border_radius'))
+                  .borderRadius(15)
                   .backgroundColor('#E8E8E8')
                   .alignItems(HorizontalAlign.Center)
                   .justifyContent(FlexAlign.Center)
@@ -253,7 +253,7 @@ struct HomePage {
           .width(CommonConstants.FULL_PERCENT)
         }
         .width(CommonConstants.FULL_PERCENT)
-        .margin({ bottom: '5vp' })
+        .margin({ bottom: '3vp' })
         
         // Fraction input buttons
         Column() {
@@ -264,7 +264,7 @@ struct HomePage {
                 .fontColor('#666666')
             }
             .width('100%')
-            .margin({ bottom: '5vp' })
+            .margin({ bottom: '3vp' })
           }
           
           Row() {
@@ -274,11 +274,11 @@ struct HomePage {
                 .fontSize('14vp')
                 .fontColor(Color.Black)
             }
-            .width('60vp')
-            .height('35vp')
+            .width('55vp')
+            .height('30vp')
             .borderWidth(1)
             .borderColor($r('app.color.border_color'))
-            .borderRadius($r('app.float.border_radius'))
+            .borderRadius(15)
             .backgroundColor('#FFE4B5')
             .alignItems(HorizontalAlign.Center)
             .justifyContent(FlexAlign.Center)
@@ -286,7 +286,7 @@ struct HomePage {
               this.inputFractionSymbol('/');
             })
             
-            Blank().width('10vp')
+            Blank().width('8vp')
             
             // Mixed number format button: a b/c
             Column() {
@@ -294,11 +294,11 @@ struct HomePage {
                 .fontSize('14vp')
                 .fontColor(Color.Black)
             }
-            .width('60vp')
-            .height('35vp')
+            .width('55vp')
+            .height('30vp')
             .borderWidth(1)
             .borderColor($r('app.color.border_color'))
-            .borderRadius($r('app.float.border_radius'))
+            .borderRadius(15)
             .backgroundColor('#FFE4B5')
             .alignItems(HorizontalAlign.Center)
             .justifyContent(FlexAlign.Center)
@@ -310,7 +310,7 @@ struct HomePage {
           .justifyContent(FlexAlign.Center)
         }
         .width(CommonConstants.FULL_PERCENT)
-        .margin({ bottom: '5vp' })
+        .margin({ bottom: '3vp' })
       }
 
       Column() {
@@ -336,16 +336,14 @@ struct HomePage {
                   }
                   .width($r('app.float.key_width'))
                   .height(
-                    ((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                      (keyItemIndex === (columnItem.length - 1))) ?
+                    ((columnItemIndex === 2) && (keyItem.value === 'equ')) ?
                       $r('app.float.equals_height') : $r('app.float.key_height')
                   )
                   .borderWidth(1)
                   .borderColor($r('app.color.border_color'))
                   .borderRadius($r('app.float.border_radius'))
                   .backgroundColor(
-                    ((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                      (keyItemIndex === (columnItem.length - 1))) ?
+                    (keyItem.value === 'equ') ?
                       $r('app.color.equals_back_color') : Color.White
                   )
                   .alignItems(HorizontalAlign.Center)
@@ -359,8 +357,7 @@ struct HomePage {
                   })
                 }
                 .layoutWeight(
-                  ((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                    (keyItemIndex === (columnItem.length - 1))) ? CommonConstants.TWO : 1
+                  (keyItem.value === 'equ') ? CommonConstants.TWO : 1
                 )
                 .width(CommonConstants.FULL_PERCENT)
                 .justifyContent(FlexAlign.Center)

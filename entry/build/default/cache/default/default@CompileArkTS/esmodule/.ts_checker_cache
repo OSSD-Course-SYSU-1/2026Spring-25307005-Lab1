@@ -124,17 +124,22 @@
       "error": false
     },
     "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\entryability\\EntryAbility.ts": {
-      "mtimeMs": 1778575611401.9705,
+      "mtimeMs": 1780398632576.987,
       "children": [
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.AbilityConstant.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.UIAbility.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.Want.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.window.d.ts",
-        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.hilog.d.ts"
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.hilog.d.ts",
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.distributedDataObject.d.ts"
       ],
       "parent": [],
-      "error": false
+      "error": true,
+      "errorCodes": [
+        28007,
+        28040
+      ]
     },
     "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.appManager.d.ts": {
       "mtimeMs": 1774582692000,
@@ -192,7 +197,8 @@
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts",
-        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts"
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.distributedDataObject.d.ts"
       ],
       "error": false
     },
@@ -481,7 +487,8 @@
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\Context.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.common.d.ts",
         "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\app\\context.d.ts",
-        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts"
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts",
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.distributedDataObject.d.ts"
       ],
       "error": false
     },
@@ -1527,8 +1534,25 @@
       ],
       "error": false
     },
+    "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\HistoryManager.ets": {
+      "mtimeMs": 1779211405509.7227,
+      "children": [],
+      "parent": [
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+      ],
+      "error": false
+    },
+    "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\FractionUtil.ets": {
+      "mtimeMs": 1779213444640.837,
+      "children": [],
+      "parent": [
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets"
+      ],
+      "error": false
+    },
     "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PresskeysViewModel.ets": {
-      "mtimeMs": 1778588592044.7568,
+      "mtimeMs": 1779805408283.738,
       "children": [
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PressKeysItem.ets"
       ],
@@ -1556,7 +1580,7 @@
       "error": false
     },
     "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1779291276714.9868,
+      "mtimeMs": 1779806091946.8264,
       "children": [
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\Logger.ets",
         "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets",
@@ -2036,25 +2060,25 @@
       ],
       "error": false
     },
-    "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\HistoryManager.ets": {
-      "mtimeMs": 1779211405509.7227,
-      "children": [],
+    "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.distributedDataObject.d.ts": {
+      "mtimeMs": 1774582692000,
+      "children": [
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\BaseContext.d.ts",
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.commonType.d.ts"
+      ],
       "parent": [
-        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\entryability\\EntryAbility.ts"
       ],
       "error": false
     },
-    "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\FractionUtil.ets": {
-      "mtimeMs": 1779213444640.837,
+    "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.commonType.d.ts": {
+      "mtimeMs": 1774582692000,
       "children": [],
       "parent": [
-        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
-        "D:\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets"
+        "C:\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.distributedDataObject.d.ts"
       ],
-      "error": false,
-      "errorCodes": [
-        38
-      ]
+      "error": false
     }
   }
 }

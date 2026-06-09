@@ -1,0 +1,12 @@
+{
+  "license": "",
+  "devDependencies": {},
+  "author": "",
+  "name": "calculator",
+  "description": "Calculator feature module",
+  "main": "index.ets",
+  "version": "1.0.0",
+  "dependencies": {
+    "common": "file:../../common"
+  }
+}

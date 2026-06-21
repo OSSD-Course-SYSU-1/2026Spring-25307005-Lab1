@@ -1,0 +1,33 @@
+# Build output
+build/
+output/
+
+# Hvigor cache
+.hvigor/
+hvigorw
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# CodeArts
+.arts/
+.codeartsdoer/
+
+# oh_modules (dependency cache, similar to node_modules)
+oh_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp

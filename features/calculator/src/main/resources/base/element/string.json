@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "calculator_desc",
+      "value": "Calculator feature module"
+    },
+    {
+      "name": "error",
+      "value": "error"
+    }
+  ]
+}

@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import { CommonConstants, Symbol, CalculateUtil, CheckEmptyUtil, HistoryManager, HistoryItem, FractionUtil, Fraction, Logger, FeatureAvailability, DistributedSyncUtil, CalculatorState } from 'common';
 import keysModel from '../viewmodel/PresskeysViewModel';
 import { PressKeysBean } from '../viewmodel/PressKeysItem';
 import { BreakpointType, BreakpointUtil } from './BreakpointSystem';
 import pasteboard from '@ohos.pasteboard';
+=======
+import { CommonConstants, Symbol, CalculateUtil, CheckEmptyUtil, HistoryManager, HistoryItem, FractionUtil, Fraction, Logger, FeatureAvailability } from 'common';
+import keysModel from '../viewmodel/PresskeysViewModel';
+import { PressKeysBean } from '../viewmodel/PressKeysItem';
+import { BreakpointType, BreakpointUtil } from './BreakpointSystem';
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 
 @Component
 export struct CalculatorComponent {
@@ -13,6 +20,7 @@ export struct CalculatorComponent {
   @State showHistory: boolean = false;
   @State isFractionMode: boolean = false;
   @State historyList: Array<HistoryItem> = [];
+<<<<<<< HEAD
   @State isCollaborating: boolean = false;
   @State collaborationPeer: string = '';
   @Prop currentBreakpoint: BreakpointType = BreakpointType.SM;
@@ -157,6 +165,10 @@ export struct CalculatorComponent {
       timestamp: Date.now()
     });
   }
+=======
+  @Prop currentBreakpoint: BreakpointType = BreakpointType.SM;
+  private expressions: Array<string> = [];
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 
   build() {
     // Use different layout based on breakpoint
@@ -273,7 +285,11 @@ export struct CalculatorComponent {
   }
 
   /**
+<<<<<<< HEAD
    * Top control buttons (history, fraction, scientific mode, collaboration)
+=======
+   * Top control buttons (history, fraction, scientific mode)
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
    */
   @Builder
   buildControlButtons() {
@@ -285,7 +301,11 @@ export struct CalculatorComponent {
             .fontSize('14vp')
             .fontColor(Color.White)
         }
+<<<<<<< HEAD
         .width('18%')
+=======
+        .width('25%')
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
         .height('40vp')
         .backgroundColor('#6C7B8B')
         .justifyContent(FlexAlign.Center)
@@ -295,6 +315,7 @@ export struct CalculatorComponent {
           if (this.showHistory) {
             this.historyList = HistoryManager.getHistory();
           }
+<<<<<<< HEAD
           this.syncStateToDistributed();
         })
 
@@ -307,6 +328,19 @@ export struct CalculatorComponent {
             .fontColor(Color.White)
         }
         .width('18%')
+=======
+        })
+
+        Blank().width('3%')
+
+        // Fraction/Decimal toggle
+        Column() {
+          Text(this.isFractionMode ? '小数模式' : '分数模式')
+            .fontSize('14vp')
+            .fontColor(Color.White)
+        }
+        .width('25%')
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
         .height('40vp')
         .backgroundColor(this.isFractionMode ? '#FF6B6B' : '#4ECDC4')
         .justifyContent(FlexAlign.Center)
@@ -316,6 +350,7 @@ export struct CalculatorComponent {
           if (this.calValue && this.calValue !== 'NaN') {
             this.updateDisplayFormat();
           }
+<<<<<<< HEAD
           this.syncStateToDistributed();
         })
 
@@ -328,12 +363,26 @@ export struct CalculatorComponent {
             .fontColor(Color.White)
         }
         .width('18%')
+=======
+        })
+
+        Blank().width('3%')
+
+        // Scientific mode toggle
+        Column() {
+          Text(this.isScientificMode ? '标准模式' : '科学模式')
+            .fontSize('14vp')
+            .fontColor(Color.White)
+        }
+        .width('35%')
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
         .height('40vp')
         .backgroundColor('#4A90E2')
         .justifyContent(FlexAlign.Center)
         .borderRadius(5)
         .onClick(() => {
           this.isScientificMode = !this.isScientificMode;
+<<<<<<< HEAD
           this.syncStateToDistributed();
         })
 
@@ -352,10 +401,13 @@ export struct CalculatorComponent {
         .borderRadius(5)
         .onClick(() => {
           this.toggleCollaboration();
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
         })
       }
       .width(CommonConstants.FULL_PERCENT)
       .justifyContent(FlexAlign.Center)
+<<<<<<< HEAD
 
       // Collaboration status bar
       if (this.isCollaborating) {
@@ -375,6 +427,8 @@ export struct CalculatorComponent {
         .width('95%')
         .padding({ top: '5vp', bottom: '5vp' })
       }
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
     }
     .width(CommonConstants.FULL_PERCENT)
     .margin({ bottom: '3vp' })
@@ -681,7 +735,10 @@ export struct CalculatorComponent {
         break;
     }
     this.formatInputValue();
+<<<<<<< HEAD
     this.syncStateToDistributed();
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 
   inputNumber(value: string) {
@@ -734,7 +791,10 @@ export struct CalculatorComponent {
     if (value !== CommonConstants.DOTS) {
       this.getResult();
     }
+<<<<<<< HEAD
     this.syncStateToDistributed();
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 
   validateEnter(last: string, value: string) {
@@ -1040,6 +1100,7 @@ export struct CalculatorComponent {
     this.expressions.push(symbol);
     this.formatInputValue();
   }
+<<<<<<< HEAD
 
   // ==================== Collaboration Methods ====================
 
@@ -1157,4 +1218,6 @@ export struct CalculatorComponent {
       Logger.error('[CalculatorComponent] Failed to paste from clipboard: ' + JSON.stringify(error));
     }
   }
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 }

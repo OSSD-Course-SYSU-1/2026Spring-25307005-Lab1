@@ -21,8 +21,11 @@ import FractionUtil, { Fraction } from '../common/util/FractionUtil';
 import keysModel from '../viewmodel/PresskeysViewModel';
 import { PressKeysBean } from '../viewmodel/PressKeysItem';
 import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
+<<<<<<< HEAD
 import distributedDataObject from '@ohos.data.distributedDataObject';
 import pasteboard from '@ohos.pasteboard';
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 
 @Entry
 @Component
@@ -34,6 +37,7 @@ struct HomePage {
   @State showHistory: boolean = false; // Show history panel
   @State isFractionMode: boolean = false; // Fraction output mode
   @State historyList: Array<HistoryItem> = []; // History records
+<<<<<<< HEAD
   @State isCollaborating: boolean = false;
   @State collaborationPeer: string = '';
   private expressions: Array<string> = [];
@@ -131,6 +135,9 @@ struct HomePage {
     this.dObject['historyList'] = historyListStr;
     this.dObject['timestamp'] = Date.now();
   }
+=======
+  private expressions: Array<string> = [];
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 
   build() {
     Column() {
@@ -176,7 +183,11 @@ struct HomePage {
               .fontSize('14vp')
               .fontColor(Color.White)
           }
+<<<<<<< HEAD
           .width('18%')
+=======
+          .width('25%')
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           .height('40vp')
           .backgroundColor('#6C7B8B')
           .justifyContent(FlexAlign.Center)
@@ -186,6 +197,7 @@ struct HomePage {
             if (this.showHistory) {
               this.historyList = HistoryManager.getHistory();
             }
+<<<<<<< HEAD
             this.syncStateToDistributed();
           })
 
@@ -198,12 +210,26 @@ struct HomePage {
               .fontColor(Color.White)
           }
           .width('18%')
+=======
+          })
+
+          Blank().width('3%')
+
+          // Fraction/Decimal toggle button
+          Column() {
+            Text(this.isFractionMode ? '小数模式' : '分数模式')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('25%')
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           .height('40vp')
           .backgroundColor(this.isFractionMode ? '#FF6B6B' : '#4ECDC4')
           .justifyContent(FlexAlign.Center)
           .borderRadius(5)
           .onClick(() => {
             this.isFractionMode = !this.isFractionMode;
+<<<<<<< HEAD
             if (this.calValue && this.calValue !== 'NaN') {
               this.updateDisplayFormat();
             }
@@ -219,12 +245,30 @@ struct HomePage {
               .fontColor(Color.White)
           }
           .width('18%')
+=======
+            // Re-calculate display if there's a result
+            if (this.calValue && this.calValue !== 'NaN') {
+              this.updateDisplayFormat();
+            }
+          })
+
+          Blank().width('3%')
+
+          // Scientific mode toggle button
+          Column() {
+            Text(this.isScientificMode ? '标准模式' : '科学模式')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('35%')
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           .height('40vp')
           .backgroundColor('#4A90E2')
           .justifyContent(FlexAlign.Center)
           .borderRadius(5)
           .onClick(() => {
             this.isScientificMode = !this.isScientificMode;
+<<<<<<< HEAD
             this.syncStateToDistributed();
           })
 
@@ -243,10 +287,13 @@ struct HomePage {
           .borderRadius(5)
           .onClick(() => {
             this.toggleCollaboration();
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           })
         }
         .width(CommonConstants.FULL_PERCENT)
         .justifyContent(FlexAlign.Center)
+<<<<<<< HEAD
 
         // Collaboration status bar
         if (this.isCollaborating) {
@@ -266,6 +313,8 @@ struct HomePage {
           .width('95%')
           .padding({ top: '5vp', bottom: '5vp' })
         }
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
       }
       .width(CommonConstants.FULL_PERCENT)
       .margin({ bottom: '3vp' })
@@ -570,7 +619,10 @@ struct HomePage {
         break;
     }
     this.formatInputValue();
+<<<<<<< HEAD
     this.syncStateToDistributed();
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 
   /**
@@ -648,7 +700,10 @@ struct HomePage {
     if (value !== CommonConstants.DOTS) {
       this.getResult();
     }
+<<<<<<< HEAD
     this.syncStateToDistributed();
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 
   /**
@@ -1077,6 +1132,7 @@ struct HomePage {
     this.inputValue += symbol;
     this.expressions.push(symbol);
     this.formatInputValue();
+<<<<<<< HEAD
     this.syncStateToDistributed();
   }
 
@@ -1222,5 +1278,9 @@ struct HomePage {
     } catch (error) {
       Logger.error('[HomePage] Failed to paste from clipboard: ' + JSON.stringify(error));
     }
+=======
+    // Don't call getResult() here - wait for complete fraction input
+    // The calculation will be triggered when user inputs the denominator
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 }

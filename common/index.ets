@@ -5,4 +5,7 @@ export { default as FractionUtil, Fraction } from './src/main/ets/util/FractionU
 export { default as HistoryManager, HistoryItem } from './src/main/ets/util/HistoryManager';
 export { default as Logger } from './src/main/ets/util/Logger';
 export { isSysCapSupported, SysCapConstants, FeatureAvailability } from './src/main/ets/util/SysCapUtil';
+<<<<<<< HEAD
 export { default as DistributedSyncUtil, CalculatorState, OnDataChangeCallback, OnStatusChangeCallback } from './src/main/ets/util/DistributedSyncUtil';
+=======
+>>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be

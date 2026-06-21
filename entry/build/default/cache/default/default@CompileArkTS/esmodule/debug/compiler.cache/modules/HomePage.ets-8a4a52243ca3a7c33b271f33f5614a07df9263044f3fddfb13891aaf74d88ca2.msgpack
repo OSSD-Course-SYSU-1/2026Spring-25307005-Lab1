@@ -1,0 +1,2393 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚáŒif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import Logger from '../common/util/Logger';
+import CalculateUtil from '../common/util/CalculateUtil';
+import CheckEmptyUtil from '../common/util/CheckEmptyUtil';
+import HistoryManager from '../common/util/HistoryManager';
+import FractionUtil from '../common/util/FractionUtil';
+import keysModel from '../viewmodel/PresskeysViewModel';
+import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
+class HomePage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__inputValue = new ObservedPropertySimplePU('', this, "inputValue");
+        this.__calValue = new ObservedPropertySimplePU('', this, "calValue");
+        this.__isScientificMode = new ObservedPropertySimplePU(false, this, "isScientificMode");
+        this.__equationMode = new ObservedPropertySimplePU('', this, "equationMode");
+        this.__showHistory = new ObservedPropertySimplePU(false, this, "showHistory");
+        this.__isFractionMode = new ObservedPropertySimplePU(false, this, "isFractionMode");
+        this.__historyList = new ObservedPropertyObjectPU([], this, "historyList");
+        this.expressions = [];
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.inputValue !== undefined) {
+            this.inputValue = params.inputValue;
+        }
+        if (params.calValue !== undefined) {
+            this.calValue = params.calValue;
+        }
+        if (params.isScientificMode !== undefined) {
+            this.isScientificMode = params.isScientificMode;
+        }
+        if (params.equationMode !== undefined) {
+            this.equationMode = params.equationMode;
+        }
+        if (params.showHistory !== undefined) {
+            this.showHistory = params.showHistory;
+        }
+        if (params.isFractionMode !== undefined) {
+            this.isFractionMode = params.isFractionMode;
+        }
+        if (params.historyList !== undefined) {
+            this.historyList = params.historyList;
+        }
+        if (params.expressions !== undefined) {
+            this.expressions = params.expressions;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__inputValue.purgeDependencyOnElmtId(rmElmtId);
+        this.__calValue.purgeDependencyOnElmtId(rmElmtId);
+        this.__isScientificMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__equationMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__showHistory.purgeDependencyOnElmtId(rmElmtId);
+        this.__isFractionMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__historyList.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__inputValue.aboutToBeDeleted();
+        this.__calValue.aboutToBeDeleted();
+        this.__isScientificMode.aboutToBeDeleted();
+        this.__equationMode.aboutToBeDeleted();
+        this.__showHistory.aboutToBeDeleted();
+        this.__isFractionMode.aboutToBeDeleted();
+        this.__historyList.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get inputValue() {
+        return this.__inputValue.get();
+    }
+    set inputValue(newValue) {
+        this.__inputValue.set(newValue);
+    }
+    get calValue() {
+        return this.__calValue.get();
+    }
+    set calValue(newValue) {
+        this.__calValue.set(newValue);
+    }
+    get isScientificMode() {
+        return this.__isScientificMode.get();
+    }
+    set isScientificMode(newValue) {
+        this.__isScientificMode.set(newValue);
+    }
+    get equationMode() {
+        return this.__equationMode.get();
+    }
+    set equationMode(newValue) {
+        this.__equationMode.set(newValue);
+    }
+    get showHistory() {
+        return this.__showHistory.get();
+    }
+    set showHistory(newValue) {
+        this.__showHistory.set(newValue);
+    }
+    get isFractionMode() {
+        return this.__isFractionMode.get();
+    }
+    set isFractionMode(newValue) {
+        this.__isFractionMode.set(newValue);
+    }
+    get historyList() {
+        return this.__historyList.get();
+    }
+    set historyList(newValue) {
+        this.__historyList.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.height(CommonConstants.FULL_PERCENT);
+            Column.backgroundColor({ "id": 50331655, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(CommonConstants.FULL_PERCENT);
+            Column.height({ "id": 50331667, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Column.alignItems(HorizontalAlign.End);
+            Column.margin({
+                right: { "id": 50331668, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                top: { "id": 50331669, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            TextInput.create({ text: this.resultFormat(this.inputValue) });
+            TextInput.height(CommonConstants.FULL_PERCENT);
+            TextInput.fontSize((this.inputValue.length > CommonConstants.INPUT_LENGTH_MAX) ? { "id": 50331666, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 50331665, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            TextInput.enabled(false);
+            TextInput.fontColor(Color.Black);
+            TextInput.textAlign(TextAlign.End);
+            TextInput.backgroundColor({ "id": 50331657, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+        }, TextInput);
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(CommonConstants.FULL_PERCENT);
+            Column.height({ "id": 50331676, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Column.alignItems(HorizontalAlign.End);
+            Column.margin({
+                right: { "id": 50331678, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                bottom: { "id": 50331677, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.resultFormat(this.calValue));
+            Text.fontSize({ "id": 50331666, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            Text.fontColor({ "id": 50331660, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Top control buttons
+            Column.create();
+            // Top control buttons
+            Column.width(CommonConstants.FULL_PERCENT);
+            // Top control buttons
+            Column.margin({ bottom: '3vp' });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width(CommonConstants.FULL_PERCENT);
+            Row.justifyContent(FlexAlign.Center);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // History button
+            Column.create();
+            // History button
+            Column.width('25%');
+            // History button
+            Column.height('40vp');
+            // History button
+            Column.backgroundColor('#6C7B8B');
+            // History button
+            Column.justifyContent(FlexAlign.Center);
+            // History button
+            Column.borderRadius(5);
+            // History button
+            Column.onClick(() => {
+                this.showHistory = !this.showHistory;
+                if (this.showHistory) {
+                    this.historyList = HistoryManager.getHistory();
+                }
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å†å²');
+            Text.fontSize('14vp');
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        // History button
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.width('3%');
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Fraction/Decimal toggle button
+            Column.create();
+            // Fraction/Decimal toggle button
+            Column.width('25%');
+            // Fraction/Decimal toggle button
+            Column.height('40vp');
+            // Fraction/Decimal toggle button
+            Column.backgroundColor(this.isFractionMode ? '#FF6B6B' : '#4ECDC4');
+            // Fraction/Decimal toggle button
+            Column.justifyContent(FlexAlign.Center);
+            // Fraction/Decimal toggle button
+            Column.borderRadius(5);
+            // Fraction/Decimal toggle button
+            Column.onClick(() => {
+                this.isFractionMode = !this.isFractionMode;
+                // Re-calculate display if there's a result
+                if (this.calValue && this.calValue !== 'NaN') {
+                    this.updateDisplayFormat();
+                }
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isFractionMode ? 'å°æ•°æ¨¡å¼' : 'åˆ†æ•°æ¨¡å¼');
+            Text.fontSize('14vp');
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        // Fraction/Decimal toggle button
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.width('3%');
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Scientific mode toggle button
+            Column.create();
+            // Scientific mode toggle button
+            Column.width('35%');
+            // Scientific mode toggle button
+            Column.height('40vp');
+            // Scientific mode toggle button
+            Column.backgroundColor('#4A90E2');
+            // Scientific mode toggle button
+            Column.justifyContent(FlexAlign.Center);
+            // Scientific mode toggle button
+            Column.borderRadius(5);
+            // Scientific mode toggle button
+            Column.onClick(() => {
+                this.isScientificMode = !this.isScientificMode;
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isScientificMode ? 'æ ‡å‡†æ¨¡å¼' : 'ç§‘å­¦æ¨¡å¼');
+            Text.fontSize('14vp');
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        // Scientific mode toggle button
+        Column.pop();
+        Row.pop();
+        // Top control buttons
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // History panel
+            if (this.showHistory) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width(CommonConstants.FULL_PERCENT);
+                        Column.backgroundColor('#F9F9F9');
+                        Column.border({ width: 1, color: '#E0E0E0' });
+                        Column.borderRadius(10);
+                        Column.margin({ bottom: '5vp' });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // History header
+                        Row.create();
+                        // History header
+                        Row.width('95%');
+                        // History header
+                        Row.padding({ top: '10vp', bottom: '10vp' });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('è®¡ç®—å†å²');
+                        Text.fontSize('16vp');
+                        Text.fontColor(Color.Black);
+                        Text.fontWeight(FontWeight.Bold);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Blank.create();
+                    }, Blank);
+                    Blank.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('æ¸…ç©º');
+                        Text.fontSize('14vp');
+                        Text.fontColor('#FF0000');
+                        Text.onClick(() => {
+                            HistoryManager.clearHistory();
+                            this.historyList = [];
+                        });
+                    }, Text);
+                    Text.pop();
+                    // History header
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        If.create();
+                        // History list
+                        if (this.historyList.length === 0) {
+                            this.ifElseBranchUpdateFunction(0, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Column.create();
+                                    Column.width('95%');
+                                    Column.height('150vp');
+                                    Column.justifyContent(FlexAlign.Center);
+                                }, Column);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create('æš‚æ— å†å²è®°å½•');
+                                    Text.fontSize('14vp');
+                                    Text.fontColor('#999999');
+                                }, Text);
+                                Text.pop();
+                                Column.pop();
+                            });
+                        }
+                        else {
+                            this.ifElseBranchUpdateFunction(1, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    List.create();
+                                    List.width('95%');
+                                    List.height('200vp');
+                                    List.divider({ strokeWidth: 1, color: '#E0E0E0' });
+                                }, List);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    ForEach.create();
+                                    const forEachItemGenFunction = (_item, index) => {
+                                        const item = _item;
+                                        {
+                                            const itemCreation = (elmtId, isInitialRender) => {
+                                                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                                                ListItem.create(deepRenderFunction, true);
+                                                if (!isInitialRender) {
+                                                    ListItem.pop();
+                                                }
+                                                ViewStackProcessor.StopGetAccessRecording();
+                                            };
+                                            const itemCreation2 = (elmtId, isInitialRender) => {
+                                                ListItem.create(deepRenderFunction, true);
+                                            };
+                                            const deepRenderFunction = (elmtId, isInitialRender) => {
+                                                itemCreation(elmtId, isInitialRender);
+                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                                    Column.create();
+                                                    Column.width('95%');
+                                                    Column.padding('8vp');
+                                                    Column.backgroundColor(index % 2 === 0 ? '#FFFFFF' : '#F5F5F5');
+                                                    Column.borderRadius(5);
+                                                    Column.onClick(() => {
+                                                        // Click to use this history record
+                                                        this.inputValue = item.expression;
+                                                        this.calValue = item.result;
+                                                        this.showHistory = false;
+                                                    });
+                                                }, Column);
+                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                                    Row.create();
+                                                    Row.width('100%');
+                                                }, Row);
+                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                                    Text.create(item.expression);
+                                                    Text.fontSize('14vp');
+                                                    Text.fontColor('#333333');
+                                                    Text.layoutWeight(1);
+                                                }, Text);
+                                                Text.pop();
+                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                                    Text.create('=');
+                                                    Text.fontSize('14vp');
+                                                    Text.fontColor('#666666');
+                                                    Text.margin({ left: '5vp', right: '5vp' });
+                                                }, Text);
+                                                Text.pop();
+                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                                    Text.create(item.result);
+                                                    Text.fontSize('14vp');
+                                                    Text.fontColor('#4A90E2');
+                                                    Text.fontWeight(FontWeight.Bold);
+                                                }, Text);
+                                                Text.pop();
+                                                Row.pop();
+                                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                                    Text.create(HistoryManager.formatTime(item.timestamp));
+                                                    Text.fontSize('12vp');
+                                                    Text.fontColor('#999999');
+                                                    Text.margin({ top: '3vp' });
+                                                }, Text);
+                                                Text.pop();
+                                                Column.pop();
+                                                ListItem.pop();
+                                            };
+                                            this.observeComponentCreation2(itemCreation2, ListItem);
+                                            ListItem.pop();
+                                        }
+                                    };
+                                    this.forEachUpdateFunction(elmtId, this.historyList, forEachItemGenFunction, (item) => JSON.stringify(item), true, false);
+                                }, ForEach);
+                                ForEach.pop();
+                                List.pop();
+                            });
+                        }
+                    }, If);
+                    If.pop();
+                    Column.pop();
+                });
+            }
+            // Scientific keys (shown when in scientific mode)
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // Scientific keys (shown when in scientific mode)
+            if (this.isScientificMode) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width(CommonConstants.FULL_PERCENT);
+                        Column.margin({ bottom: '3vp' });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width(CommonConstants.FULL_PERCENT);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, columnItemIndex) => {
+                            const columnItem = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width(CommonConstants.FULL_PERCENT);
+                                Column.justifyContent(FlexAlign.Center);
+                                Column.layoutWeight(1);
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                ForEach.create();
+                                const forEachItemGenFunction = (_item, keyItemIndex) => {
+                                    const keyItem = _item;
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Column.create();
+                                        Column.width('55vp');
+                                        Column.height('30vp');
+                                        Column.borderWidth(1);
+                                        Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Column.borderRadius(15);
+                                        Column.backgroundColor('#E8E8E8');
+                                        Column.alignItems(HorizontalAlign.Center);
+                                        Column.justifyContent(FlexAlign.Center);
+                                        Column.onClick(() => {
+                                            this.inputScientificSymbol(keyItem.value);
+                                        });
+                                    }, Column);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(keyItem.value);
+                                        Text.fontSize('14vp');
+                                        Text.fontColor(Color.Black);
+                                    }, Text);
+                                    Text.pop();
+                                    Column.pop();
+                                };
+                                this.forEachUpdateFunction(elmtId, columnItem, forEachItemGenFunction, (keyItem) => JSON.stringify(keyItem), true, false);
+                            }, ForEach);
+                            ForEach.pop();
+                            Column.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, keysModel.getScientificKeys(), forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // Fraction input buttons
+                        Column.create();
+                        // Fraction input buttons
+                        Column.width(CommonConstants.FULL_PERCENT);
+                        // Fraction input buttons
+                        Column.margin({ bottom: '3vp' });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.margin({ bottom: '3vp' });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('åˆ†æ•°è¾“å…¥');
+                        Text.fontSize('12vp');
+                        Text.fontColor('#666666');
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width('100%');
+                        Row.justifyContent(FlexAlign.Center);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // Fraction format button: a/b
+                        Column.create();
+                        // Fraction format button: a/b
+                        Column.width('55vp');
+                        // Fraction format button: a/b
+                        Column.height('30vp');
+                        // Fraction format button: a/b
+                        Column.borderWidth(1);
+                        // Fraction format button: a/b
+                        Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                        // Fraction format button: a/b
+                        Column.borderRadius(15);
+                        // Fraction format button: a/b
+                        Column.backgroundColor('#FFE4B5');
+                        // Fraction format button: a/b
+                        Column.alignItems(HorizontalAlign.Center);
+                        // Fraction format button: a/b
+                        Column.justifyContent(FlexAlign.Center);
+                        // Fraction format button: a/b
+                        Column.onClick(() => {
+                            this.inputFractionSymbol('/');
+                        });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('a/b');
+                        Text.fontSize('14vp');
+                        Text.fontColor(Color.Black);
+                    }, Text);
+                    Text.pop();
+                    // Fraction format button: a/b
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Blank.create();
+                        Blank.width('8vp');
+                    }, Blank);
+                    Blank.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // Mixed number format button: a b/c
+                        Column.create();
+                        // Mixed number format button: a b/c
+                        Column.width('55vp');
+                        // Mixed number format button: a b/c
+                        Column.height('30vp');
+                        // Mixed number format button: a b/c
+                        Column.borderWidth(1);
+                        // Mixed number format button: a b/c
+                        Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                        // Mixed number format button: a b/c
+                        Column.borderRadius(15);
+                        // Mixed number format button: a b/c
+                        Column.backgroundColor('#FFE4B5');
+                        // Mixed number format button: a b/c
+                        Column.alignItems(HorizontalAlign.Center);
+                        // Mixed number format button: a b/c
+                        Column.justifyContent(FlexAlign.Center);
+                        // Mixed number format button: a b/c
+                        Column.onClick(() => {
+                            this.inputFractionSymbol(' ');
+                        });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('a b/c');
+                        Text.fontSize('14vp');
+                        Text.fontColor(Color.Black);
+                    }, Text);
+                    Text.pop();
+                    // Mixed number format button: a b/c
+                    Column.pop();
+                    Row.pop();
+                    // Fraction input buttons
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+            Column.width(CommonConstants.FULL_PERCENT);
+            Column.backgroundColor({ "id": 50331658, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.height(CommonConstants.FULL_PERCENT);
+            Row.alignItems(VerticalAlign.Top);
+            Row.margin({
+                left: { "id": 50331673, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                right: { "id": 50331674, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+            });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = (_item, columnItemIndex) => {
+                const columnItem = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Column.create();
+                    Column.layoutWeight(1);
+                    Column.margin({
+                        top: { "id": 50331675, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" },
+                        bottom: { "id": 50331672, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" }
+                    });
+                }, Column);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    ForEach.create();
+                    const forEachItemGenFunction = (_item, keyItemIndex) => {
+                        const keyItem = _item;
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.layoutWeight((keyItem.value === 'equ') ? CommonConstants.TWO : 1);
+                            Column.width(CommonConstants.FULL_PERCENT);
+                            Column.justifyContent(FlexAlign.Center);
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.width({ "id": 50331671, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.height(((columnItemIndex === 2) && (keyItem.value === 'equ')) ? { "id": 50331662, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 50331670, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.borderWidth(1);
+                            Column.borderColor({ "id": 50331654, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.borderRadius({ "id": 50331661, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                            Column.backgroundColor((keyItem.value === 'equ') ? { "id": 50331656, "type": 10001, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : Color.White);
+                            Column.alignItems(HorizontalAlign.Center);
+                            Column.justifyContent(FlexAlign.Center);
+                            Column.onClick(() => {
+                                if (keyItem.flag === 0) {
+                                    this.inputSymbol(keyItem.value);
+                                }
+                                else {
+                                    this.inputNumber(keyItem.value);
+                                }
+                            });
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            If.create();
+                            if (keyItem.flag === 0) {
+                                this.ifElseBranchUpdateFunction(0, () => {
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Image.create(keyItem.source !== undefined ? keyItem.source : '');
+                                        Image.width(keyItem.width);
+                                        Image.height(keyItem.height);
+                                    }, Image);
+                                });
+                            }
+                            else {
+                                this.ifElseBranchUpdateFunction(1, () => {
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(keyItem.value);
+                                        Text.fontSize((keyItem.value === CommonConstants.DOTS) ? { "id": 50331664, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" } : { "id": 50331666, "type": 10002, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+                                        Text.width(keyItem.width);
+                                        Text.height(keyItem.height);
+                                    }, Text);
+                                    Text.pop();
+                                });
+                            }
+                        }, If);
+                        If.pop();
+                        Column.pop();
+                        Column.pop();
+                    };
+                    this.forEachUpdateFunction(elmtId, columnItem, forEachItemGenFunction, (keyItem) => JSON.stringify(keyItem), true, false);
+                }, ForEach);
+                ForEach.pop();
+                Column.pop();
+            };
+            this.forEachUpdateFunction(elmtId, keysModel.getPressKeys(), forEachItemGenFunction, (item) => JSON.stringify(item), true, false);
+        }, ForEach);
+        ForEach.pop();
+        Row.pop();
+        Column.pop();
+        Column.pop();
+    }
+    /**
+     * Input Symbols.
+     *
+     * @param value Input Operators.
+     */
+    inputSymbol(value) {
+        if (CheckEmptyUtil.isEmpty(value)) {
+            return;
+        }
+        let len = this.expressions.length;
+        switch (value) {
+            case Symbol.CLEAN:
+                this.expressions = [];
+                this.calValue = '';
+                this.equationMode = ''; // Exit equation mode
+                break;
+            case Symbol.DEL:
+                this.inputDelete(len);
+                break;
+            case Symbol.EQU:
+                // Check if in equation mode
+                if (this.equationMode !== '') {
+                    this.solveEquation();
+                    return;
+                }
+                if (len === 0) {
+                    return;
+                }
+                this.getResult().then((result) => {
+                    if (!result) {
+                        return;
+                    }
+                    // Save to history
+                    const expression = this.inputValue;
+                    const resultValue = this.calValue;
+                    HistoryManager.addHistory(expression, resultValue);
+                    this.inputValue = this.calValue;
+                    this.calValue = '';
+                    this.expressions = [];
+                    this.expressions.push(this.inputValue);
+                });
+                break;
+            default:
+                this.inputOperators(len, value);
+                break;
+        }
+        this.formatInputValue();
+    }
+    /**
+     * Enter numbers.
+     *
+     * @param value Enter numbers.
+     */
+    inputNumber(value) {
+        if (CheckEmptyUtil.isEmpty(value)) {
+            return;
+        }
+        // In equation mode, just append to input value
+        if (this.equationMode !== '') {
+            this.inputValue += value;
+            return;
+        }
+        let len = this.expressions.length;
+        let last = len > 0 ? this.expressions[len - 1] : '';
+        let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
+        if (!this.validateEnter(last, value)) {
+            return;
+        }
+        // Check if we're in fraction input mode (last element is '/' for fraction)
+        if (last === '/' && len >= 2) {
+            // We're completing a fraction: numerator/denominator
+            // Merge into a single fraction element
+            let numerator = secondLast;
+            if (numerator && !CalculateUtil.isSymbol(numerator) && !CalculateUtil.isScientificSymbol(numerator)) {
+                // Remove the last two elements (numerator and '/')
+                this.expressions.pop(); // Remove '/'
+                this.expressions.pop(); // Remove numerator
+                // Add the complete fraction
+                this.expressions.push(numerator + '/' + value);
+                this.formatInputValue();
+                this.getResult();
+                return;
+            }
+        }
+        // Check if last element is a fraction (contains '/') - append to denominator
+        if (last && last.indexOf('/') !== -1) {
+            // Append to the denominator of the fraction
+            this.expressions[len - 1] += value;
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Check if last element is an operator (including scientific operators)
+        let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
+        if (!last) {
+            this.expressions.push(value);
+        }
+        else if (isLastOperator) {
+            // If last is an operator, push new number
+            this.expressions.push(value);
+        }
+        else if (!secondLast) {
+            // If no second last, append to last number
+            this.expressions[len - 1] += value;
+        }
+        else {
+            // Check if second last is an operator
+            let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
+            if (isSecondLastOperator) {
+                // Append to last number
+                this.expressions[len - 1] += value;
+            }
+            else {
+                // Push new number
+                this.expressions.push(value);
+            }
+        }
+        this.formatInputValue();
+        if (value !== CommonConstants.DOTS) {
+            this.getResult();
+        }
+    }
+    /**
+     * Verify that you can enter.
+     *
+     * @param last Value of the last element.
+     * @param value Current input value.
+     * return Indicates whether to allow input.
+     */
+    validateEnter(last, value) {
+        if (!last && value === CommonConstants.PERCENT_SIGN) {
+            return false;
+        }
+        if ((last === CommonConstants.MIN) && (value === CommonConstants.PERCENT_SIGN)) {
+            return false;
+        }
+        if (last.endsWith(CommonConstants.PERCENT_SIGN)) {
+            return false;
+        }
+        if ((last.indexOf(CommonConstants.DOTS) !== -1) && (value === CommonConstants.DOTS)) {
+            return false;
+        }
+        if ((last === '0') && (value !== CommonConstants.DOTS) &&
+            (value !== CommonConstants.PERCENT_SIGN)) {
+            return false;
+        }
+        return true;
+    }
+    /**
+     * Delete Key Trigger.
+     *
+     * @param len Expression Length.
+     */
+    inputDelete(len) {
+        if (len === 0) {
+            return;
+        }
+        let last = this.expressions[len - 1];
+        let lastLen = last.length;
+        if (lastLen === 1) {
+            this.expressions.pop();
+            len = this.expressions.length;
+        }
+        else {
+            this.expressions[len - 1] = last.slice(0, last.length - 1);
+        }
+        if (len === 0) {
+            this.inputValue = '';
+            this.calValue = '';
+            return;
+        }
+        if (!CalculateUtil.isSymbol(this.expressions[len - 1])) {
+            this.getResult();
+        }
+    }
+    /**
+     * Triggered when input is added, subtracted, multiplied, and divided.
+     *
+     * @param len Expression Length.
+     * @param value Current Input Value.
+     */
+    inputOperators(len, value) {
+        let last = len > 0 ? this.expressions[len - 1] : undefined;
+        let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
+        if (!last && (value === Symbol.MIN)) {
+            this.expressions.push(this.getSymbol(value));
+            return;
+        }
+        if (!last) {
+            return;
+        }
+        if (!CalculateUtil.isSymbol(last)) {
+            this.expressions.push(this.getSymbol(value));
+            return;
+        }
+        if ((value === Symbol.MIN) &&
+            (last === CommonConstants.MIN || last === CommonConstants.ADD)) {
+            this.expressions.pop();
+            this.expressions.push(this.getSymbol(value));
+            return;
+        }
+        if (!secondLast) {
+            return;
+        }
+        if (value !== Symbol.MIN) {
+            this.expressions.pop();
+        }
+        if (CalculateUtil.isSymbol(secondLast)) {
+            this.expressions.pop();
+        }
+        this.expressions.push(this.getSymbol(value));
+    }
+    /**
+     * Get Operator.
+     *
+     * @param value.
+     * @return Operators.
+     */
+    getSymbol(value) {
+        if (CheckEmptyUtil.isEmpty(value)) {
+            return '';
+        }
+        let symbol = '';
+        switch (value) {
+            case Symbol.ADD:
+                symbol = CommonConstants.ADD;
+                break;
+            case Symbol.MIN:
+                symbol = CommonConstants.MIN;
+                break;
+            case Symbol.MUL:
+                symbol = CommonConstants.MUL;
+                break;
+            case Symbol.DIV:
+                symbol = CommonConstants.DIV;
+                break;
+            default:
+                break;
+        }
+        return symbol;
+    }
+    /**
+     * Make a deep copy of an expression.
+     *
+     * @return deep copy expression.
+     */
+    deepCopy() {
+        let copyExpressions = Array.from(this.expressions);
+        return copyExpressions;
+    }
+    /**
+     * Obtaining Results.
+     *
+     * @return Whether the result is incorrect.
+     */
+    async getResult() {
+        let calResult = CalculateUtil.parseExpression(this.deepCopy());
+        if (calResult === 'NaN') {
+            this.calValue = this.resourceToString({ "id": 50331652, "type": 10003, params: [], "bundleName": "com.example.simplecalculator", "moduleName": "entry" });
+            return false;
+        }
+        // Convert to fraction if in fraction mode
+        if (this.isFractionMode) {
+            calResult = this.convertToFraction(calResult);
+        }
+        this.calValue = calResult;
+        return true;
+    }
+    /**
+     * Convert decimal result to fraction
+     *
+     * @param decimalStr Decimal string
+     * @return Fraction string or original decimal
+     */
+    convertToFraction(decimalStr) {
+        if (!decimalStr || decimalStr === 'NaN') {
+            return decimalStr;
+        }
+        // Check if already a fraction
+        if (decimalStr.indexOf('/') !== -1) {
+            return decimalStr;
+        }
+        try {
+            const decimal = parseFloat(decimalStr);
+            if (isNaN(decimal)) {
+                return decimalStr;
+            }
+            const fraction = FractionUtil.decimalToFraction(decimal);
+            const fractionStr = FractionUtil.fractionToString(fraction);
+            // Only return fraction if it's reasonable (denominator not too large)
+            if (fraction.denominator <= 1000 && fractionStr !== 'NaN') {
+                return fractionStr;
+            }
+        }
+        catch (e) {
+            Logger.error('[HomePage] convertToFraction error: ' + JSON.stringify(e));
+        }
+        return decimalStr;
+    }
+    /**
+     * Update display format when switching between fraction and decimal modes
+     */
+    updateDisplayFormat() {
+        if (!this.calValue || this.calValue === 'NaN') {
+            return;
+        }
+        if (this.isFractionMode) {
+            // Convert decimal to fraction
+            this.calValue = this.convertToFraction(this.calValue);
+        }
+        else {
+            // Convert fraction to decimal
+            if (this.calValue.indexOf('/') !== -1) {
+                try {
+                    const fraction = FractionUtil.parseFraction(this.calValue);
+                    const decimal = FractionUtil.fractionToDecimal(fraction);
+                    if (!isNaN(decimal)) {
+                        this.calValue = decimal.toString();
+                    }
+                }
+                catch (e) {
+                    Logger.error('[HomePage] updateDisplayFormat error: ' + JSON.stringify(e));
+                }
+            }
+        }
+    }
+    /**
+     * Number Formatting.
+     *
+     * @param value Formatting parameters.
+     * @return Thousand percentile data.
+     */
+    resultFormat(value) {
+        let reg = (value.indexOf('.') > -1) ? new RegExp("/(\d)(?=(\d{3})+\.)/g") : new RegExp("/(\d)(?=(?:\d{3})+$)/g");
+        return value.replace(reg, '$1,');
+    }
+    /**
+     * Convert a resource file to a string.
+     *
+     * @param resource Resource file.
+     * @return Character string converted from the resource file.
+     */
+    resourceToString(resource) {
+        if (CheckEmptyUtil.isEmpty(resource)) {
+            return '';
+        }
+        let result = '';
+        try {
+            const uiContext = AppStorage.get('uiContext');
+            let context = uiContext.getHostContext();
+            result = context.resourceManager.getStringSync(resource.id);
+        }
+        catch (error) {
+            Logger.error('[CalculateModel] getResourceString fail: ' + JSON.stringify(error));
+        }
+        return result;
+    }
+    /**
+     * Thousands in the formatting result.
+     */
+    formatInputValue() {
+        let deepExpressions = [];
+        this.deepCopy().forEach((item, index) => {
+            deepExpressions[index] = this.resultFormat(item);
+        });
+        this.inputValue = deepExpressions.join('');
+    }
+    /**
+     * Input scientific symbols.
+     *
+     * @param value Scientific symbol.
+     */
+    inputScientificSymbol(value) {
+        if (CheckEmptyUtil.isEmpty(value)) {
+            return;
+        }
+        // In equation mode, handle comma and minus
+        if (this.equationMode !== '') {
+            if (value === ',') {
+                this.inputValue += ',';
+                return;
+            }
+            if (value === '-') {
+                this.inputValue += '-';
+                return;
+            }
+        }
+        // Handle special constants
+        if (value === 'Ï€') {
+            this.expressions.push(Math.PI.toString());
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        if (value === 'e') {
+            this.expressions.push(Math.E.toString());
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle equation mode
+        if (value === 'æ–¹ç¨‹') {
+            this.showEquationDialog();
+            return;
+        }
+        // Handle xÂ² (square)
+        if (value === 'xÂ²') {
+            this.expressions.push('^');
+            this.expressions.push('2');
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle 1/x (reciprocal)
+        if (value === '1/x') {
+            this.expressions.unshift('1');
+            this.expressions.push('Ã·');
+            this.formatInputValue();
+            this.getResult();
+            return;
+        }
+        // Handle parentheses
+        if (value === '(' || value === ')') {
+            this.expressions.push(value);
+            this.formatInputValue();
+            return;
+        }
+        // For unary scientific operators (sin, cos, tan, log, ln, âˆš)
+        // These are prefix operators, so they should be added before the operand
+        // But in our UI flow, user inputs number first, then clicks operator
+        // So we need to apply the operator to the last number in expressions
+        const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', 'âˆš', '!'];
+        if (unaryOperators.indexOf(value) !== -1) {
+            let len = this.expressions.length;
+            if (len > 0) {
+                let last = this.expressions[len - 1];
+                // If last element is a number, apply the operator
+                if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
+                    // For prefix operators like sin, cos, âˆš, we need to insert operator before the number
+                    // For postfix operators like !, we add after the number
+                    if (value === '!') {
+                        // Postfix operator (factorial)
+                        this.expressions.push(value);
+                    }
+                    else {
+                        // Prefix operator: insert before the last number
+                        this.expressions.splice(len - 1, 0, value);
+                    }
+                    this.formatInputValue();
+                    this.getResult();
+                    return;
+                }
+            }
+            // If no number before, just add the operator (user will input number next)
+            this.expressions.push(value);
+            this.formatInputValue();
+            return;
+        }
+        // For binary operators like ^
+        this.expressions.push(value);
+        this.formatInputValue();
+    }
+    /**
+     * Show equation solving dialog.
+     */
+    showEquationDialog() {
+        // Toggle equation mode
+        if (this.equationMode === '') {
+            this.equationMode = 'quadratic';
+            this.calValue = 'æ–¹ç¨‹æ¨¡å¼ï¼šè¾“å…¥ç³»æ•° a,b,c è§£ axÂ²+bx+c=0';
+            this.expressions = [];
+            this.inputValue = '';
+        }
+        else {
+            // Exit equation mode
+            this.equationMode = '';
+            this.calValue = '';
+            this.expressions = [];
+            this.inputValue = '';
+        }
+    }
+    /**
+     * Solve equation from input.
+     */
+    solveEquation() {
+        // Get the input string
+        let input = this.inputValue.trim();
+        // Parse coefficients (separated by comma or space)
+        let coefficients;
+        if (input.indexOf(',') !== -1) {
+            coefficients = input.split(',');
+        }
+        else {
+            coefficients = input.split(/\s+/);
+        }
+        // Trim each coefficient
+        coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
+        if (coefficients.length === 2) {
+            // Linear equation: ax + b = 0
+            let a = coefficients[0];
+            let b = coefficients[1];
+            this.calValue = CalculateUtil.solveLinearEquation(a, b);
+        }
+        else if (coefficients.length === 3) {
+            // Quadratic equation: axÂ² + bx + c = 0
+            let a = coefficients[0];
+            let b = coefficients[1];
+            let c = coefficients[2];
+            this.calValue = CalculateUtil.solveQuadraticEquation(a, b, c);
+        }
+        else {
+            this.calValue = 'é”™è¯¯ï¼šè¯·è¾“å…¥2ä¸ªç³»æ•°ï¼ˆä¸€æ¬¡æ–¹ç¨‹ï¼‰æˆ–3ä¸ªç³»æ•°ï¼ˆäºŒæ¬¡æ–¹ç¨‹ï¼‰';
+        }
+    }
+    /**
+     * Input fraction symbol (for fraction input mode)
+     *
+     * @param symbol Fraction symbol ('/' or ' ')
+     */
+    inputFractionSymbol(symbol) {
+        // Add the symbol to input
+        this.inputValue += symbol;
+        this.expressions.push(symbol);
+        this.formatInputValue();
+        // Don't call getResult() here - wait for complete fraction input
+        // The calculation will be triggered when user inputs the denominator
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "HomePage";
+    }
+}
+registerNamedRoute(() => new HomePage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/HomePage", pageFullPath: "entry/src/main/ets/pages/HomePage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=HomePage.js.mapÂ—ÙDD:\SimpleCalculator-master\entry\src\main\ets\common\util\Logger.etsÙKD:\SimpleCalculator-master\entry\src\main\ets\common\util\CalculateUtil.etsÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\CheckEmptyUtil.etsÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\HistoryManager.etsÙJD:\SimpleCalculator-master\entry\src\main\ets\common\util\FractionUtil.etsÙND:\SimpleCalculator-master\entry\src\main\ets\viewmodel\PresskeysViewModel.etsÙRD:\SimpleCalculator-master\entry\src\main\ets\common\constants\CommonConstants.etsÙ@D:\SimpleCalculator-master\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ D:\SimpleCalculator-master\entryºD:\SimpleCalculator-master¥entry¥1.0.0Ô  Ù D:\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚq®/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import Logger from '../common/util/Logger';
+import CalculateUtil from '../common/util/CalculateUtil';
+import CheckEmptyUtil from '../common/util/CheckEmptyUtil';
+import HistoryManager, { HistoryItem } from '../common/util/HistoryManager';
+import FractionUtil, { Fraction } from '../common/util/FractionUtil';
+import keysModel from '../viewmodel/PresskeysViewModel';
+import { PressKeysBean } from '../viewmodel/PressKeysItem';
+import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
+
+@Entry
+@Component
+struct HomePage {
+  @State inputValue: string = '';
+  @State calValue: string = '';
+  @State isScientificMode: boolean = false;
+  @State equationMode: string = ''; // 'linear' or 'quadratic'
+  @State showHistory: boolean = false; // Show history panel
+  @State isFractionMode: boolean = false; // Fraction output mode
+  @State historyList: Array<HistoryItem> = []; // History records
+  private expressions: Array<string> = [];
+
+  build() {
+    Column() {
+      Column() {
+        TextInput({ text: this.resultFormat(this.inputValue) })
+          .height(CommonConstants.FULL_PERCENT)
+          .fontSize(
+            (this.inputValue.length > CommonConstants.INPUT_LENGTH_MAX) ?
+              $r('app.float.font_size_text') : $r('app.float.font_size_input')
+          )
+          .enabled(false)
+          .fontColor(Color.Black)
+          .textAlign(TextAlign.End)
+          .backgroundColor($r('app.color.input_back_color'))
+      }
+      .width(CommonConstants.FULL_PERCENT)
+      .height($r('app.float.input_height'))
+      .alignItems(HorizontalAlign.End)
+      .margin({
+        right: $r('app.float.input_margin_right'),
+        top: $r('app.float.input_margin_top')
+      })
+
+      Column() {
+        Text(this.resultFormat(this.calValue))
+          .fontSize($r('app.float.font_size_text'))
+          .fontColor($r('app.color.text_color'))
+      }
+      .width(CommonConstants.FULL_PERCENT)
+      .height($r('app.float.text_height'))
+      .alignItems(HorizontalAlign.End)
+      .margin({
+        right: $r('app.float.text_margin_right'),
+        bottom: $r('app.float.text_margin_bottom')
+      })
+
+      // Top control buttons
+      Column() {
+        Row() {
+          // History button
+          Column() {
+            Text('å†å²')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('25%')
+          .height('40vp')
+          .backgroundColor('#6C7B8B')
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(5)
+          .onClick(() => {
+            this.showHistory = !this.showHistory;
+            if (this.showHistory) {
+              this.historyList = HistoryManager.getHistory();
+            }
+          })
+
+          Blank().width('3%')
+
+          // Fraction/Decimal toggle button
+          Column() {
+            Text(this.isFractionMode ? 'å°æ•°æ¨¡å¼' : 'åˆ†æ•°æ¨¡å¼')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('25%')
+          .height('40vp')
+          .backgroundColor(this.isFractionMode ? '#FF6B6B' : '#4ECDC4')
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(5)
+          .onClick(() => {
+            this.isFractionMode = !this.isFractionMode;
+            // Re-calculate display if there's a result
+            if (this.calValue && this.calValue !== 'NaN') {
+              this.updateDisplayFormat();
+            }
+          })
+
+          Blank().width('3%')
+
+          // Scientific mode toggle button
+          Column() {
+            Text(this.isScientificMode ? 'æ ‡å‡†æ¨¡å¼' : 'ç§‘å­¦æ¨¡å¼')
+              .fontSize('14vp')
+              .fontColor(Color.White)
+          }
+          .width('35%')
+          .height('40vp')
+          .backgroundColor('#4A90E2')
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(5)
+          .onClick(() => {
+            this.isScientificMode = !this.isScientificMode;
+          })
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .justifyContent(FlexAlign.Center)
+      }
+      .width(CommonConstants.FULL_PERCENT)
+      .margin({ bottom: '3vp' })
+
+      // History panel
+      if (this.showHistory) {
+        Column() {
+          // History header
+          Row() {
+            Text('è®¡ç®—å†å²')
+              .fontSize('16vp')
+              .fontColor(Color.Black)
+              .fontWeight(FontWeight.Bold)
+            
+            Blank()
+            
+            Text('æ¸…ç©º')
+              .fontSize('14vp')
+              .fontColor('#FF0000')
+              .onClick(() => {
+                HistoryManager.clearHistory();
+                this.historyList = [];
+              })
+          }
+          .width('95%')
+          .padding({ top: '10vp', bottom: '10vp' })
+          
+          // History list
+          if (this.historyList.length === 0) {
+            Column() {
+              Text('æš‚æ— å†å²è®°å½•')
+                .fontSize('14vp')
+                .fontColor('#999999')
+            }
+            .width('95%')
+            .height('150vp')
+            .justifyContent(FlexAlign.Center)
+          } else {
+            List() {
+              ForEach(this.historyList, (item: HistoryItem, index: number) => {
+                ListItem() {
+                  Column() {
+                    Row() {
+                      Text(item.expression)
+                        .fontSize('14vp')
+                        .fontColor('#333333')
+                        .layoutWeight(1)
+                      
+                      Text('=')
+                        .fontSize('14vp')
+                        .fontColor('#666666')
+                        .margin({ left: '5vp', right: '5vp' })
+                      
+                      Text(item.result)
+                        .fontSize('14vp')
+                        .fontColor('#4A90E2')
+                        .fontWeight(FontWeight.Bold)
+                    }
+                    .width('100%')
+                    
+                    Text(HistoryManager.formatTime(item.timestamp))
+                      .fontSize('12vp')
+                      .fontColor('#999999')
+                      .margin({ top: '3vp' })
+                  }
+                  .width('95%')
+                  .padding('8vp')
+                  .backgroundColor(index % 2 === 0 ? '#FFFFFF' : '#F5F5F5')
+                  .borderRadius(5)
+                  .onClick(() => {
+                    // Click to use this history record
+                    this.inputValue = item.expression;
+                    this.calValue = item.result;
+                    this.showHistory = false;
+                  })
+                }
+              }, (item: HistoryItem) => JSON.stringify(item))
+            }
+            .width('95%')
+            .height('200vp')
+            .divider({ strokeWidth: 1, color: '#E0E0E0' })
+          }
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .backgroundColor('#F9F9F9')
+        .border({ width: 1, color: '#E0E0E0' })
+        .borderRadius(10)
+        .margin({ bottom: '5vp' })
+      }
+
+      // Scientific keys (shown when in scientific mode)
+      if (this.isScientificMode) {
+        Column() {
+          Row() {
+            ForEach(keysModel.getScientificKeys(), (columnItem: Array<PressKeysBean>, columnItemIndex?: number) => {
+              Column() {
+                ForEach(columnItem, (keyItem: PressKeysBean, keyItemIndex?: number) => {
+                  Column() {
+                    Text(keyItem.value)
+                      .fontSize('14vp')
+                      .fontColor(Color.Black)
+                  }
+                  .width('55vp')
+                  .height('30vp')
+                  .borderWidth(1)
+                  .borderColor($r('app.color.border_color'))
+                  .borderRadius(15)
+                  .backgroundColor('#E8E8E8')
+                  .alignItems(HorizontalAlign.Center)
+                  .justifyContent(FlexAlign.Center)
+                  .onClick(() => {
+                    this.inputScientificSymbol(keyItem.value);
+                  })
+                }, (keyItem: PressKeysBean) => JSON.stringify(keyItem))
+              }
+              .width(CommonConstants.FULL_PERCENT)
+              .justifyContent(FlexAlign.Center)
+              .layoutWeight(1)
+            })
+          }
+          .width(CommonConstants.FULL_PERCENT)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .margin({ bottom: '3vp' })
+        
+        // Fraction input buttons
+        Column() {
+          Row() {
+            Column() {
+              Text('åˆ†æ•°è¾“å…¥')
+                .fontSize('12vp')
+                .fontColor('#666666')
+            }
+            .width('100%')
+            .margin({ bottom: '3vp' })
+          }
+          
+          Row() {
+            // Fraction format button: a/b
+            Column() {
+              Text('a/b')
+                .fontSize('14vp')
+                .fontColor(Color.Black)
+            }
+            .width('55vp')
+            .height('30vp')
+            .borderWidth(1)
+            .borderColor($r('app.color.border_color'))
+            .borderRadius(15)
+            .backgroundColor('#FFE4B5')
+            .alignItems(HorizontalAlign.Center)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.inputFractionSymbol('/');
+            })
+            
+            Blank().width('8vp')
+            
+            // Mixed number format button: a b/c
+            Column() {
+              Text('a b/c')
+                .fontSize('14vp')
+                .fontColor(Color.Black)
+            }
+            .width('55vp')
+            .height('30vp')
+            .borderWidth(1)
+            .borderColor($r('app.color.border_color'))
+            .borderRadius(15)
+            .backgroundColor('#FFE4B5')
+            .alignItems(HorizontalAlign.Center)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.inputFractionSymbol(' ');
+            })
+          }
+          .width('100%')
+          .justifyContent(FlexAlign.Center)
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .margin({ bottom: '3vp' })
+      }
+
+      Column() {
+        Row() {
+          ForEach(keysModel.getPressKeys(), (columnItem: Array<PressKeysBean>, columnItemIndex?: number) => {
+            Column() {
+              ForEach(columnItem, (keyItem: PressKeysBean, keyItemIndex?: number) => {
+                Column() {
+                  Column() {
+                    if (keyItem.flag === 0) {
+                      Image(keyItem.source !== undefined ? keyItem.source : '')
+                        .width(keyItem.width)
+                        .height(keyItem.height)
+                    } else {
+                      Text(keyItem.value)
+                        .fontSize(
+                          (keyItem.value === CommonConstants.DOTS) ?
+                            $r('app.float.font_size_dot') : $r('app.float.font_size_text')
+                        )
+                        .width(keyItem.width)
+                        .height(keyItem.height)
+                    }
+                  }
+                  .width($r('app.float.key_width'))
+                  .height(
+                    ((columnItemIndex === 2) && (keyItem.value === 'equ')) ?
+                      $r('app.float.equals_height') : $r('app.float.key_height')
+                  )
+                  .borderWidth(1)
+                  .borderColor($r('app.color.border_color'))
+                  .borderRadius($r('app.float.border_radius'))
+                  .backgroundColor(
+                    (keyItem.value === 'equ') ?
+                      $r('app.color.equals_back_color') : Color.White
+                  )
+                  .alignItems(HorizontalAlign.Center)
+                  .justifyContent(FlexAlign.Center)
+                  .onClick(() => {
+                    if (keyItem.flag === 0) {
+                      this.inputSymbol(keyItem.value);
+                    } else {
+                      this.inputNumber(keyItem.value);
+                    }
+                  })
+                }
+                .layoutWeight(
+                  (keyItem.value === 'equ') ? CommonConstants.TWO : 1
+                )
+                .width(CommonConstants.FULL_PERCENT)
+                .justifyContent(FlexAlign.Center)
+              }, (keyItem: PressKeysBean) => JSON.stringify(keyItem))
+            }
+            .layoutWeight(1)
+            .margin({
+              top: $r('app.float.margin_top'),
+              bottom: $r('app.float.margin_bottom')
+            })
+          }, (item: Array<Array<PressKeysBean>>) => JSON.stringify(item))
+        }
+        .height(CommonConstants.FULL_PERCENT)
+        .alignItems(VerticalAlign.Top)
+        .margin({
+          left: $r('app.float.margin_left'),
+          right: $r('app.float.margin_right')
+        })
+      }
+      .layoutWeight(1)
+      .width(CommonConstants.FULL_PERCENT)
+      .backgroundColor($r('app.color.row_back_color'))
+    }
+    .height(CommonConstants.FULL_PERCENT)
+    .backgroundColor($r('app.color.column_back_color'))
+  }
+
+
+  /**
+   * Input Symbols.
+   *
+   * @param value Input Operators.
+   */
+  inputSymbol(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return;
+    }
+    let len = this.expressions.length;
+    switch (value) {
+      case Symbol.CLEAN:
+        this.expressions = [];
+        this.calValue = '';
+        this.equationMode = '';  // Exit equation mode
+        break;
+      case Symbol.DEL:
+        this.inputDelete(len);
+        break;
+      case Symbol.EQU:
+        // Check if in equation mode
+        if (this.equationMode !== '') {
+          this.solveEquation();
+          return;
+        }
+        if (len === 0) {
+          return;
+        }
+        this.getResult().then((result: boolean) => {
+          if (!result) {
+            return;
+          }
+          // Save to history
+          const expression = this.inputValue;
+          const resultValue = this.calValue;
+          HistoryManager.addHistory(expression, resultValue);
+          
+          this.inputValue = this.calValue;
+          this.calValue = '';
+          this.expressions = [];
+          this.expressions.push(this.inputValue);
+        })
+        break;
+      default:
+        this.inputOperators(len, value);
+        break;
+    }
+    this.formatInputValue();
+  }
+
+  /**
+   * Enter numbers.
+   *
+   * @param value Enter numbers.
+   */
+  inputNumber(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return;
+    }
+
+    // In equation mode, just append to input value
+    if (this.equationMode !== '') {
+      this.inputValue += value;
+      return;
+    }
+
+    let len = this.expressions.length;
+    let last = len > 0 ? this.expressions[len - 1] : '';
+    let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
+    if (!this.validateEnter(last, value)) {
+      return;
+    }
+
+    // Check if we're in fraction input mode (last element is '/' for fraction)
+    if (last === '/' && len >= 2) {
+      // We're completing a fraction: numerator/denominator
+      // Merge into a single fraction element
+      let numerator = secondLast;
+      if (numerator && !CalculateUtil.isSymbol(numerator) && !CalculateUtil.isScientificSymbol(numerator)) {
+        // Remove the last two elements (numerator and '/')
+        this.expressions.pop(); // Remove '/'
+        this.expressions.pop(); // Remove numerator
+        // Add the complete fraction
+        this.expressions.push(numerator + '/' + value);
+        this.formatInputValue();
+        this.getResult();
+        return;
+      }
+    }
+
+    // Check if last element is a fraction (contains '/') - append to denominator
+    if (last && last.indexOf('/') !== -1) {
+      // Append to the denominator of the fraction
+      this.expressions[len - 1] += value;
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Check if last element is an operator (including scientific operators)
+    let isLastOperator = CalculateUtil.isSymbol(last) || CalculateUtil.isScientificSymbol(last);
+
+    if (!last) {
+      this.expressions.push(value);
+    } else if (isLastOperator) {
+      // If last is an operator, push new number
+      this.expressions.push(value);
+    } else if (!secondLast) {
+      // If no second last, append to last number
+      this.expressions[len - 1] += value;
+    } else {
+      // Check if second last is an operator
+      let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
+      if (isSecondLastOperator) {
+        // Append to last number
+        this.expressions[len - 1] += value;
+      } else {
+        // Push new number
+        this.expressions.push(value);
+      }
+    }
+    this.formatInputValue();
+    if (value !== CommonConstants.DOTS) {
+      this.getResult();
+    }
+  }
+
+  /**
+   * Verify that you can enter.
+   *
+   * @param last Value of the last element.
+   * @param value Current input value.
+   * return Indicates whether to allow input.
+   */
+  validateEnter(last: string, value: string) {
+    if (!last && value === CommonConstants.PERCENT_SIGN) {
+      return false;
+    }
+    if ((last === CommonConstants.MIN) && (value === CommonConstants.PERCENT_SIGN)) {
+      return false;
+    }
+    if (last.endsWith(CommonConstants.PERCENT_SIGN)) {
+      return false;
+    }
+    if ((last.indexOf(CommonConstants.DOTS) !== -1) && (value === CommonConstants.DOTS)) {
+      return false;
+    }
+    if ((last === '0') && (value !== CommonConstants.DOTS) &&
+      (value !== CommonConstants.PERCENT_SIGN)) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Delete Key Trigger.
+   *
+   * @param len Expression Length.
+   */
+  inputDelete(len: number) {
+    if (len === 0) {
+      return;
+    }
+    let last = this.expressions[len - 1];
+    let lastLen = last.length;
+    if (lastLen === 1) {
+      this.expressions.pop();
+      len = this.expressions.length;
+    } else {
+      this.expressions[len - 1] = last.slice(0, last.length - 1);
+    }
+    if (len === 0) {
+      this.inputValue = '';
+      this.calValue = '';
+      return;
+    }
+    if (!CalculateUtil.isSymbol(this.expressions[len - 1])) {
+      this.getResult();
+    }
+  }
+
+  /**
+   * Triggered when input is added, subtracted, multiplied, and divided.
+   *
+   * @param len Expression Length.
+   * @param value Current Input Value.
+   */
+  inputOperators(len: number, value: string) {
+    let last = len > 0 ? this.expressions[len - 1] : undefined;
+    let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
+    if (!last && (value === Symbol.MIN)) {
+      this.expressions.push(this.getSymbol(value));
+      return;
+    }
+    if (!last) {
+      return;
+    }
+    if (!CalculateUtil.isSymbol(last)) {
+      this.expressions.push(this.getSymbol(value));
+      return;
+    }
+    if ((value === Symbol.MIN) &&
+      (last === CommonConstants.MIN || last === CommonConstants.ADD)) {
+      this.expressions.pop();
+      this.expressions.push(this.getSymbol(value));
+      return;
+    }
+    if (!secondLast) {
+      return;
+    }
+    if (value !== Symbol.MIN) {
+      this.expressions.pop();
+    }
+    if (CalculateUtil.isSymbol(secondLast)) {
+      this.expressions.pop();
+    }
+    this.expressions.push(this.getSymbol(value));
+  }
+
+  /**
+   * Get Operator.
+   *
+   * @param value.
+   * @return Operators.
+   */
+  getSymbol(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return '';
+    }
+    let symbol = '';
+    switch (value) {
+      case Symbol.ADD:
+        symbol = CommonConstants.ADD;
+        break;
+      case Symbol.MIN:
+        symbol = CommonConstants.MIN;
+        break;
+      case Symbol.MUL:
+        symbol = CommonConstants.MUL;
+        break;
+      case Symbol.DIV:
+        symbol = CommonConstants.DIV;
+        break;
+      default:
+        break;
+    }
+    return symbol;
+  }
+
+  /**
+   * Make a deep copy of an expression.
+   *
+   * @return deep copy expression.
+   */
+  deepCopy(): Array<string> {
+    let copyExpressions: Array<string> = Array.from(this.expressions);
+    return copyExpressions;
+  }
+
+  /**
+   * Obtaining Results.
+   *
+   * @return Whether the result is incorrect.
+   */
+  async getResult() {
+    let calResult = CalculateUtil.parseExpression(this.deepCopy());
+    if (calResult === 'NaN') {
+      this.calValue = this.resourceToString($r('app.string.error'));
+      return false;
+    }
+    
+    // Convert to fraction if in fraction mode
+    if (this.isFractionMode) {
+      calResult = this.convertToFraction(calResult);
+    }
+    
+    this.calValue = calResult;
+    return true;
+  }
+
+  /**
+   * Convert decimal result to fraction
+   *
+   * @param decimalStr Decimal string
+   * @return Fraction string or original decimal
+   */
+  convertToFraction(decimalStr: string): string {
+    if (!decimalStr || decimalStr === 'NaN') {
+      return decimalStr;
+    }
+    
+    // Check if already a fraction
+    if (decimalStr.indexOf('/') !== -1) {
+      return decimalStr;
+    }
+    
+    try {
+      const decimal = parseFloat(decimalStr);
+      if (isNaN(decimal)) {
+        return decimalStr;
+      }
+      
+      const fraction = FractionUtil.decimalToFraction(decimal);
+      const fractionStr = FractionUtil.fractionToString(fraction);
+      
+      // Only return fraction if it's reasonable (denominator not too large)
+      if (fraction.denominator <= 1000 && fractionStr !== 'NaN') {
+        return fractionStr;
+      }
+    } catch (e) {
+      Logger.error('[HomePage] convertToFraction error: ' + JSON.stringify(e));
+    }
+    
+    return decimalStr;
+  }
+
+  /**
+   * Update display format when switching between fraction and decimal modes
+   */
+  updateDisplayFormat() {
+    if (!this.calValue || this.calValue === 'NaN') {
+      return;
+    }
+    
+    if (this.isFractionMode) {
+      // Convert decimal to fraction
+      this.calValue = this.convertToFraction(this.calValue);
+    } else {
+      // Convert fraction to decimal
+      if (this.calValue.indexOf('/') !== -1) {
+        try {
+          const fraction = FractionUtil.parseFraction(this.calValue);
+          const decimal = FractionUtil.fractionToDecimal(fraction);
+          if (!isNaN(decimal)) {
+            this.calValue = decimal.toString();
+          }
+        } catch (e) {
+          Logger.error('[HomePage] updateDisplayFormat error: ' + JSON.stringify(e));
+        }
+      }
+    }
+  }
+
+  /**
+   * Number Formatting.
+   *
+   * @param value Formatting parameters.
+   * @return Thousand percentile data.
+   */
+  resultFormat(value: string) {
+    let reg = (value.indexOf('.') > -1) ? new RegExp("/(\d)(?=(\d{3})+\.)/g") : new RegExp("/(\d)(?=(?:\d{3})+$)/g");
+    return value.replace(reg, '$1,');
+  }
+
+  /**
+   * Convert a resource file to a string.
+   *
+   * @param resource Resource file.
+   * @return Character string converted from the resource file.
+   */
+  resourceToString(resource: Resource): string {
+    if (CheckEmptyUtil.isEmpty(resource)) {
+      return '';
+    }
+    let result = '';
+    try {
+      const uiContext: UIContext | undefined = AppStorage.get('uiContext');
+      let context = uiContext!.getHostContext()!;
+      result = context.resourceManager.getStringSync(resource.id);
+    } catch (error) {
+      Logger.error('[CalculateModel] getResourceString fail: ' + JSON.stringify(error))
+    }
+    return result;
+  }
+
+  /**
+   * Thousands in the formatting result.
+   */
+  formatInputValue() {
+    let deepExpressions: Array<string> = [];
+    this.deepCopy().forEach((item: string, index: number) => {
+      deepExpressions[index] = this.resultFormat(item);
+    });
+    this.inputValue = deepExpressions.join('');
+  }
+
+  /**
+   * Input scientific symbols.
+   *
+   * @param value Scientific symbol.
+   */
+  inputScientificSymbol(value: string) {
+    if (CheckEmptyUtil.isEmpty(value)) {
+      return;
+    }
+
+    // In equation mode, handle comma and minus
+    if (this.equationMode !== '') {
+      if (value === ',') {
+        this.inputValue += ',';
+        return;
+      }
+      if (value === '-') {
+        this.inputValue += '-';
+        return;
+      }
+    }
+
+    // Handle special constants
+    if (value === 'Ï€') {
+      this.expressions.push(Math.PI.toString());
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    if (value === 'e') {
+      this.expressions.push(Math.E.toString());
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle equation mode
+    if (value === 'æ–¹ç¨‹') {
+      this.showEquationDialog();
+      return;
+    }
+
+    // Handle xÂ² (square)
+    if (value === 'xÂ²') {
+      this.expressions.push('^');
+      this.expressions.push('2');
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle 1/x (reciprocal)
+    if (value === '1/x') {
+      this.expressions.unshift('1');
+      this.expressions.push('Ã·');
+      this.formatInputValue();
+      this.getResult();
+      return;
+    }
+
+    // Handle parentheses
+    if (value === '(' || value === ')') {
+      this.expressions.push(value);
+      this.formatInputValue();
+      return;
+    }
+
+    // For unary scientific operators (sin, cos, tan, log, ln, âˆš)
+    // These are prefix operators, so they should be added before the operand
+    // But in our UI flow, user inputs number first, then clicks operator
+    // So we need to apply the operator to the last number in expressions
+    const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', 'âˆš', '!'];
+    if (unaryOperators.indexOf(value) !== -1) {
+      let len = this.expressions.length;
+      if (len > 0) {
+        let last = this.expressions[len - 1];
+        // If last element is a number, apply the operator
+        if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
+          // For prefix operators like sin, cos, âˆš, we need to insert operator before the number
+          // For postfix operators like !, we add after the number
+          if (value === '!') {
+            // Postfix operator (factorial)
+            this.expressions.push(value);
+          } else {
+            // Prefix operator: insert before the last number
+            this.expressions.splice(len - 1, 0, value);
+          }
+          this.formatInputValue();
+          this.getResult();
+          return;
+        }
+      }
+      // If no number before, just add the operator (user will input number next)
+      this.expressions.push(value);
+      this.formatInputValue();
+      return;
+    }
+
+    // For binary operators like ^
+    this.expressions.push(value);
+    this.formatInputValue();
+  }
+
+  /**
+   * Show equation solving dialog.
+   */
+  showEquationDialog() {
+    // Toggle equation mode
+    if (this.equationMode === '') {
+      this.equationMode = 'quadratic';
+      this.calValue = 'æ–¹ç¨‹æ¨¡å¼ï¼šè¾“å…¥ç³»æ•° a,b,c è§£ axÂ²+bx+c=0';
+      this.expressions = [];
+      this.inputValue = '';
+    } else {
+      // Exit equation mode
+      this.equationMode = '';
+      this.calValue = '';
+      this.expressions = [];
+      this.inputValue = '';
+    }
+  }
+
+  /**
+   * Solve equation from input.
+   */
+  solveEquation() {
+    // Get the input string
+    let input = this.inputValue.trim();
+
+    // Parse coefficients (separated by comma or space)
+    let coefficients: string[];
+    if (input.indexOf(',') !== -1) {
+      coefficients = input.split(',');
+    } else {
+      coefficients = input.split(/\s+/);
+    }
+
+    // Trim each coefficient
+    coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
+
+    if (coefficients.length === 2) {
+      // Linear equation: ax + b = 0
+      let a = coefficients[0];
+      let b = coefficients[1];
+      this.calValue = CalculateUtil.solveLinearEquation(a, b);
+    } else if (coefficients.length === 3) {
+      // Quadratic equation: axÂ² + bx + c = 0
+      let a = coefficients[0];
+      let b = coefficients[1];
+      let c = coefficients[2];
+      this.calValue = CalculateUtil.solveQuadraticEquation(a, b, c);
+    } else {
+      this.calValue = 'é”™è¯¯ï¼šè¯·è¾“å…¥2ä¸ªç³»æ•°ï¼ˆä¸€æ¬¡æ–¹ç¨‹ï¼‰æˆ–3ä¸ªç³»æ•°ï¼ˆäºŒæ¬¡æ–¹ç¨‹ï¼‰';
+    }
+  }
+
+  /**
+   * Input fraction symbol (for fraction input mode)
+   *
+   * @param symbol Fraction symbol ('/' or ' ')
+   */
+  inputFractionSymbol(symbol: string) {
+    // Add the symbol to input
+    this.inputValue += symbol;
+    this.expressions.push(symbol);
+    this.formatInputValue();
+    // Don't call getResult() here - wait for complete fraction input
+    // The calculation will be triggered when user inputs the denominator
+  }
+}ÀÔrD—½../common/util/CheckEmptyUtil¼../common/util/CalculateUtil½../common/util/HistoryManagerµ../common/util/Logger»../common/util/FractionUtil¿../viewmodel/PresskeysViewModelÙ#../common/constants/CommonConstantsÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\CheckEmptyUtil.etsAÃªoh-resolveÂEAÂÙKD:\SimpleCalculator-master\entry\src\main\ets\common\util\CalculateUtil.etsAÃªoh-resolveÂEAÂÙLD:\SimpleCalculator-master\entry\src\main\ets\common\util\HistoryManager.etsAÃªoh-resolveÂEAÂÙDD:\SimpleCalculator-master\entry\src\main\ets\common\util\Logger.etsAÃªoh-resolveÂEAÂÙJD:\SimpleCalculator-master\entry\src\main\ets\common\util\FractionUtil.etsAÃªoh-resolveÂEAÂÙND:\SimpleCalculator-master\entry\src\main\ets\viewmodel\PresskeysViewModel.etsAÃªoh-resolveÂEAÂÙRD:\SimpleCalculator-master\entry\src\main\ets\common\constants\CommonConstants.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings«HomePage.js ‘¬HomePage.etsÜÕ‘”    ‘” –”   ” ” ” ”* *”+ +–”   ” ” ” ”8 8”9 9–”   ” ” ” ”: :”; ;–”   ” ” &” ,”: ÌK”; ÌL–”   ” ” !” '”6 ÌD”7 ÌE–”   ” ” ” ”7 7”8 8š”   ” ”	 	” ” ”   ”" "”( (”ÌM ÌM”ÌN ÌN’” ” ‘”  ’”9 ”;  ’”7 ”9 ’”? %”ÌD *’”;  ”= "’”:  ”? %’”=  #”ÌB  (’”: !+”< !-’” "'” ")‘” ÌN’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’”  	”  ’”  	”  ’” !	” !’” !	” !‘” $’” %” %
+˜” %” %
+” Í” Í” Í”) Í”* Í”6 Í(”” %” %
+” Í€”" Í€’” &” &˜” &” &” 2” 2” 2”( 2”) 2”5 2)”” &” &” 3” 3˜” &” &” 4” 4” 4”- 4!”. 4"”1 4%•” &” &” 5” 5” 5“” 6” 6”Ì‰ 61“” 7” 7”Ì‡ 7-‘” 8Ÿ” '” '” '” '”# '”% '”) '”* '”6 '+”7 ',”; '0”< '1”ÌF ';”ÌG '<”ÌI '>˜” '” '” (” (” (”, (!”- ("”9 (.Ü ” '” '” )” )” *”  *”$ *”% *”/ *”0 *”6 *#”9 *&”ÌH *5”ÌI *6”ÌY *ÌF”ÌZ *ÌG”Ì[ *ÌH”Ì\ *ÌI”ÌĞ +-”ÌÑ +.”ÍD +ÌN–” '” '” -” -” -”# -˜” '” '” .” .”  .”% .”& .”+ . ˜” '” '” /” /”  /”) /”* /”- /"”” '” '” 0”% 0’” &” &’” :” :˜” :” :” ?” ?” ?”( ?”) ?”5 ?)”” :” :” Ì@” Ì@˜” :” :” ÌA” ÌA” ÌA”- ÌA!”. ÌA"”1 ÌA%•” :” :” ÌB” ÌB” ÌB“” ÌC” ÌC”Ì‰ ÌC0“” ÌD” ÌD”ÌŠ ÌD2‘” ÌE›” ;” ;” ;” ;” ;”) ;”* ;”. ;#”/ ;$”7 ;,”8 ;-”” ;” ;” <” <”” ;” ;” =” =’” ;” ;’” :” :’” ÌG”" ÌG’” ÌH” ÌH’” ÌG”" ÌG˜” ÌH” ÌH” Ì…” Ì…” Ì…”( Ì…”) Ì…”5 Ì…)’” ÌG”" ÌGš” ÌH” ÌH” Ì†” Ì†” Ì†” Ì†”" Ì†”$ Ì†”) Ì†”+ Ì†’” ÌI” ÌI˜” ÌI” ÌI” Ì‚	” Ì‚” Ì‚”% Ì‚”& Ì‚”2 Ì‚+˜” ÌI” ÌI” Ìƒ	” Ìƒ” Ìƒ”( Ìƒ!”) Ìƒ"”/ Ìƒ(’” ÌJ
+” ÌJ’” ÌK
+” ÌK’” ÌJ
+” ÌJ–” ÌK
+” ÌK” ÌP” ÌP” ÌP” ÌP’” ÌJ
+” ÌJ–” ÌK
+” ÌK” ÌQ” ÌQ” ÌQ”  ÌQ’” ÌJ
+” ÌJ–” ÌK
+” ÌK” ÌR”" ÌR”# ÌR”, ÌR$’” ÌJ
+” ÌJ˜” ÌK
+” ÌK” ÌS”! ÌS”" ÌS”+ ÌS#”, ÌS$”2 ÌS*’” ÌJ
+” ÌJ–” ÌK
+” ÌK” ÌT” ÌT”  ÌT”! ÌT’” ÌJ
+” ÌJ—” ÌK
+” ÌK” ÌU” ÌU” ÌU” ÌU”  ÌUš” ÌV” ÌV” ÌV”  ÌV”# ÌV”$ ÌV ”( ÌV$”) ÌV%”4 ÌV0”5 ÌV1–” ÌW” ÌW” ÌW” ÌW”$ ÌW ”& ÌW"š” ÌX” ÌX” ÌX”$ ÌX”' ÌX!”5 ÌX/”6 ÌX0”Ì@ ÌX:”ÌB ÌX<”ÌC ÌX=‘” ÌY’” ÌZ
+” ÌZ”” ÌL” ÌL” ÌL” ÌL–” ÌL” ÌL” ÌM” ÌM” ÌM”  ÌM˜” ÌL” ÌL” ÌN” ÌN” ÌN”  ÌN”! ÌN”& ÌN$’” ÌL” ÌL’” ÌJ
+” ÌJ’” ÌK
+” ÌK’” Ì\
+” Ì\–” Ì\
+” Ì\” Ì\” Ì\” Ì\” Ì\’” Ì\
+” Ì\’” Ì^
+”- Ì^+’” Ì_
+” Ì_’” Ì^
+”- Ì^+–” Ì_
+” Ì_” Ìd” Ìd” Ìd” Ìd’” Ì^
+”- Ì^+–” Ì_
+” Ì_” Ìe” Ìe” Ìe”  Ìe’” Ì^
+”- Ì^+Ü ” Ì_
+” Ì_” Ìf”" Ìf”# Ìf”' Ìf”( Ìf ”6 Ìf.”7 Ìf/”8 Ìf0”9 Ìf1”ÌB Ìf:”ÌC Ìf;”ÌD Ìf<”ÌE Ìf=”ÌN ÌfÌF’” Ì^
+”- Ì^+˜” Ì_
+” Ì_” Ìg”! Ìg”" Ìg”+ Ìg#”, Ìg$”2 Ìg*’” Ì^
+”- Ì^+–” Ì_
+” Ì_” Ìh” Ìh”  Ìh”! Ìh’” Ì^
+”- Ì^+—” Ì_
+” Ì_” Ìi” Ìi” Ìi” Ìi”  Ìiš” Ìj” Ìj” Ìj”# Ìj”& Ìj"”' Ìj#”+ Ìj'”, Ìj(”: Ìj6”; Ìj7’” Ìk”; Ìk7œ” Ìl” Ìl” Ìl” Ìl”! Ìl”% Ìl!”) Ìl%”* Ìl&”2 Ìl.”7 Ìl3”< Ìl8”> Ìl:–” Ìm” Ìm” Ìm”, Ìm&”. Ìm(”/ Ìm)‘” Ìn’” Ìo
+” Ìo” Ì`” Ì`” Ì`” Ì`” Ì`”+ Ì`$”, Ì`%”- Ì`&”. Ì`'”4 Ì`-”5 Ì`.”6 Ì`/”7 Ì`0”= Ì`6–” Ì`” Ì`” Ìa” Ìa” Ìa”  Ìa˜” Ì`” Ì`” Ìb” Ìb” Ìb”  Ìb”! Ìb”& Ìb$’” Ì`” Ì`’” Ì^
+”) Ì^+’” Ì_
+” Ì_’” Ìq
+” Ìq–” Ìq
+” Ìq” Ìq” Ìq” Ìq” Ìq’” Ìq
+” Ìq’” Ìs
+”, Ìs*’” Ìt
+” Ìt’” Ìs
+”, Ìs*–” Ìt
+” Ìt” Ìy” Ìy” Ìy” Ìy’” Ìs
+”, Ìs*–” Ìt
+” Ìt” Ìz” Ìz” Ìz”  Ìz’” Ìs
+”, Ìs*–” Ìt
+” Ìt” Ì{”" Ì{”# Ì{”, Ì{$’” Ìs
+”, Ìs*˜” Ìt
+” Ìt” Ì|”! Ì|”" Ì|”+ Ì|#”, Ì|$”2 Ì|*’” Ìs
+”, Ìs*–” Ìt
+” Ìt” Ì}” Ì}”  Ì}”! Ì}’” Ìs
+”, Ìs*—” Ìt
+” Ìt” Ì~” Ì~” Ì~” Ì~”  Ì~š” Ì” Ì” Ì”% Ì!”( Ì$”) Ì%”- Ì)”. Ì*”> Ì:”? Ì;’” Ì€
+” Ì€” Ìu” Ìu” Ìu” Ìu” Ìu”- Ìu&”. Ìu'”/ Ìu(”0 Ìu)”6 Ìu/”7 Ìu0”8 Ìu1”9 Ìu2”? Ìu8–” Ìu” Ìu” Ìv” Ìv” Ìv”  Ìv˜” Ìu” Ìu” Ìw” Ìw” Ìw”  Ìw”! Ìw”& Ìw$’” Ìu” Ìu’” Ìs
+”( Ìs*’” Ìt
+” Ìt’” ÌI” ÌI’” ÌG” ÌG’” ÌH” ÌH’” Ìˆ” Ìˆ–” Ì‰” Ì‰
+” Ì‰” Ì‰”  Ì‰”" Ì‰’” ÌŠ” ÌŠ˜” ÌŠ” ÌŠ” Ì×	”$ Ì×”% Ì×”4 Ì×”5 Ì×”ÌA Ì×+–” ÌŠ” ÌŠ” ÌØ	”. ÌØ”/ ÌØ”8 ÌØ"” ÌŠ” ÌŠ” ÌÙ	”% ÌÙ”& ÌÙ”( ÌÙ”- ÌÙ”/ ÌÙ”0 ÌÙ”2 ÌÙ”7 ÌÙ!”9 ÌÙ#”ÌB ÌÙ,”ÌD ÌÙ.–” ÌŠ” ÌŠ” ÌÚ	”+ ÌÚ”, ÌÚ”. ÌÚš” ÌŠ” ÌŠ” ÌÛ	”% ÌÛ”& ÌÛ”( ÌÛ”. ÌÛ”0 ÌÛ”5 ÌÛ”7 ÌÛ!’” Ì‹
+”) Ì‹’” ÌŒ
+” ÌŒ’” Ì‹
+”) Ì‹–” ÌŒ
+” ÌŒ” Ìœ”! Ìœ”" Ìœ”' Ìœ’” Ì‹
+”) Ì‹” ÌŒ
+” ÌŒ” Ì”# Ì”$ Ì”& Ì”) Ì”+ Ì”1 Ì ”3 Ì"”9 Ì(”; Ì*”ÌA Ì0”ÌC Ì2”” Ì” Ì”$ Ì”* Ì–” Ì” Ì” Ì”% Ì”& Ì”, Ì˜” Ì” Ì” Ì”& Ì”' Ì”, Ì”- Ì”2 Ì$˜” Ì” Ì” Ì”' Ì”( Ì”2 Ì$”3 Ì%”7 Ì)’” Ì” Ì’” Ì’” Ì’’” Ì’” Ì’”” Ì”” Ì””$ Ì””( Ì”–” Ì”” Ì”” Ì•”% Ì•”& Ì•”, Ì•–” Ì”” Ì”” Ì–”& Ì–”' Ì–”0 Ì–"—” Ì”” Ì”” Ì—”$ Ì—”% Ì—”( Ì—”* Ì—–” Ì˜”* Ì˜”+ Ì˜”7 Ì˜+”9 Ì˜-”: Ì˜.—” Ì™”  Ì™”! Ì™”, Ì™ ”/ Ì™#”1 Ì™%”2 Ì™&’” Ìš” Ìš’” Ì”” Ì”’” Ì‹
+”% Ì‹’” ÌŒ
+” ÌŒ’” ÌŸ
+”' ÌŸš” Ì 
+” Ì ”  Ì ”! Ì ”, Ì ”- Ì ”3 Ì %”8 Ì *”9 Ì +”; Ì -’”$ Ì¡”* Ì¡–”$ Ì¡”* Ì¡”+ Ì¦”0 Ì¦”1 Ì¦”6 Ì¦–”$ Ì¡”* Ì¡”+ Ì§”1 Ì§”2 Ì§”9 Ì§˜”$ Ì¡”* Ì¡”+ Ì¨”9 Ì¨”: Ì¨”ÌC Ì¨%”ÌD Ì¨&”ÌJ Ì¨,””$ Ì¢”( Ì¢”0 Ì¢”8 Ì¢–”$ Ì¢”( Ì¢”) Ì£”1 Ì£”2 Ì£”8 Ì£ –”$ Ì¢”( Ì¢”) Ì¤”2 Ì¤”3 Ì¤”< Ì¤$’”  Ì¢”$ Ì¢’”  Ì¡”& Ì¡‘” Ì©‘” Ì©’”$ Ìª”( Ìª–”$ Ìª”( Ìª”) ÌÒ”. ÌÒ”/ ÌÒ”4 ÌÒ–”$ Ìª”( Ìª”) ÌÓ”/ ÌÓ”0 ÌÓ”7 ÌÓ”$ Ìª”( Ìª”) ÌÔ”0 ÌÔ”1 ÌÔ”3 ÌÔ”> ÌÔ"”Ì@ ÌÔ$”ÌA ÌÔ%”ÌC ÌÔ'”ÌH ÌÔ,”ÌJ ÌÔ.”ÌS ÌÔ7”ÌU ÌÔ9’”$ Ì«”+ Ì«’”ÌK Ì«<”ÌP Ì«ÌI’”4 Ì¬”< Ì¬’”4 Ì­”: Ì­–”4 Ì­”: Ì­”; ÌÅ”Ì@ ÌÅ”ÌA ÌÅ”ÌF ÌÅ–”4 Ì­”: Ì­”; ÌÆ”ÌB ÌÆ”ÌC ÌÆ”ÌH ÌÆ Ü ”4 Ì­”: Ì­”; ÌÇ”ÌJ ÌÇ"”ÌK ÌÇ#”ÌP ÌÇ(”ÌS ÌÇ+”ÌT ÌÇ,”ÌY ÌÇ1”ÌZ ÌÇ2”Ì[ ÌÇ3”Ì\ ÌÇ4”Ì] ÌÇ5”Ìf ÌÇ>”Ìg ÌÇ?”Ìh ÌÇÌ@”Ìi ÌÇÌA”Ìr ÌÇÌJ–”4 Ì­”: Ì­”; ÌÈ”ÌG ÌÈ”ÌH ÌÈ ”ÌI ÌÈ!—”4 Ì­”: Ì­”; ÌÉ”ÌB ÌÉ”ÌC ÌÉ”ÌF ÌÉ”ÌH ÌÉ ’”8 ÌÊ”Ì[ ÌÊ7™”8 ÌË”< ÌË”= ÌË”ÌG ÌË#”ÌJ ÌË&”ÌN ÌË*”ÌO ÌË+”ÌY ÌË5”ÌZ ÌË6™”8 ÌÌ”< ÌÌ”= ÌÌ”ÌE ÌÌ!”ÌH ÌÌ$”ÌL ÌÌ(”ÌM ÌÌ)”ÌS ÌÌ/”ÌT ÌÌ0—”8 ÌÍ”< ÌÍ”= ÌÍ”ÌH ÌÍ$”ÌK ÌÍ'”ÌP ÌÍ,”ÌQ ÌÍ-’”4 ÌÎ”5 ÌÎ’”4 Ì®”7 Ì®–”4 Ì®”7 Ì®”8 Ì¾”= Ì¾”> Ì¾”ÌD Ì¾!–”4 Ì¯”8 Ì¯”Ì@ Ì¯”ÌD Ì¯”ÌE Ì¯ ”ÌO Ì¯*–”4 Ì¯”8 Ì¯”9 Ì°”ÌA Ì°!”ÌB Ì°"”ÌH Ì°(–”4 Ì¯”8 Ì¯”9 Ì±”ÌB Ì±"”ÌC Ì±#”ÌL Ì±,–”4 Ì¯”8 Ì¯”9 Ì²”ÌE Ì²%”ÌF Ì²&”ÌG Ì²'’”0 Ì¯”4 Ì¯””4 Ì´”8 Ì´”Ì@ Ì´”ÌC Ì´–”4 Ì´”8 Ì´”9 Ìµ”ÌA Ìµ!”ÌB Ìµ"”ÌH Ìµ(–”4 Ì´”8 Ì´”9 Ì¶”ÌB Ì¶"”ÌC Ì¶#”ÌL Ì¶,”4 Ì´”8 Ì´”9 Ì·”? Ì·”Ì@ Ì· ”ÌB Ì·"”ÌF Ì·&”ÌH Ì·(”ÌM Ì·-”ÌO Ì·/”ÌT Ì·4”ÌV Ì·6”Ì[ Ì·;”Ì] Ì·=’”0 Ì´”4 Ì´–”4 Ì¹”8 Ì¹”Ì@ Ì¹”ÌD Ì¹”ÌE Ì¹ ”ÌK Ì¹&–”4 Ì¹”8 Ì¹”9 Ìº”ÌA Ìº!”ÌB Ìº"”ÌH Ìº(–”4 Ì¹”8 Ì¹”9 Ì»”ÌB Ì»"”ÌC Ì»#”ÌL Ì»,˜”4 Ì¹”8 Ì¹”9 Ì¼”ÌC Ì¼#”ÌD Ì¼$”ÌN Ì¼.”ÌO Ì¼/”ÌS Ì¼3’”0 Ì¹”4 Ì¹’”0 Ì®”3 Ì®›”4 ÌÀ”8 ÌÀ”Ì@ ÌÀ”ÌN ÌÀ'”ÌO ÌÀ(”ÌY ÌÀ2”ÌZ ÌÀ3”Ì^ ÌÀ7”Ì_ ÌÀ8”Ìh ÌÀÌA”Ìi ÌÀÌB–”4 ÌÀ”8 ÌÀ”9 ÌÁ”ÌA ÌÁ”ÌB ÌÁ ”ÌH ÌÁ&–”4 ÌÀ”8 ÌÀ”9 ÌÂ”ÌB ÌÂ ”ÌC ÌÂ!”ÌL ÌÂ*š”4 ÌÀ”8 ÌÀ”9 ÌÃ”? ÌÃ”Ì@ ÌÃ”ÌB ÌÃ ”ÌE ÌÃ#”ÌG ÌÃ%”ÌL ÌÃ*”ÌN ÌÃ,’”0 ÌÀ”4 ÌÀ’”0 Ì­”6 Ì­’”0 Ì¬”8 Ì¬’”, Ì¬”4 Ì¬Ü ”ÌG Ì«”ÌK Ì«”ÌL Ì«”ÌW Ì«&”Ìq ÌĞ”Ìr ÌĞ”Ìv ÌĞ#”Ìx ÌĞ%”Ìz ÌĞ'”Ì{ ÌĞ(”Ì ÌĞ,”Ì€ ÌĞ-”Ì‰ ÌĞ6”ÌŠ ÌĞ7”Ì ÌĞ;”Ì ÌĞ<’”  Ì«”' Ì«’”  Ìª”$ Ìª‘” ÌÕ’” ÌŠ” ÌŠ‘” ÌÜ’” ÌŞ”> ÌŞ8‘” ÌÜ’” ÌŞ”> ÌŞ8–” Ìß” Ìß
+” Ìß” Ìß”% Ìß”' Ìß!’” Ìà” Ìà˜” Ìà” Ìà” Ìş	”$ Ìş”% Ìş”4 Ìş”5 Ìş”ÌA Ìş+š” Ìà” Ìà” Ìÿ	”% Ìÿ”& Ìÿ”( Ìÿ”. Ìÿ”0 Ìÿ”5 Ìÿ”7 Ìÿ!’” Ìá
+” Ìá˜” Ìá
+” Ìá” Ìü”! Ìü”" Ìü”1 Ìü ”2 Ìü!”> Ìü-’” Ìâ” Ìâ’”? ÌâÌV”ÌN ÌâÌn’”  Ìã”& Ìã˜”  Ìã”& Ìã”' Ì÷”, Ì÷”- Ì÷”< Ì÷$”= Ì÷%”ÌI Ì÷1˜”  Ìã”& Ìã”' Ìø”5 Ìø”6 Ìø”? Ìø'”Ì@ Ìø(”ÌF Ìø.–”  Ìã”& Ìã”' Ìù”3 Ìù”4 Ìù”5 Ìù’”  Ìä”' Ìä’”ÌG Ìä=”ÌS ÌäÌR’”( Ìå”. Ìå–”( Ìå”. Ìå”/ Ìê”4 Ìê”5 Ìê”; Ìê–”( Ìå”. Ìå”/ Ìë”5 Ìë”6 Ìë”< Ìë –”( Ìå”. Ìå”/ Ìì”: Ìì”; Ìì”< Ìì ””( Ìå”. Ìå”/ Ìí”: Ìí–”( Ìå”. Ìå”/ Ìî”; Ìî”< Ìî ”> Ìî"–”( Ìå”. Ìå”/ Ìï”> Ìï"”? Ìï#”ÌH Ìï,˜”( Ìå”. Ìå”/ Ìğ”9 Ìğ”: Ìğ”ÌI Ìğ-”ÌJ Ìğ.”ÌP Ìğ4˜”( Ìå”. Ìå”/ Ìñ”= Ìñ!”> Ìñ"”ÌG Ìñ+”ÌH Ìñ,”ÌN Ìñ2—”( Ìå”. Ìå”/ Ìò”6 Ìò”7 Ìò”: Ìò”< Ìò š”, Ìó”0 Ìó”1 Ìó”ÌF Ìó.”ÌG Ìó/”ÌN Ìó6”ÌO Ìó7”ÌT Ìó<”ÌU Ìó=”ÌV Ìó>’”( Ìô”) Ìô–”( Ìæ”, Ìæ”4 Ìæ”; Ìæ ”< Ìæ!”ÌA Ìæ&–”( Ìæ”, Ìæ”- Ìç”5 Ìç”6 Ìç ”< Ìç&˜”( Ìæ”, Ìæ”- Ìè”6 Ìè ”7 Ìè!”< Ìè&”= Ìè'”ÌB Ìè,’”$ Ìæ”( Ìæ’”$ Ìå”* Ìå”ÌC Ìä”ÌM Ìä"”Ìg Ìõ”Ìh Ìõ”Ìo Ìõ*”Ìq Ìõ,”Ìs Ìõ.”Ìt Ìõ/”Ìx Ìõ3”Ìy Ìõ4”Ì‚ Ìõ=”Ìƒ Ìõ>”ÌŠ ÌõÌE”Ì‹ ÌõÌF’” Ìä”# Ìä’” Ìã”" Ìã•”; Ìâ”ÌD Ìâ”ÌE Ìâ”ÌV Ìâ/”ÌX Ìâ1’” Ìâ” Ìâ’” Ìá
+” Ìá’” Ìà” Ìà’” Í”1 Í!’” Í” Í’” Í”1 Í!˜” Í” Í” Í7	”$ Í7”% Í7”4 Í7”5 Í7”ÌA Í7+’” Í”1 Í!š” Í” Í” Í8	”% Í8”& Í8”( Í8”. Í8”0 Í8”5 Í8”7 Í8!’” Í
+” Í’” Í” Í–” Í” Í” Í	”$ Í	”% Í	”+ Í	š” Í” Í” Í
+”% Í
+”& Í
+”( Í
+”. Í
+”0 Í
+”5 Í
+#”7 Í
+%”” Í” Í”$ Í”* Í–” Í” Í” Í”% Í”& Í”, Í –” Í” Í” Í”& Í”' Í”0 Í$’” Í” Í’” Í” Í’” Í
+” Í’” Í
+” Í–” Í
+” Í” Í4”! Í4”" Í4”( Í4˜” Í
+” Í” Í5”* Í5”+ Í5”4 Í5#”5 Í5$”; Í5*’” Í”6 Í*’” Í” Í’” Í”6 Í*–” Í” Í” Í”$ Í”% Í”+ Í’” Í”6 Í*–” Í” Í” Í”% Í”& Í”, Í’” Í”6 Í*–” Í” Í” Í”* Í”+ Í”, Í’” Í”6 Í*”” Í” Í” Í”* Í’” Í”6 Í*–” Í” Í” Í”+ Í”, Í”. Í’” Í”6 Í*–” Í” Í” Í”. Í”/ Í”8 Í&’” Í”6 Í*˜” Í” Í” Í”) Í”* Í”9 Í'”: Í(”Ì@ Í.’” Í”6 Í*˜” Í” Í” Í”- Í”. Í”7 Í%”8 Í&”> Í,’” Í”6 Í*—” Í” Í” Í”& Í”' Í”* Í”, Í˜” Í”  Í”! Í”4 Í&”5 Í'”8 Í*”9 Í+”: Í,’” Í” Í”” Í” Í”$ Í”) Í–” Í” Í” Í”% Í”& Í”, Í ˜” Í” Í” Í”& Í”' Í”, Í ”- Í!”2 Í&’” Í” Í’” Í”2 Í*’” Í” Í’” Í ” Í –” Í ” Í ” Í ”# Í ”$ Í ”) Í ’” Í ” Í ’” Í"”< Í"0’” Í#” Í#’” Í"”< Í"0–” Í#” Í#” Í(”$ Í(”% Í(”+ Í(’” Í"”< Í"0–” Í#” Í#” Í)”% Í)”& Í)”, Í)’” Í"”< Í"0–” Í#” Í#” Í*”* Í*”+ Í*”, Í*’” Í"”< Í"0”” Í#” Í#” Í+”* Í+’” Í"”< Í"0–” Í#” Í#” Í,”+ Í,”, Í,”. Í,’” Í"”< Í"0–” Í#” Í#” Í-”. Í-”/ Í-”8 Í-&’” Í"”< Í"0˜” Í#” Í#” Í.”) Í.”* Í.”9 Í.'”: Í.(”Ì@ Í..’” Í"”< Í"0˜” Í#” Í#” Í/”- Í/”. Í/”7 Í/%”8 Í/&”> Í/,’” Í"”< Í"0—” Í#” Í#” Í0”& Í0”' Í0”* Í0”, Í0˜” Í1”  Í1”! Í1”4 Í1&”5 Í1'”8 Í1*”9 Í1+”: Í1,’” Í2” Í2”” Í$” Í$”$ Í$”+ Í$–” Í$” Í$” Í%”% Í%”& Í%”, Í% ˜” Í$” Í$” Í&”& Í&”' Í&”, Í& ”- Í&!”2 Í&&’” Í$” Í$’” Í"”8 Í"0’” Í#” Í#’” Í
+” Í’” Í”- Í!’” Í” Í‘” Í9‘” Í9’” Í;” Í;–” Í;” Í;” Í{” Í{”  Í{”! Í{˜” Í;” Í;” Í|” Í|” Í|”( Í|”) Í|”5 Í|)”” Í;” Í;” Í}”" Í}’” Í<” Í<˜” Í<” Í<” Ít	” Ít” Ít”& Ít”' Ít ”3 Ít,˜” Í<” Í<” Íu	” Íu” Íu”( Íu!”) Íu"”, Íu%•” Í<” Í<” Ív	” Ív” Ív“” Íw
+” Íw”Ìˆ Íw+“” Íx
+” Íx”Ì‰ Íx-‘” Íy	’” Í=
+” Í=’”3 Í=ÌO”ÌB Í=Ìg’” Í>” Í>–” Í>” Í>” Ím”' Ím”( Ím”) Ím•” Í>” Í>” Ín”! Ín”" Ín“” Ío” Ío”Ì Ío-“” Íp” Íp”Ì’ Íp3‘” Íq’” Í?” Í?’”; Í?;”ÌG Í?ÌP’” Í@”" Í@Ü ” Í@”" Í@”# Íf”/ Íf”0 Íg”1 Íg”8 Íg”9 Íg”> Íg ”ÌC Íg%”ÌH Íg*”ÌI Íg+”ÌJ Íg,”ÌK Íg-”ÌL Íg.”Ì[ Íg=”Ì\ Íg>”Ì_ ÍgÌA”Ì` ÍgÌB”Ìa ÍgÌC”Ìb ÍgÌD”Ìc ÍgÌE˜” Í@”" Í@”# Íi”( Íi”) Íi”8 Íi&”9 Íi'”ÌE Íi3˜” Í@”" Í@”# Íj”1 Íj”2 Íj ”; Íj)”< Íj*”ÌB Íj0’” ÍA”" ÍA”” ÍA”" ÍA”# ÍP”( ÍPÜ ” ÍA”" ÍA”# ÍQ”) ÍQ”* ÍR”+ ÍR”, ÍR”; ÍR%”Ì@ ÍR*”ÌA ÍR+”ÌB ÍR,”ÌF ÍR0”ÌG ÍR1”ÌN ÍR8”ÌO ÍR9”ÌT ÍR>”ÌY ÍRÌC”Ì^ ÍRÌH”Ì_ ÍRÌI”Ì` ÍRÌJ”Ìa ÍRÌK”Ìb ÍRÌL”ÌÖ ÍS4”Ì× ÍS5”ÍJ ÍSÌP–” ÍA”" ÍA”# ÍU”. ÍU”/ ÍU”0 ÍU ”” ÍA”" ÍA”# ÍV”. ÍV”” ÍA”" ÍA”# ÍW”/ ÍWÜ ” ÍA”" ÍA”# ÍX”2 ÍX"”3 ÍY”4 ÍY”; ÍY”< ÍY”ÌA ÍY"”ÌF ÍY'”ÌK ÍY,”ÌL ÍY-”ÌM ÍY.”ÌN ÍY/”ÌÂ ÍZ8”ÌÃ ÍZ9”ÌÄ ÍZ:”ÌÉ ÍZ?”ÌÊ ÍZÌ@”ÌÏ ÍZÌE˜” ÍA”" ÍA”# Í\”- Í\”. Í\”= Í\-”> Í\.”ÌD Í\4˜” ÍA”" ÍA”# Í]”1 Í]!”2 Í]"”; Í]+”< Í],”ÌB Í]2—” ÍA”" ÍA”# Í^”* Í^”+ Í^”. Í^”0 Í^ ˜”  Í_”$ Í_”+ Í_”, Í_ ”0 Í_$”5 Í_)”6 Í_*”8 Í_,š”$ Í`”( Í`”) Í`”4 Í`&”5 Í`'”< Í`.”= Í`/”ÌB Í`4”ÌC Í`5”ÌD Í`6‘”! Ía‘”% Íaš”$ Íb”( Íb”) Íb”4 Íb&”5 Íb'”< Íb.”= Íb/”ÌB Íb4”ÌC Íb5”ÌD Íb6‘”! Íc’” Íd” Íd˜” ÍB”  ÍB”' ÍB”( ÍB ”, ÍB$”1 ÍB)”2 ÍB*”4 ÍB,Ü ”( ÍC”- ÍC”5 ÍC”< ÍC#”= ÍC$”ÌC ÍC*”ÌH ÍC/”ÌQ ÍC8”ÌR ÍC9”ÌS ÍC:”ÌT ÍC;”Ì[ ÍCÌB”Ì\ ÍCÌC”Ìb ÍCÌI”Ìc ÍCÌJ”Ìd ÍCÌK”Ìe ÍCÌL”Ìg ÍCÌN˜”( ÍC”- ÍC”. ÍD”3 ÍD”4 ÍD”; ÍD&”< ÍD'”ÌA ÍD,˜”( ÍC”- ÍC”. ÍE”4 ÍE”5 ÍE ”< ÍE'”= ÍE(”ÌC ÍE.‘” ÍF‘”! ÍF–”( ÍG”, ÍG”4 ÍG”; ÍG"”< ÍG#”ÌA ÍG(Ü ”( ÍG”, ÍG”- ÍH”5 ÍH!”6 ÍI”7 ÍI”> ÍI"”? ÍI#”ÌD ÍI(”ÌI ÍI-”ÌX ÍI<”ÌY ÍI=”Ì] ÍIÌA”Ì^ ÍIÌB”Ì_ ÍIÌC”Ì` ÍIÌD”ÌÔ ÍJ:”ÌÕ ÍJ;”ÍH ÍJÌZ˜”( ÍG”, ÍG”- ÍL”2 ÍL”3 ÍL”: ÍL&”; ÍL'”Ì@ ÍL,˜”( ÍG”, ÍG”- ÍM”3 ÍM”4 ÍM ”; ÍM'”< ÍM(”ÌB ÍM.’”$ ÍG”( ÍG‘” ÍN’” ÍA” ÍA’” Í@” Í@”7 Í?”ÌA Í? ”Ì[ Ík”Ì\ Ík”Ìc Ík(”Ìe Ík*”Ìg Ík,”Ìh Ík-”Ìl Ík1”Ìm Ík2”Ìv Ík;”Ìw Ík<”Ì~ ÍkÌC”Ì ÍkÌD’” Í?” Í?’” Í>” Í>Ü ”/ Í=”8 Í=”9 Í=”ÌE Í=(”ÌG Í=*”Ìa Ír”Ìb Ír”Ìf Ír/”Ìh Ír1”Ìj Ír3”Ìk Ír4”Ìo Ír8”Ìp Ír9”Ìy ÍrÌB”Ìz ÍrÌC”Ì~ ÍrÌG”Ì ÍrÌH’” Í=
+” Í=’” Í<” Í<’” Í;” Í;’” %” %
+‘” Í‘” Í„‘” Íˆ”” Í‰” Í‰” Í‰” Í‰™” ÍŠ” ÍŠ” ÍŠ” ÍŠ”" ÍŠ”# ÍŠ”( ÍŠ$”) ÍŠ%”+ ÍŠ'’” Í‹” Í‹‘”	 ÍŒš” Í” Í” Í” Í” Í” Í”" Í”# Í”) Í%”* Í&”” Í” Í” Í” Í•” Í” Í” Í” Í” Í—” Í” Í” Í”  Í”# Í”% Í”& Í—” Í‘” Í‘” Í‘” Í‘”  Í‘”" Í‘”# Í‘™” Í’” Í’” Í’”! Í’”$ Í’”& Í’”' Í’”( Í’!”= Í’6’” Í“” Í“•” Í”” Í”” Í”” Í”” Í”˜” Í•” Í•” Í•”  Í•”! Í•”$ Í•”% Í•”& Í•’” Í–” Í–•” Í—” Í—” Í—” Í—” Í—’” Í˜”, Í˜$˜” Í™” Í™” Í™” Í™”% Í™”* Í™"”, Í™$”. Í™&–” Íš
+” Íš” Íš”& Íš”( Íš”) Íš’” Í›
+” Í›‘” Íœ	–” Í” Í” Í” Í” Í” Í’” Í
+” Í‘” ÍŸ	œ” Í ” Í ” Í ” Í ”  Í ”! Í ”% Í ”& Í ”' Í ”- Í .”/ Í 0”1 Í 2•” Í¡
+” Í¡” Í¡” Í¡”! Í¡’” Í¢” Í¢‘” Í£’” Í¤
+”& Í¤˜” Í¥
+” Í¥”$ Í¥”' Í¥”+ Í¥!”, Í¥"”6 Í¥,”7 Í¥-˜” Í¦
+” Í¦”% Í¦”( Í¦”, Í¦"”- Í¦#”5 Í¦+”6 Í¦,š” Í§
+”" Í§”# Í§”- Í§#”. Í§$”8 Í§.”: Í§0”ÌE Í§;”ÌF Í§<”ÌG Í§=™” Í©
+” Í©” Í©”# Í©”& Í©”* Í© ”+ Í©!”3 Í©)”4 Í©*—” Íª
+” Íª” Íª”! Íª”$ Íª”& Íª”' Íª—” Í«
+” Í«” Í«”$ Í«”' Í«”) Í«”* Í« œ” Í¬
+” Í¬” Í¬”$ Í¬”% Í¬”) Í¬”* Í¬ ”. Í¬$”/ Í¬%”9 Í¬/”: Í¬0”; Í¬1”” Í­” Í­	” Í­
+” Í­
+’” Í®” Í®‘” Í¯š” Í°” Í°” Í°”# Í°”$ Í°”' Í°”) Í°!”. Í°&”/ Í°'”0 Í°(’” Í±” Í±‘”	 Í²–” Í³” Í³” Í³	” Í³” Í³”  Í³’” Í´” Í´‘” Í¶‘” Íº”” Í»” Í»” Í»” Í»™” Í¼” Í¼” Í¼” Í¼”" Í¼”# Í¼”( Í¼$”) Í¼%”+ Í¼'’” Í½” Í½‘”	 Í¾’” ÍÀ”7 ÍÀ3˜” ÍÁ” ÍÁ” ÍÁ” ÍÁ” ÍÁ”" ÍÁ”$ ÍÁ ”& ÍÁ"—” ÍÂ” ÍÂ
+” ÍÂ” ÍÂ” ÍÂ”$ ÍÂ”% ÍÂ’” ÍÃ” ÍÃ‘”	 ÍÄš” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ”" ÍÆ”# ÍÆ”) ÍÆ%”* ÍÆ&Ü ” ÍÇ” ÍÇ” ÍÇ” ÍÇ” ÍÇ” ÍÇ” ÍÇ” ÍÇ” ÍÇ” ÍÇ”! ÍÇ”" ÍÇ”- ÍÇ)”. ÍÇ*”1 ÍÇ-”4 ÍÇ0”5 ÍÇ1”6 ÍÇ2”7 ÍÇ3”8 ÍÇ4”9 ÍÇ5”; ÍÇ7”< ÍÇ8Ü ” ÍÈ” ÍÈ” ÍÈ” ÍÈ” ÍÈ” ÍÈ”  ÍÈ”! ÍÈ”" ÍÈ”# ÍÈ”' ÍÈ#”( ÍÈ$”3 ÍÈ/”4 ÍÈ0”7 ÍÈ3”: ÍÈ6”ÌI ÍÈÌE”ÌJ ÍÈÌF”ÌM ÍÈÌI”ÌN ÍÈÌJ”ÌO ÍÈÌK”ÌP ÍÈÌL”ÌQ ÍÈÌM”ÌZ ÍÈÌV”Ì[ ÍÈÌWœ” ÍÉ” ÍÉ” ÍÉ	” ÍÉ” ÍÉ” ÍÉ”  ÍÉ”$ ÍÉ ”& ÍÉ"”+ ÍÉ'”, ÍÉ(”. ÍÉ*’” ÍÊ” ÍÊ‘”	 ÍË’” ÍÍ”ÌS ÍÍÌOš” ÍÎ” ÍÎ” ÍÎ” ÍÎ” ÍÎ” ÍÎ” ÍÎ”# ÍÎ”$ ÍÎ ”& ÍÎ"’” ÍÏ”ÌA ÍÏ;’” ÍĞ”3 ÍĞ-–” ÍÑ” ÍÑ
+” ÍÑ” ÍÑ”& ÍÑ ”' ÍÑ!Ü ” ÍÒ” ÍÒ
+” ÍÒ” ÍÒ” ÍÒ”+ ÍÒ%”, ÍÒ&”4 ÍÒ.”5 ÍÒ/”> ÍÒ8”? ÍÒ9”ÌC ÍÒ=”ÌD ÍÒ>”ÌQ ÍÒÌK”ÌR ÍÒÌL”Ìd ÍÒÌ^”Ìe ÍÒÌ_”Ìn ÍÒÌh”Ìo ÍÒÌi”Ìq ÍÒÌk’” ÍÓ”ÌC ÍÓ;š” ÍÔ” ÍÔ” ÍÔ”  ÍÔ”! ÍÔ”$ ÍÔ”& ÍÔ”' ÍÔ”( ÍÔ ”5 ÍÔ-š” ÍÕ” ÍÕ” ÍÕ”  ÍÕ”! ÍÕ”$ ÍÕ”& ÍÕ”' ÍÕ”( ÍÕ ”; ÍÕ3’” ÍÖ”, ÍÖ$” Í×” Í×” Í×”  Í×”! Í×”% Í×”& Í×”/ Í×'”2 Í×*”5 Í×-”8 Í×0”= Í×5”> Í×6”? Í×7–” ÍØ” ÍØ” ÍØ”% ÍØ”' ÍØ”( ÍØ –” ÍÙ” ÍÙ” ÍÙ” ÍÙ”  ÍÙ”! ÍÙ’” ÍÚ” ÍÚ‘” ÍÛ‘”	 ÍÜ’” ÍŞ”ÌU ÍŞÌQ” Íß” Íß” Íß” Íß” Íß” Íß”  Íß”! Íß”$ Íß ”% Íß!”* Íß&”+ Íß'”, Íß(”. Íß*’” Íà”8 Íà2œ” Íá” Íá
+” Íá” Íá” Íá”  Íá”# Íá”$ Íá”% Íá”) Íá#”. Íá(”/ Íá)–” Íâ” Íâ
+” Íâ”! Íâ”# Íâ”$ Íâ–” Íã” Íã
+” Íã” Íã” Íã” Íã’” Íä” Íä‘”	 Íå’” Íç”ÌP ÍçÌLÜ ” Íè” Íè” Íè” Íè”* Íè&”+ Íè'”3 Íè/”4 Íè0”8 Íè4”9 Íè5”= Íè9”ÌJ ÍèÌF”ÌK ÍèÌG”Ì] ÍèÌY”Ì^ ÍèÌZ”Ìb ÍèÌ^”Ìc ÍèÌ_”Ìd ÍèÌ`•” Íê” Íê” Íê	” Íê” Íêš” Íë” Íë
+” Íë” Íë” Íë”! Íë”" Íë”' Íë!”( Íë"”) Íë#‘”	 Íì”” Íì” Íì” Íì”! Íì’” Íí”6 Íí0š” Íî” Íî
+” Íî” Íî” Íî”! Íî”" Íî”' Íî!”( Íî"”) Íî#‘”	 Íï•” Íï” Íï” Íï” Íï” Íï’” Íğ”7 Íğ1œ” Íñ” Íñ
+” Íñ” Íñ” Íñ”  Íñ”# Íñ”$ Íñ”% Íñ”) Íñ#”. Íñ(”/ Íñ)‘”	 Íò‘” Íò’” Íó”2 Íó,Ü ” Íô” Íô
+”$ Íô”' Íô!”4 Íô.”5 Íô/”= Íô7”> Íô8”ÌH ÍôÌB”ÌI ÍôÌC”ÌM ÍôÌG”ÌZ ÍôÌT”Ì[ ÍôÌU”Ìm ÍôÌg”Ìn ÍôÌh”Ìx ÍôÌr”Ìy ÍôÌs”Ìz ÍôÌt”” Íõ” Íõ
+”$ Íõ”& Íõ ’” Íö”( Íö œ” Í÷” Í÷” Í÷”  Í÷”! Í÷”$ Í÷”' Í÷”( Í÷ ”) Í÷!”- Í÷%”2 Í÷*”3 Í÷+‘” Íø‘” Íø’” Íù”" Íùš” Íú” Íú” Íú”  Íú”! Íú”% Íú”& Íú”+ Íú#”, Íú$”- Íú%‘” Íû‘”	 Íü–” Íı” Íı” Íı	” Íı” Íı”  Íı˜” Íş” Íş” Íş” Íş”% Íş!”& Íş"”* Íş&”, Íş(–” Íÿ” Íÿ
+” Íÿ” Íÿ” Íÿ” Íÿ‘”	 Í ’” Í” Í‘” Í‘” Í	–” Í
+” Í
+” Í
+” Í
+” Í
+” Í
++›” Í” Í” Í	” Í” Í” Í” Í”. Í*”/ Í+”; Í7”= Í9”” Í” Í” Í” Í‘”	 ÍÜ ” Í” Í” Í	” Í” Í”% Í!”& Í"”) Í%”* Í&”. Í*”/ Í+”4 Í0”9 Í5”ÌH ÍÌD”ÌI ÍÌE”ÌU ÍÌQ”ÌV ÍÌR”ÌX ÍÌT”” Í” Í” Í” Í‘”	 Í›” Í” Í” Í” Í” Í” Í”) Í%”* Í&”6 Í2”7 Í3”9 Í5”” Í” Í” Í” Í‘”	 ÍÜ ” Í” Í” Í	” Í” Í” Í” Í”) Í%”* Í&”. Í*”/ Í+”4 Í0”5 Í1”6 Í2”7 Í3”; Í7”< Í8”ÌA Í=”ÌF ÍÌB”ÌU ÍÌQ”ÌV ÍÌR”ÌZ ÍÌV”Ì[ ÍÌW”Ì] ÍÌY”” Í” Í” Í” Í‘”	 ÍŸ” Í” Í” Í	” Í” Í” Í” Í” Í” Í”$ Í ”) Í%”8 Í4”9 Í5”= Í9”> Í:™” Í” Í” Í” Í”& Í ”' Í!”3 Í-”4 Í.”6 Í0”” Í” Í” Í” Í‘”	 Í”” Í” Í” Í” Í’” Í” Í‘” Í‘” Í"”” Í#” Í#” Í#” Í#–” Í$” Í$” Í$” Í$” Í$” Í$’” Í%” Í%‘”	 Í&” Í'” Í'” Í'” Í'” Í'” Í'”# Í'”$ Í' ”' Í'#”* Í'&”+ Í''”, Í'(”- Í')˜” Í(” Í(” Í(” Í(” Í(” Í(”! Í(”" Í(–” Í)” Í)” Í)” Í)” Í)” Í)˜” Í*” Í*
+” Í*” Í*” Í*”  Í*”" Í*”# Í*™” Í+” Í+	” Í+” Í+” Í+”" Í+”# Í+”) Í+#”* Í+$‘”	 Í,‘” Í,Ü ” Í-” Í-
+” Í-” Í-” Í-”  Í-”# Í-”$ Í-”% Í-”( Í-"”, Í-&”- Í-'”2 Í-,”3 Í--”4 Í-.”6 Í-0”: Í-4”; Í-5”ÌA Í-;”ÌD Í->”ÌE Í-?”ÌF Í-Ì@”ÌG Í-ÌA‘”	 Í.–” Í/” Í/” Í/” Í/” Í/” Í/—” Í0” Í0
+” Í0” Í0” Í0”  Í0”! Í0—” Í1” Í1
+” Í1” Í1” Í1” Í1” Í1’” Í2” Í2‘”	 Í3Ü ” Í4” Í4” Í4	” Í4” Í4”# Í4”$ Í4 ”( Í4$”) Í4%”4 Í40”5 Í41”8 Í44”; Í47”< Í48”= Í49”> Í4:”Ì@ Í4<–” Í5” Í5
+” Í5” Í5” Í5” Í5‘”	 Í6’” Í7” Í7‘” Í9‘” Í>–” Í?” Í?” Í?” Í?” Í?” Í?+Ü ” Í@” Í@” Í@” Í@” Í@” Í@” Í@” Í@” Í@” Í@”! Í@”" Í@”- Í@)”. Í@*”1 Í@-”4 Í@0”5 Í@1”6 Í@2”7 Í@3”8 Í@4”9 Í@5”ÌB Í@>”ÌC Í@?Ü ” ÍA” ÍA” ÍA” ÍA” ÍA” ÍA”  ÍA”! ÍA”" ÍA”# ÍA”' ÍA#”( ÍA$”3 ÍA/”4 ÍA0”7 ÍA3”: ÍA6”ÌI ÍAÌE”ÌJ ÍAÌF”ÌM ÍAÌI”ÌN ÍAÌJ”ÌO ÍAÌK”ÌP ÍAÌL”ÌQ ÍAÌM”ÌZ ÍAÌV”Ì[ ÍAÌW” ÍB” ÍB” ÍB	” ÍB” ÍB” ÍB” ÍB”  ÍB”& ÍB"”' ÍB#”* ÍB&”+ ÍB'”- ÍB)Ÿ” ÍC” ÍC
+” ÍC” ÍC” ÍC”! ÍC”" ÍC”& ÍC ”' ÍC!”0 ÍC*”1 ÍC+”6 ÍC0”7 ÍC1”8 ÍC2”9 ÍC3’” ÍD” ÍD‘”	 ÍE•” ÍF” ÍF” ÍF	” ÍF” ÍF’” ÍG” ÍG‘”	 ÍHš” ÍI” ÍI” ÍI	” ÍI” ÍI”# ÍI”$ ÍI ”( ÍI$”) ÍI%”+ ÍI'Ÿ” ÍJ” ÍJ
+” ÍJ” ÍJ” ÍJ”! ÍJ”" ÍJ”& ÍJ ”' ÍJ!”0 ÍJ*”1 ÍJ+”6 ÍJ0”7 ÍJ1”8 ÍJ2”9 ÍJ3’” ÍK” ÍK‘”	 ÍL™” ÍM” ÍM” ÍM	” ÍM” ÍM” ÍM” ÍM”! ÍM”" ÍMŸ” ÍN” ÍN” ÍN” ÍN”% ÍN”& ÍN ”) ÍN#”- ÍN'”1 ÍN+”6 ÍN0”ÌE ÍN?”ÌF ÍNÌ@”ÌI ÍNÌC”ÌJ ÍNÌD”ÌL ÍNÌF˜” ÍO” ÍO
+” ÍO” ÍO” ÍO”  ÍO”" ÍO”# ÍOŸ” ÍP” ÍP
+” ÍP” ÍP” ÍP”! ÍP”" ÍP”& ÍP ”' ÍP!”0 ÍP*”1 ÍP+”6 ÍP0”7 ÍP1”8 ÍP2”9 ÍP3’” ÍQ” ÍQ‘”	 ÍR•” ÍS” ÍS” ÍS	” ÍS” ÍS’” ÍT” ÍT‘”	 ÍU˜” ÍV” ÍV” ÍV” ÍV” ÍV” ÍV”  ÍV”" ÍV˜” ÍW” ÍW
+” ÍW” ÍW” ÍW”  ÍW”" ÍW”# ÍW‘”	 ÍX™” ÍY” ÍY” ÍY” ÍY”" ÍY”# ÍY”- ÍY)”. ÍY*”0 ÍY,˜” ÍZ” ÍZ
+” ÍZ” ÍZ” ÍZ”  ÍZ”" ÍZ”# ÍZ‘”	 Í[Ÿ” Í\” Í\” Í\	” Í\” Í\” Í\” Í\”" Í\”# Í\”, Í\(”- Í\)”2 Í\.”3 Í\/”4 Í\0”5 Í\1’” Í]” Í]‘” Í_‘” Íd”” Íe” Íe” Íe” Íe™” Íf” Íf” Íf” Íf”" Íf”# Íf”( Íf$”) Íf%”+ Íf'”” Íg” Íg” Íg” Íg‘”	 Íh–” Íi” Íi” Íi” Íi” Íi” Íi”” Íj” Íj” Íj” Íj•” Ík” Ík” Ík” Ík” Ík—” Íl” Íl” Íl”( Íl ”) Íl!”, Íl$”- Íl%’” Ím” Ím•” Ín” Ín” Ín” Ín” Ín—” Ío” Ío” Ío”( Ío ”) Ío!”, Ío$”- Ío%’” Íp” Íp•” Íq” Íq” Íq” Íq” Íq—” Ír” Ír” Ír”( Ír ”) Ír!”, Ír$”- Ír%’” Ís” Ís•” Ít” Ít” Ít” Ít” Ít—” Íu” Íu” Íu”( Íu ”) Íu!”, Íu$”- Íu%’” Ív” Ív‘” Íw’” Íx” Íx‘”	 Íy”” Íz” Íz” Íz” Íz’” Í{” Í{‘” Í}‘” Í’” Í‚” Í‚
+” Íƒ” Íƒ” Íƒ” Íƒ)”# Íƒ.”$ Íƒ/”( Íƒ3”) Íƒ4”- Íƒ8”. Íƒ9”9 ÍƒÌD”: ÍƒÌE”; ÍƒÌF”” Í„” Í„” Í„” Í„’” Í…” Í…‘” Í‡‘” Í‹”” ÍŒ”	 ÍŒ”
+ ÍŒ” ÍŒ” Í” Í” Í” Í”% Í!”& Í"”5 Í1”6 Í2”: Í6”; Í7”ÌC Í?”ÌE ÍÌA”ÌF ÍÌB”ÌG ÍÌC–” Í” Í” Í” Í” Í”! Íš” Í” Í
+” Í” Í” Í”  Í”! Í”1 Í+”Ì¥ ÍÌC”Ì¦ ÍÌD”” Í” Í” Í” Í‘”	 Í‘’” Í“”2 Í“.–” Í”” Í”” Í”” Í”” Í””! Í”š” Í•” Í•” Í•” Í•” Í•”. Í•(”/ Í•)”8 Í•2”9 Í•3”: Í•4‘”	 Í–—” Í˜” Í˜” Í˜	” Í˜” Í˜”! Í˜”" Í˜”” Í™” Í™” Í™” Í™’” Íš” Íš‘” Íœ‘” Í¡”” Í¢” Í¢” Í¢”  Í¢&™” Í£” Í£” Í£	” Í£” Í£”% Í£!”* Í£&”/ Í£+”1 Í£-”” Í¤” Í¤” Í¤” Í¤‘”	 Í¥’” Í§”& Í§"œ” Í¨” Í¨” Í¨” Í¨” Í¨” Í¨”" Í¨”# Í¨”( Í¨$”) Í¨%”* Í¨&”, Í¨(”” Í©” Í©” Í©” Í©‘”	 Íª’” Í¬” Í¬™” Í­” Í­” Í­” Í­”& Í­ ”' Í­!”1 Í­+”2 Í­,”3 Í­-—” Í®” Í®
+” Í®” Í®” Í®” Í®”  Í®”” Í¯” Í¯”! Í¯”" Í¯‘” Í°›” Í²” Í²” Í²” Í²”) Í²#”* Í²$”; Í²5”< Í²6”ÌC Í²=”ÌD Í²>”ÌE Í²?›” Í³” Í³” Í³”  Í³”, Í³&”- Í³'”= Í³7”> Í³8”ÌF Í³Ì@”ÌG Í³ÌA”ÌH Í³ÌB’” Íµ”ÌR ÍµÌLœ” Í¶” Í¶
+” Í¶” Í¶”$ Í¶”( Í¶"”, Í¶&”0 Í¶*”; Í¶5”Ì@ Í¶:”ÌE Í¶?”ÌG Í¶ÌA”” Í·” Í·”" Í·”# Í·‘” Í¸‘”	 Í¹”” Í¹” Í¹” Í¹” Í¹Ÿ” Íº” Íº” Íº” Íº” Íº”? Íº9”ÌB Íº<”ÌF ÍºÌ@”ÌG ÍºÌA”ÌP ÍºÌJ”ÌQ ÍºÌK”ÌR ÍºÌL”ÌS ÍºÌM”ÌT ÍºÌN”ÌU ÍºÌO‘”	 Í»”” Í½” Í½” Í½” Í½’” Í¾” Í¾‘” ÍÀ‘” ÍÂ’” ÍÃ” ÍÃ” ÍÄ” ÍÄ” ÍÄ	” ÍÄ” ÍÄ” ÍÄ” ÍÄ”" ÍÄ”# ÍÄ”+ ÍÄ'”0 ÍÄ,”5 ÍÄ1”7 ÍÄ3’” ÍÅ” ÍÅ‘”	 ÍÆ–” ÍÈ” ÍÈ” ÍÈ” ÍÈ” ÍÈ”! ÍÈ’” ÍÉ”* ÍÉ$” ÍÊ” ÍÊ
+” ÍÊ” ÍÊ” ÍÊ”  ÍÊ”! ÍÊ”2 ÍÊ,”3 ÍÊ-”7 ÍÊ1”8 ÍÊ2”Ì@ ÍÊ:”ÌA ÍÊ;”ÌB ÍÊ<‘”	 ÍË‘” ÍË’” ÍÌ”* ÍÌ$” ÍÍ” ÍÍ
+” ÍÍ” ÍÍ” ÍÍ” ÍÍ”% ÍÍ”& ÍÍ ”) ÍÍ#”* ÍÍ$”/ ÍÍ)”0 ÍÍ*”1 ÍÍ+”3 ÍÍ-’” ÍÎ” ÍÎ” ÍÏ
+” ÍÏ”" ÍÏ”% ÍÏ”1 ÍÏ'”2 ÍÏ(”? ÍÏ5”Ì@ ÍÏ6”ÌD ÍÏ:”ÌE ÍÏ;”ÌM ÍÏÌC”ÌN ÍÏÌD”ÌO ÍÏÌE›” ÍĞ
+” ÍĞ”! ÍĞ”$ ÍĞ”0 ÍĞ&”1 ÍĞ'”ÌB ÍĞ8”ÌC ÍĞ9”ÌK ÍĞÌA”ÌL ÍĞÌB”ÌM ÍĞÌC˜” ÍÑ
+” ÍÑ” ÍÑ” ÍÑ” ÍÑ”& ÍÑ”' ÍÑ”) ÍÑš” ÍÒ” ÍÒ” ÍÒ”% ÍÒ”( ÍÒ”/ ÍÒ#”0 ÍÒ$”8 ÍÒ,”: ÍÒ.”; ÍÒ/‘” ÍÓ‘” ÍÔ	”” ÍÔ
+” ÍÔ” ÍÔ” ÍÔŸ” ÍÕ
+” ÍÕ” ÍÕ”  ÍÕ”! ÍÕ”ÌI ÍÕ?”ÌL ÍÕÌB”ÌP ÍÕÌF”ÌQ ÍÕÌG”ÌZ ÍÕÌP”Ì[ ÍÕÌQ”Ì\ ÍÕÌR”Ì] ÍÕÌS”Ì^ ÍÕÌT”Ì_ ÍÕÌU‘” ÍÖ	‘” Í×‘”	 ÍØ’” ÍÙ” ÍÙ‘” ÍÛ‘” Íà”” Íá” Íá” Íá” ÍáÜ  ” Íâ” Íâ” Íâ” Íâ” Íâ” Íâ” Íâ”  Íâ”! Íâ”$ Íâ ”% Íâ!”( Íâ$”) Íâ%”* Íâ&”+ Íâ'”, Íâ(”- Íâ)”. Íâ*”2 Íâ.”8 Íâ4”9 Íâ5”ÌP ÍâÌL”ÌQ ÍâÌM”ÌR ÍâÌN”ÌS ÍâÌO”ÌT ÍâÌP”ÌX ÍâÌT”Ì^ ÍâÌZ”Ì_ ÍâÌ[”Ìw ÍâÌs”Ìx ÍâÌt”Ìy ÍâÌu›” Íã” Íã” Íã” Íã” Íã” Íã”  Íã”" Íã”' Íã#”( Íã$”) Íã%’” Íä” Íä‘” Íæ‘” Íë”” Íì” Íì” Íì” Íì%™” Íí” Íí” Íí” Íí”" Íí”# Íí”+ Íí'”, Íí(”. Íí*”” Íî” Íî” Íî” Íî‘”	 Íï–” Íğ” Íğ” Íğ” Íğ” Íğ” Íğ’” Íñ” Íñ›” Íò” Íò” Íò” Íò/”( Íò9”) Íò:”, Íò=”- Íò>”8 ÍòÌI”9 ÍòÌJ”: ÍòÌK™” Íó” Íó
+” Íó” Íó”# Íó”$ Íó”2 Íó-”4 Íó0”5 Íó1” Íô” Íô” Íô” Íô” Íô”, Íô&”- Íô'”: Íô4”; Íô5”ÌC Íô=”ÌD Íô>”ÌF ÍôÌ@”ÌG ÍôÌA”ÌH ÍôÌB‘”	 Íõ”” Íõ” Íõ” Íõ” ÍõŸ” Íö” Íö” Íö” Íö” Íö”ÌD Íö>”ÌG ÍöÌA”ÌK ÍöÌE”ÌL ÍöÌF”ÌU ÍöÌO”ÌV ÍöÌP”Ì[ ÍöÌU”Ì\ ÍöÌV”Ì] ÍöÌW”Ì^ ÍöÌW‘”	 Í÷”” Íø” Íø” Íø” Íø’” Íù” Íù‘” Íû‘” Íı’” Íş” Íş–” Íÿ” Íÿ” Íÿ” Íÿ)”  Íÿ+”! Íÿ,” Í ” Í ” Í 	” Í ” Í ” Í ” Í ”  Í ”! Í ”% Í )”' Í +”, Í 8”. Í :”0 Í <” Í” Í” Í”! Í”" Í”% Í”) Í#”* Í$”6 Í0”7 Í1”; Í5”< Í6”= Í7”” Í”	 Í”
+ Í” Íœ” Í” Í” Í	” Í” Í”) Í%”* Í&”. Í*”/ Í+”1 Í-”2 Í.”3 Í/’” Í” Í‘” Í‘” Í
+”” Í” Í” Í” Í%™” Í” Í” Í” Í”" Í”# Í”( Í$”) Í%”+ Í'’” Í” Í‘”	 Í’” Í”3 Í/˜” Í” Í” Í” Í” Í”" Í”$ Í ”& Í"–” Í” Í
+” Í” Í” Í” Í—” Í” Í” Í” Í”# Í”& Í”' Í’” Í” Í‘” Í–” Í” Í
+” Í” Í” Í” Í—” Í” Í” Í” Í”# Í”& Í”' Í’” Í” Í‘” Í‘”	 Í’” Í”# Í–” Í” Í” Í” Í” Í” ÍŸ” Í” Í
+” Í” Í” Í”! Í”" Í”& Í ”' Í!”) Í#”* Í$”2 Í,”4 Í.”5 Í/”6 Í0–” Í” Í
+” Í”! Í”# Í”$ Í–” Í ” Í 
+” Í ” Í ” Í ” Í ’” Í!” Í!‘”	 Í"–” Í$” Í$” Í$” Í$” Í$” Í$Ÿ” Í%” Í%
+” Í%” Í%” Í%”! Í%”" Í%”& Í% ”' Í%!”( Í%"”) Í%#”1 Í%+”3 Í%-”4 Í%.”5 Í%/–” Í&” Í&
+” Í&”! Í&”# Í&”$ Í&–” Í'” Í'
+” Í'” Í'” Í'” Í'’” Í(” Í(‘”	 Í)’” Í+” Í+–” Í,” Í,” Í,” Í,” Í,” Í,–” Í-” Í-
+” Í-”# Í-”% Í-”& Í- ’” Í.” Í.‘”	 Í/’” Í1” Í1–” Í2” Í2” Í2” Í2” Í2” Í2š” Í3” Í3
+” Í3” Í3” Í3”! Í3”" Í3”% Í3”& Í3 ”' Í3!š” Í4” Í4
+” Í4” Í4” Í4”! Í4”" Í4”% Í4”& Í4 ”' Í4!–” Í5” Í5
+” Í5”! Í5”# Í5”$ Í5–” Í6” Í6
+” Í6” Í6” Í6” Í6’” Í7” Í7‘”	 Í8’” Í:”" Í:–” Í;” Í;” Í;” Í;” Í;” Í;š” Í<” Í<
+” Í<” Í<” Í<”$ Í<”% Í<”( Í<"”) Í<#”* Í<$š” Í=” Í=
+” Í=” Í=” Í=”! Í=”" Í=”% Í=”& Í= ”' Í=!–” Í>” Í>
+” Í>”! Í>”# Í>”$ Í>–” Í?” Í?
+” Í?” Í?” Í?” Í?’” Í@” Í@‘”	 ÍA’” ÍC” ÍCš” ÍD” ÍD” ÍD” ÍD” ÍD” ÍD”" ÍD”' ÍD#”* ÍD&”, ÍD(š” ÍE” ÍE
+” ÍE” ÍE” ÍE”! ÍE”" ÍE”' ÍE!”( ÍE"”) ÍE#–” ÍF” ÍF
+” ÍF”! ÍF”# ÍF”$ ÍF’” ÍG” ÍG‘”	 ÍH’” ÍJ”ÌE ÍJÌA’” ÍK”ÌQ ÍKÌM’” ÍL”ÌM ÍLÌI’” ÍM”ÌM ÍMÌIÜ ” ÍN” ÍN
+” ÍN” ÍN”  ÍN”% ÍN!”' ÍN#”, ÍN(”. ÍN*”3 ÍN/”5 ÍN1”: ÍN6”< ÍN8”Ì@ ÍN<”ÌB ÍN>”ÌE ÍNÌA”ÌG ÍNÌC”ÌJ ÍNÌF”ÌK ÍNÌG”ÌL ÍNÌHœ” ÍO” ÍO” ÍO” ÍO”" ÍO”# ÍO”( ÍO$”) ÍO%”. ÍO*”/ ÍO+”0 ÍO,”2 ÍO.š” ÍP” ÍP
+” ÍP” ÍP” ÍP” ÍP”& ÍP ”' ÍP!”- ÍP'”. ÍP(–” ÍQ” ÍQ
+” ÍQ” ÍQ” ÍQ” ÍQ” ÍR” ÍR” ÍR” ÍR” ÍR”  ÍR”+ ÍR#”, ÍR$”/ ÍR'”2 ÍR*”3 ÍR+”4 ÍR,”5 ÍR-’” ÍS”ÌB ÍS:Ü ” ÍT” ÍT” ÍT”" ÍT”# ÍT”+ ÍT#”, ÍT$”0 ÍT(”1 ÍT)”5 ÍT-”6 ÍT.”ÌC ÍT;”ÌD ÍT<”ÌV ÍTÌN”ÌW ÍTÌO”Ì[ ÍTÌS”Ì\ ÍTÌT”Ì^ ÍTÌV’” ÍU
+”Ìj ÍUÌ`’” ÍV
+”ÌL ÍVÌB–” ÍW
+” ÍW” ÍW”" ÍW”% ÍW”' ÍW’” ÍX”7 ÍX+š” ÍY” ÍY” ÍY”( ÍY”) ÍY”- ÍY!”. ÍY"”3 ÍY'”4 ÍY(”5 ÍY)‘” ÍZ‘” ÍZ’” Í[”ÌI Í[=Ü ” Í\” Í\” Í\”( Í\”) Í\”/ Í\#”0 Í\$”3 Í\'”6 Í\*”7 Í\+”9 Í\-”: Í\.”< Í\0”ÌA Í\5”ÌB Í\6”ÌC Í\7‘” Í]–” Í^
+” Í^” Í^”) Í^”+ Í^!”, Í^"–” Í_
+” Í_” Í_”" Í_”$ Í_”% Í_’” Í`
+” Í`‘” Ía	‘” Íb’” Íc”ÌW ÍcÌQš” Íd” Íd
+” Íd” Íd” Íd”! Íd”" Íd”' Íd!”( Íd"”) Íd#–” Íe” Íe
+” Íe”! Íe”# Íe”$ Íe’” Íf” Íf‘”	 Íg’” Íi”& Íi"š” Íj” Íj” Íj	” Íj” Íj” Íj” Íj”# Íj”$ Íj ”% Íj!–” Ík” Ík” Ík	” Ík” Ík”  Ík’” Íl” Íl‘” Ín‘” Íp’” Íq” Íq’” Ír” Ír˜” Ís” Ís” Ís” Ís” Ís”" Ís”$ Ís ”& Ís"—” Ít” Ít
+” Ít” Ít”  Ít”+ Ít%”, Ít&—” Íu” Íu
+” Íu” Íu” Íu”: Íu4”; Íu5—” Ív” Ív
+” Ív” Ív” Ív”! Ív”" Ív—” Íw” Íw
+” Íw” Íw” Íw”  Íw”! Íw‘”	 Íx‘” Íx’” Íy”! Íy—” Íz” Íz
+” Íz” Íz”  Íz”" Íz”# Íz—” Í{” Í{
+” Í{” Í{” Í{” Í{” Í{—” Í|” Í|
+” Í|” Í|” Í|”! Í|”" Í|—” Í}” Í}
+” Í}” Í}” Í}”  Í}”! Í}‘”	 Í~’” Í” Í‘” Í‘” Íƒ’” Í„” Í„’” Í…” Í…›” Í†” Í†” Í†” Í†” Í†” Í†”# Í†”$ Í† ”( Í†$”* Í†&”+ Í†'’” Íˆ”; Íˆ7”” Í‰” Í‰” Í‰” Í‰œ” ÍŠ” ÍŠ” ÍŠ” ÍŠ” ÍŠ” ÍŠ” ÍŠ” ÍŠ”# ÍŠ”$ ÍŠ ”% ÍŠ!”' ÍŠ#š” Í‹” Í‹” Í‹”  Í‹”! Í‹”& Í‹ ”' Í‹!”* Í‹$”+ Í‹%”, Í‹&‘”	 ÍŒ‘” ÍŒš” Í” Í” Í”  Í”! Í”& Í ”' Í!”, Í&”- Í'”. Í(‘”	 Í’” Í”  ÍÜ ” Í‘” Í‘” Í‘”# Í‘”$ Í‘ ”' Í‘#”( Í‘$”) Í‘%”* Í‘&”, Í‘(”- Í‘)”. Í‘*”/ Í‘+”3 Í‘/”5 Í‘1”6 Í‘2”7 Í‘3”= Í‘9”> Í‘:”? Í‘;”Ì@ Í‘<”ÌB Í‘>”ÌC Í‘?”ÌD Í‘Ì@”ÌI Í‘ÌE”ÌK Í‘ÌG”ÌL Í‘ÌH”ÌM Í‘ÌI˜” Í“” Í“” Í“” Í“” Í“”$ Í“ ”% Í“!”' Í“#’” Í””* Í”$™” Í•” Í•
+” Í•” Í•”  Í•”! Í•”" Í•”# Í•”$ Í•™” Í–” Í–
+” Í–” Í–”  Í–”! Í–”" Í–”# Í–”$ Í–” Í—” Í—
+” Í—” Í—” Í—”) Í—#”* Í—$”= Í—7”> Í—8”? Í—9”ÌA Í—;”ÌB Í—<”ÌC Í—=”ÌD Í—>‘”	 Í˜˜” Í˜” Í˜” Í˜” Í˜”$ Í˜"”) Í˜'”* Í˜(”, Í˜*’” Í™”3 Í™-™” Íš” Íš
+” Íš” Íš”  Íš”! Íš”" Íš”# Íš”$ Íš™” Í›” Í›
+” Í›” Í›”  Í›”! Í›”" Í›”# Í›”$ Í›™” Íœ” Íœ
+” Íœ” Íœ”  Íœ”! Íœ”" Íœ”# Íœ”$ ÍœÜ ” Í” Í
+” Í” Í” Í”) Í#”* Í$”Ì@ Í:”ÌA Í;”ÌB Í<”ÌD Í>”ÌE Í?”ÌG ÍÌA”ÌH ÍÌB”ÌI ÍÌC”ÌJ ÍÌD‘”	 Í‘” Í—” ÍŸ” ÍŸ
+” ÍŸ” ÍŸ” ÍŸ”9 ÍŸ3”: ÍŸ4‘”	 Í ’” Í¡” Í¡‘” Í£‘” Í§”” Í¨” Í¨” Í¨” Í¨$’” Í©”" Í©—” Íª” Íª” Íª	” Íª” Íª”! Íª”" Íªš” Í«” Í«” Í«	” Í«” Í«” Í«” Í«”$ Í« ”% Í«!”& Í«"–” Í¬” Í¬” Í¬	” Í¬” Í¬”  Í¬’” Í­”ÌI Í­ÌE’” Í®”ÌM Í®ÌI’” Í¯” Í¯ÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜŞ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache—ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÍîÍ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÍõÍûÔrL”¤type¥start£end¤nameªIdentifierÍõÍû¦LoggerÔrM•¤type¥start£end¥value£raw§LiteralÍÍµ../common/util/Logger·'../common/util/Logger'J±ImportDeclarationÍÍT‘K¶ImportDefaultSpecifierÍ"Í/LªIdentifierÍ"Í/­CalculateUtilM§LiteralÍ5ÍS¼../common/util/CalculateUtil¾'../common/util/CalculateUtil'J±ImportDeclarationÍVÍ‘‘K¶ImportDefaultSpecifierÍ]ÍkLªIdentifierÍ]Ík®CheckEmptyUtilM§LiteralÍqÍ½../common/util/CheckEmptyUtil¿'../common/util/CheckEmptyUtil'J±ImportDeclarationÍ“ÍÎ‘K¶ImportDefaultSpecifierÍšÍ¨LªIdentifierÍšÍ¨®HistoryManagerM§LiteralÍ®ÍÍ½../common/util/HistoryManager¿'../common/util/HistoryManager'J±ImportDeclarationÍĞÍ‘K¶ImportDefaultSpecifierÍ×ÍãLªIdentifierÍ×Íã¬FractionUtilM§LiteralÍéÍ»../common/util/FractionUtil½'../common/util/FractionUtil'J±ImportDeclarationÍ	ÍA‘K¶ImportDefaultSpecifierÍÍLªIdentifierÍÍ©keysModelM§LiteralÍÍ@¿../viewmodel/PresskeysViewModelÙ!'../viewmodel/PresskeysViewModel'J±ImportDeclarationÍCÍ‘’ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÍLÍ[LªIdentifierÍLÍ[¯CommonConstantsLªIdentifierÍLÍ[¯CommonConstantsN¯ImportSpecifierÍ]ÍcLªIdentifierÍ]Íc¦SymbolLªIdentifierÍ]Íc¦SymbolM§LiteralÍkÍÙ#../common/constants/CommonConstantsÙ%'../common/constants/CommonConstants'

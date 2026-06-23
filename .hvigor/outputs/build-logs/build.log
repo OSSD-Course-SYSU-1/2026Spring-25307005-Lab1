@@ -9012,3 +9012,5 @@ Require stack:
 [2026-06-23T18:04:35.833] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
 [2026-06-23T18:05:34.799] [DEBUG] debug-file - session manager: send message to worker process.
 [2026-06-23T18:05:34.799] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-06-23T18:05:34.854] [DEBUG] debug-file - watch worker: worker is ready to be terminated.
+[2026-06-23T18:05:34.854] [DEBUG] debug-file - Server currently has 0 watch-worker

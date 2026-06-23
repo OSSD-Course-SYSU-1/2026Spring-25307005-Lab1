@@ -2,26 +2,26 @@
   "version": 1,
   "ohos-module-entry": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\entry\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\entry\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\entry\\src\\main",
+        "SOURCE_ROOT": "D:\\2026Spring-25307005-Lab1-master\\entry\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SimpleCalculator-master\\entry\\src\\main\\resources"
+          "D:\\2026Spring-25307005-Lab1-master\\entry\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\entry\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\2026Spring-25307005-Lab1-master\\entry\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -48,26 +48,26 @@
   },
   "ohos-module-common": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\common\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\common\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\common\\src\\main",
+        "SOURCE_ROOT": "D:\\2026Spring-25307005-Lab1-master\\common\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SimpleCalculator-master\\common\\src\\main\\resources"
+          "D:\\2026Spring-25307005-Lab1-master\\common\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\common\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\hsp_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\common\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\hsp_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\2026Spring-25307005-Lab1-master\\common\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -94,26 +94,26 @@
   },
   "ohos-module-calculator": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\features\\calculator\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\features\\calculator\\src\\main",
+        "SOURCE_ROOT": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SimpleCalculator-master\\features\\calculator\\src\\main\\resources"
+          "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\hsp_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\features\\calculator\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\hsp_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -140,26 +140,26 @@
   },
   "ohos-module-phone": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\products\\phone\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\products\\phone\\src\\main",
+        "SOURCE_ROOT": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SimpleCalculator-master\\products\\phone\\src\\main\\resources"
+          "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\products\\phone\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\2026Spring-25307005-Lab1-master\\products\\phone\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -186,26 +186,26 @@
   },
   "ohos-module-tablet": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\products\\tablet\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\products\\tablet\\src\\main",
+        "SOURCE_ROOT": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SimpleCalculator-master\\products\\tablet\\src\\main\\resources"
+          "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\products\\tablet\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -227,26 +227,26 @@
   },
   "ohos-module-pc": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\products\\pc\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "D:\\SimpleCalculator-master\\products\\pc\\src\\main",
+        "SOURCE_ROOT": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\src\\main",
         "RESOURCES_PATH": [
-          "D:\\SimpleCalculator-master\\products\\pc\\src\\main\\resources"
+          "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\src\\main\\resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\outputs\\default",
-          "INTERMEDIA_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates",
-          "JS_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\loader_out\\default",
-          "JS_LITE_ASSETS_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\loader_out_lite\\default",
-          "RES_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\res\\default",
-          "RES_PROFILE_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
-          "ETS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
-          "JS_SUPER_VISUAL_PATH": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
-          "WORKER_LOADER": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\loader\\default\\loader.json",
-          "MANIFEST_JSON": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\manifest\\default",
-          "OUTPUT_METADATA_JSON": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
-          "SOURCE_MAP_DIR": "D:\\SimpleCalculator-master\\products\\pc\\build\\default\\intermediates\\source_map\\default"
+          "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "D:\\2026Spring-25307005-Lab1-master\\products\\pc\\build\\default\\intermediates\\source_map\\default"
         },
         "BUILD_OPTION": {
           "debuggable": true
@@ -268,17 +268,17 @@
   },
   "ohos-project": {
     "SELECT_PRODUCT_NAME": "default",
-    "MODULE_BUILD_DIR": "D:\\SimpleCalculator-master\\build",
+    "MODULE_BUILD_DIR": "D:\\2026Spring-25307005-Lab1-master\\build",
     "BUNDLE_NAME": "com.example.simplecalculator",
     "VERSION_CODE": 1000000,
     "VERSION_NAME": "1.0.0",
     "BUILD_PATH": {
-      "OUTPUT_PATH": "D:\\SimpleCalculator-master\\build\\outputs\\default"
+      "OUTPUT_PATH": "D:\\2026Spring-25307005-Lab1-master\\build\\outputs\\default"
     },
     "MODULES": [
       {
         "name": "entry",
-        "srcPath": "D:\\SimpleCalculator-master\\entry",
+        "srcPath": "D:\\2026Spring-25307005-Lab1-master\\entry",
         "targets": [
           {
             "name": "default",
@@ -288,11 +288,11 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SimpleCalculator-master"
+        "belongProjectPath": "D:\\2026Spring-25307005-Lab1-master"
       },
       {
         "name": "common",
-        "srcPath": "D:\\SimpleCalculator-master\\common",
+        "srcPath": "D:\\2026Spring-25307005-Lab1-master\\common",
         "targets": [
           {
             "name": "default",
@@ -304,11 +304,11 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SimpleCalculator-master"
+        "belongProjectPath": "D:\\2026Spring-25307005-Lab1-master"
       },
       {
         "name": "calculator",
-        "srcPath": "D:\\SimpleCalculator-master\\features\\calculator",
+        "srcPath": "D:\\2026Spring-25307005-Lab1-master\\features\\calculator",
         "targets": [
           {
             "name": "default",
@@ -320,11 +320,11 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SimpleCalculator-master"
+        "belongProjectPath": "D:\\2026Spring-25307005-Lab1-master"
       },
       {
         "name": "phone",
-        "srcPath": "D:\\SimpleCalculator-master\\products\\phone",
+        "srcPath": "D:\\2026Spring-25307005-Lab1-master\\products\\phone",
         "targets": [
           {
             "name": "default",
@@ -334,11 +334,11 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SimpleCalculator-master"
+        "belongProjectPath": "D:\\2026Spring-25307005-Lab1-master"
       },
       {
         "name": "tablet",
-        "srcPath": "D:\\SimpleCalculator-master\\products\\tablet",
+        "srcPath": "D:\\2026Spring-25307005-Lab1-master\\products\\tablet",
         "targets": [
           {
             "name": "default",
@@ -347,11 +347,11 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SimpleCalculator-master"
+        "belongProjectPath": "D:\\2026Spring-25307005-Lab1-master"
       },
       {
         "name": "pc",
-        "srcPath": "D:\\SimpleCalculator-master\\products\\pc",
+        "srcPath": "D:\\2026Spring-25307005-Lab1-master\\products\\pc",
         "targets": [
           {
             "name": "default",
@@ -360,7 +360,7 @@
             ]
           }
         ],
-        "belongProjectPath": "D:\\SimpleCalculator-master"
+        "belongProjectPath": "D:\\2026Spring-25307005-Lab1-master"
       }
     ],
     "PROFILE_OPT": {
@@ -486,7 +486,7 @@
       "hvigor.keepDependency": true
     },
     "OVERALL_PROJECT_PATHS": [
-      "D:\\SimpleCalculator-master"
+      "D:\\2026Spring-25307005-Lab1-master"
     ],
     "BUILD_CACHE_DIR": ""
   }

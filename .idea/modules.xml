@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleCalculator-master.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleCalculator-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/2026Spring-25307005-Lab1-master.iml" filepath="$PROJECT_DIR$/.idea/modules/2026Spring-25307005-Lab1-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/calculator.iml" filepath="$PROJECT_DIR$/.idea/modules/calculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common.iml" filepath="$PROJECT_DIR$/.idea/modules/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/entry.iml" filepath="$PROJECT_DIR$/.idea/modules/entry.iml" />

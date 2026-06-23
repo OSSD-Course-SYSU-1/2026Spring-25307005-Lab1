@@ -11,6 +11,10 @@
     {
       "name": "PhoneAbility_label",
       "value": "SimpleCalculator"
+    },
+    {
+      "name": "distributed_datasync_reason",
+      "value": "Used for cross-device collaboration and data synchronization of calculator state"
     }
   ]
 }

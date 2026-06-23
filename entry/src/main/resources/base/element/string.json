@@ -15,6 +15,10 @@
     {
       "name": "error",
       "value": "error"
+    },
+    {
+      "name": "distributed_datasync_reason",
+      "value": "Used for cross-device collaboration and data synchronization of calculator state"
     }
   ]
 }

@@ -2,6 +2,7 @@ import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { UIContext, window } from '@kit.ArkUI';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import distributedDataObject from '@ohos.data.distributedDataObject';
+import AppContext from '../common/util/AppContext';
 
 export default class EntryAbility extends UIAbility {
   private dObject: distributedDataObject.DataObject | null = null;
@@ -9,6 +10,9 @@ export default class EntryAbility extends UIAbility {
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
+
+    // Set global context for distributed data operations
+    AppContext.setContext(this.context);
 
     // 检查是否是迁移过来的
     let dataSessionId = want.parameters?.dataSessionId as string;
@@ -22,10 +26,6 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage) {
-<<<<<<< HEAD
-=======
-    // Main window is created, set main page for this ability
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
     this.windowStage = windowStage;
     windowStage.loadContent('pages/HomePage', (err, data) => {
@@ -35,36 +35,20 @@ export default class EntryAbility extends UIAbility {
       }
       hilog.info(0x0000, 'testTag', 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');
 
-<<<<<<< HEAD
       let uiContext: UIContext | undefined = windowStage.getMainWindowSync().getUIContext()
-=======
-      let uiContext:  UIContext | undefined = windowStage.getMainWindowSync().getUIContext()
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
       AppStorage.setOrCreate('uiContext', uiContext);
     });
   }
 
   onWindowStageDestroy() {
-<<<<<<< HEAD
-=======
-    // Main window is destroyed, release UI related resources
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
   }
 
   onForeground() {
-<<<<<<< HEAD
-=======
-    // Ability has brought to foreground
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onForeground');
   }
 
   onBackground() {
-<<<<<<< HEAD
-=======
-    // Ability has back to background
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onBackground');
   }
 
@@ -73,7 +57,6 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onContinue');
 
     try {
-<<<<<<< HEAD
       // 1. 创建分布式数据对象，保存完整业务状态
       let myData: Record<string, Object> = {
         'currentPage': 'HomePage',
@@ -85,15 +68,6 @@ export default class EntryAbility extends UIAbility {
         'showHistory': AppStorage.get<boolean>('showHistory') ?? false,
         'historyList': AppStorage.get<string>('historyList') ?? '[]',
         'timestamp': Date.now()
-=======
-      // 1. 创建分布式数据对象，保存业务状态
-      let myData = {
-        currentPage: 'HomePage',
-        calculatorExpression: AppStorage.get<string>('calculatorExpression') ?? '',
-        calculatorResult: AppStorage.get<string>('calculatorResult') ?? '0',
-        historyList: AppStorage.get<string[]>('historyList') ?? [],
-        timestamp: Date.now()
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
       };
 
       let sessionId = distributedDataObject.genSessionId();
@@ -122,7 +96,6 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability handleDistributedData');
 
     // 创建一个空的数据对象（结构要与源端一致）
-<<<<<<< HEAD
     let emptyData: Record<string, Object> = {
       'currentPage': '',
       'calculatorExpression': '',
@@ -133,14 +106,6 @@ export default class EntryAbility extends UIAbility {
       'showHistory': false,
       'historyList': '[]',
       'timestamp': 0
-=======
-    let emptyData = {
-      currentPage: '',
-      calculatorExpression: '',
-      calculatorResult: '0',
-      historyList: [] as string[],
-      timestamp: 0
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
     };
 
     this.dObject = distributedDataObject.create(this.context, emptyData);
@@ -154,7 +119,6 @@ export default class EntryAbility extends UIAbility {
     this.dObject.on('status', (sessionId: string, networkId: string, status: string) => {
       hilog.info(0x0000, 'testTag', 'dObject status changed: %{public}s', status);
       if (status === 'restored') {
-<<<<<<< HEAD
         // 数据已恢复，读取并写入 AppStorage
         let calculatorExpression = this.dObject!['calculatorExpression'] as string;
         let calculatorResult = this.dObject!['calculatorResult'] as string;
@@ -174,18 +138,6 @@ export default class EntryAbility extends UIAbility {
         AppStorage.setOrCreate('showHistory', showHistory);
         AppStorage.setOrCreate('historyList', historyList);
         AppStorage.setOrCreate('migrationTimestamp', timestamp);
-=======
-        // 数据已恢复，可以读取并刷新UI
-        let currentPage = this.dObject!['currentPage'] as string;
-        let calculatorExpression = this.dObject!['calculatorExpression'] as string;
-        let calculatorResult = this.dObject!['calculatorResult'] as string;
-        let historyList = this.dObject!['historyList'] as string[];
-
-        // 恢复数据到 AppStorage
-        AppStorage.setOrCreate('calculatorExpression', calculatorExpression);
-        AppStorage.setOrCreate('calculatorResult', calculatorResult);
-        AppStorage.setOrCreate('historyList', historyList);
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 
         hilog.info(0x0000, 'testTag', 'Data restored successfully');
       }

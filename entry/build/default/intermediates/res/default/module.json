@@ -29,6 +29,15 @@
 		"deliveryWithInstall":	true,
 		"installationFree":	false,
 		"pages":	"$profile:main_pages",
+		"requestPermissions":	[{
+				"name":	"ohos.permission.DISTRIBUTED_DATASYNC",
+				"reason":	"$string:distributed_datasync_reason",
+				"usedScene":	{
+					"abilities":	["EntryAbility"],
+					"when":	"inuse"
+				},
+				"reasonId":	50331688
+			}],
 		"abilities":	[{
 				"name":	"EntryAbility",
 				"srcEntry":	"./ets/entryability/EntryAbility.ts",

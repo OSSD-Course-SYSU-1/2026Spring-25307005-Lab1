@@ -247,7 +247,11 @@ class DistributedSyncUtil {
   unregisterDataChangeCallback(): void {
     this.dataChangeCallback = null;
     if (this.dObject) {
-      this.dObject.off('change');
+      try {
+        this.dObject.off('change');
+      } catch (e) {
+        hilog.warn(DOMAIN, TAG, 'Failed to unregister change callback: %{public}s', JSON.stringify(e));
+      }
     }
   }
 
@@ -257,7 +261,11 @@ class DistributedSyncUtil {
   unregisterStatusChangeCallback(): void {
     this.statusChangeCallback = null;
     if (this.dObject) {
-      this.dObject.off('status');
+      try {
+        this.dObject.off('status');
+      } catch (e) {
+        hilog.warn(DOMAIN, TAG, 'Failed to unregister status callback: %{public}s', JSON.stringify(e));
+      }
     }
   }
 
@@ -330,7 +338,11 @@ class DistributedSyncUtil {
     this.unregisterStatusChangeCallback();
 
     if (this.dObject) {
-      this.dObject.setSessionId('');
+      try {
+        this.dObject.setSessionId('');
+      } catch (e) {
+        hilog.warn(DOMAIN, TAG, 'Failed to clear session: %{public}s', JSON.stringify(e));
+      }
       this.dObject = null;
     }
     this.sessionId = '';

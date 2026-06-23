@@ -21,11 +21,9 @@ import FractionUtil, { Fraction } from '../common/util/FractionUtil';
 import keysModel from '../viewmodel/PresskeysViewModel';
 import { PressKeysBean } from '../viewmodel/PressKeysItem';
 import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
-<<<<<<< HEAD
 import distributedDataObject from '@ohos.data.distributedDataObject';
 import pasteboard from '@ohos.pasteboard';
-=======
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
+import AppContext from '../common/util/AppContext';
 
 @Entry
 @Component
@@ -37,7 +35,6 @@ struct HomePage {
   @State showHistory: boolean = false; // Show history panel
   @State isFractionMode: boolean = false; // Fraction output mode
   @State historyList: Array<HistoryItem> = []; // History records
-<<<<<<< HEAD
   @State isCollaborating: boolean = false;
   @State collaborationPeer: string = '';
   private expressions: Array<string> = [];
@@ -51,7 +48,13 @@ struct HomePage {
 
   aboutToDisappear() {
     if (this.dObject) {
-      this.dObject.setSessionId('');
+      try {
+        this.dObject.off('change');
+        this.dObject.off('status');
+        this.dObject.setSessionId('');
+      } catch (e) {
+        // Ignore cleanup errors
+      }
       this.dObject = null;
     }
   }
@@ -135,9 +138,6 @@ struct HomePage {
     this.dObject['historyList'] = historyListStr;
     this.dObject['timestamp'] = Date.now();
   }
-=======
-  private expressions: Array<string> = [];
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
 
   build() {
     Column() {
@@ -183,11 +183,7 @@ struct HomePage {
               .fontSize('14vp')
               .fontColor(Color.White)
           }
-<<<<<<< HEAD
           .width('18%')
-=======
-          .width('25%')
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           .height('40vp')
           .backgroundColor('#6C7B8B')
           .justifyContent(FlexAlign.Center)
@@ -197,7 +193,6 @@ struct HomePage {
             if (this.showHistory) {
               this.historyList = HistoryManager.getHistory();
             }
-<<<<<<< HEAD
             this.syncStateToDistributed();
           })
 
@@ -210,26 +205,12 @@ struct HomePage {
               .fontColor(Color.White)
           }
           .width('18%')
-=======
-          })
-
-          Blank().width('3%')
-
-          // Fraction/Decimal toggle button
-          Column() {
-            Text(this.isFractionMode ? '小数模式' : '分数模式')
-              .fontSize('14vp')
-              .fontColor(Color.White)
-          }
-          .width('25%')
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           .height('40vp')
           .backgroundColor(this.isFractionMode ? '#FF6B6B' : '#4ECDC4')
           .justifyContent(FlexAlign.Center)
           .borderRadius(5)
           .onClick(() => {
             this.isFractionMode = !this.isFractionMode;
-<<<<<<< HEAD
             if (this.calValue && this.calValue !== 'NaN') {
               this.updateDisplayFormat();
             }
@@ -245,30 +226,12 @@ struct HomePage {
               .fontColor(Color.White)
           }
           .width('18%')
-=======
-            // Re-calculate display if there's a result
-            if (this.calValue && this.calValue !== 'NaN') {
-              this.updateDisplayFormat();
-            }
-          })
-
-          Blank().width('3%')
-
-          // Scientific mode toggle button
-          Column() {
-            Text(this.isScientificMode ? '标准模式' : '科学模式')
-              .fontSize('14vp')
-              .fontColor(Color.White)
-          }
-          .width('35%')
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           .height('40vp')
           .backgroundColor('#4A90E2')
           .justifyContent(FlexAlign.Center)
           .borderRadius(5)
           .onClick(() => {
             this.isScientificMode = !this.isScientificMode;
-<<<<<<< HEAD
             this.syncStateToDistributed();
           })
 
@@ -287,13 +250,10 @@ struct HomePage {
           .borderRadius(5)
           .onClick(() => {
             this.toggleCollaboration();
-=======
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
           })
         }
         .width(CommonConstants.FULL_PERCENT)
         .justifyContent(FlexAlign.Center)
-<<<<<<< HEAD
 
         // Collaboration status bar
         if (this.isCollaborating) {
@@ -313,8 +273,6 @@ struct HomePage {
           .width('95%')
           .padding({ top: '5vp', bottom: '5vp' })
         }
-=======
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
       }
       .width(CommonConstants.FULL_PERCENT)
       .margin({ bottom: '3vp' })
@@ -385,7 +343,6 @@ struct HomePage {
                   .backgroundColor(index % 2 === 0 ? '#FFFFFF' : '#F5F5F5')
                   .borderRadius(5)
                   .onClick(() => {
-                    // Click to use this history record
                     this.inputValue = item.expression;
                     this.calValue = item.result;
                     this.showHistory = false;
@@ -619,10 +576,7 @@ struct HomePage {
         break;
     }
     this.formatInputValue();
-<<<<<<< HEAD
     this.syncStateToDistributed();
-=======
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 
   /**
@@ -650,14 +604,10 @@ struct HomePage {
 
     // Check if we're in fraction input mode (last element is '/' for fraction)
     if (last === '/' && len >= 2) {
-      // We're completing a fraction: numerator/denominator
-      // Merge into a single fraction element
       let numerator = secondLast;
       if (numerator && !CalculateUtil.isSymbol(numerator) && !CalculateUtil.isScientificSymbol(numerator)) {
-        // Remove the last two elements (numerator and '/')
         this.expressions.pop(); // Remove '/'
         this.expressions.pop(); // Remove numerator
-        // Add the complete fraction
         this.expressions.push(numerator + '/' + value);
         this.formatInputValue();
         this.getResult();
@@ -667,7 +617,6 @@ struct HomePage {
 
     // Check if last element is a fraction (contains '/') - append to denominator
     if (last && last.indexOf('/') !== -1) {
-      // Append to the denominator of the fraction
       this.expressions[len - 1] += value;
       this.formatInputValue();
       this.getResult();
@@ -680,19 +629,14 @@ struct HomePage {
     if (!last) {
       this.expressions.push(value);
     } else if (isLastOperator) {
-      // If last is an operator, push new number
       this.expressions.push(value);
     } else if (!secondLast) {
-      // If no second last, append to last number
       this.expressions[len - 1] += value;
     } else {
-      // Check if second last is an operator
       let isSecondLastOperator = CalculateUtil.isSymbol(secondLast) || CalculateUtil.isScientificSymbol(secondLast);
       if (isSecondLastOperator) {
-        // Append to last number
         this.expressions[len - 1] += value;
       } else {
-        // Push new number
         this.expressions.push(value);
       }
     }
@@ -700,10 +644,7 @@ struct HomePage {
     if (value !== CommonConstants.DOTS) {
       this.getResult();
     }
-<<<<<<< HEAD
     this.syncStateToDistributed();
-=======
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 
   /**
@@ -904,10 +845,8 @@ struct HomePage {
     }
     
     if (this.isFractionMode) {
-      // Convert decimal to fraction
       this.calValue = this.convertToFraction(this.calValue);
     } else {
-      // Convert fraction to decimal
       if (this.calValue.indexOf('/') !== -1) {
         try {
           const fraction = FractionUtil.parseFraction(this.calValue);
@@ -1034,23 +973,15 @@ struct HomePage {
     }
 
     // For unary scientific operators (sin, cos, tan, log, ln, √)
-    // These are prefix operators, so they should be added before the operand
-    // But in our UI flow, user inputs number first, then clicks operator
-    // So we need to apply the operator to the last number in expressions
     const unaryOperators = ['sin', 'cos', 'tan', 'log', 'ln', '√', '!'];
     if (unaryOperators.indexOf(value) !== -1) {
       let len = this.expressions.length;
       if (len > 0) {
         let last = this.expressions[len - 1];
-        // If last element is a number, apply the operator
         if (!CalculateUtil.isSymbol(last) && !CalculateUtil.isScientificSymbol(last)) {
-          // For prefix operators like sin, cos, √, we need to insert operator before the number
-          // For postfix operators like !, we add after the number
           if (value === '!') {
-            // Postfix operator (factorial)
             this.expressions.push(value);
           } else {
-            // Prefix operator: insert before the last number
             this.expressions.splice(len - 1, 0, value);
           }
           this.formatInputValue();
@@ -1058,7 +989,6 @@ struct HomePage {
           return;
         }
       }
-      // If no number before, just add the operator (user will input number next)
       this.expressions.push(value);
       this.formatInputValue();
       return;
@@ -1073,14 +1003,12 @@ struct HomePage {
    * Show equation solving dialog.
    */
   showEquationDialog() {
-    // Toggle equation mode
     if (this.equationMode === '') {
       this.equationMode = 'quadratic';
       this.calValue = '方程模式：输入系数 a,b,c 解 ax²+bx+c=0';
       this.expressions = [];
       this.inputValue = '';
     } else {
-      // Exit equation mode
       this.equationMode = '';
       this.calValue = '';
       this.expressions = [];
@@ -1092,7 +1020,6 @@ struct HomePage {
    * Solve equation from input.
    */
   solveEquation() {
-    // Get the input string
     let input = this.inputValue.trim();
 
     // Parse coefficients (separated by comma or space)
@@ -1107,12 +1034,10 @@ struct HomePage {
     coefficients = coefficients.map(c => c.trim()).filter(c => c !== '');
 
     if (coefficients.length === 2) {
-      // Linear equation: ax + b = 0
       let a = coefficients[0];
       let b = coefficients[1];
       this.calValue = CalculateUtil.solveLinearEquation(a, b);
     } else if (coefficients.length === 3) {
-      // Quadratic equation: ax² + bx + c = 0
       let a = coefficients[0];
       let b = coefficients[1];
       let c = coefficients[2];
@@ -1128,11 +1053,9 @@ struct HomePage {
    * @param symbol Fraction symbol ('/' or ' ')
    */
   inputFractionSymbol(symbol: string) {
-    // Add the symbol to input
     this.inputValue += symbol;
     this.expressions.push(symbol);
     this.formatInputValue();
-<<<<<<< HEAD
     this.syncStateToDistributed();
   }
 
@@ -1153,16 +1076,15 @@ struct HomePage {
    * Start collaboration - creates a session and waits for peer to join
    */
   startCollaboration() {
-    try {
-      const uiContext: UIContext | undefined = AppStorage.get('uiContext');
-      if (!uiContext) {
-        Logger.error('[HomePage] No UIContext available for collaboration');
-        return;
-      }
+    // Update UI state first so user gets feedback
+    this.isCollaborating = true;
+    this.collaborationPeer = '等待连接...';
 
-      const context = uiContext.getHostContext();
+    try {
+      const context = AppContext.getContext();
       if (!context) {
-        Logger.error('[HomePage] No host context available for collaboration');
+        Logger.error('[HomePage] No AbilityContext available for collaboration');
+        this.collaborationPeer = '未获取到Context';
         return;
       }
 
@@ -1216,15 +1138,13 @@ struct HomePage {
         }
       });
 
-      this.isCollaborating = true;
-      this.collaborationPeer = '等待连接...';
-
       // Store session ID in AppStorage so other devices can join
       AppStorage.setOrCreate('collaborationSessionId', sessionId);
 
       Logger.info('[HomePage] Collaboration started, sessionId: ' + sessionId);
     } catch (error) {
       Logger.error('[HomePage] Failed to start collaboration: ' + JSON.stringify(error));
+      this.collaborationPeer = '启动失败';
     }
   }
 
@@ -1232,11 +1152,27 @@ struct HomePage {
    * Stop collaboration and clean up
    */
   stopCollaboration() {
-    if (this.dObject) {
-      this.dObject.off('change');
-      this.dObject.off('status');
-      this.dObject.setSessionId('');
-      this.dObject = null;
+    try {
+      if (this.dObject) {
+        try {
+          this.dObject.off('change');
+        } catch (e) {
+          // Ignore errors when unregistering change callback
+        }
+        try {
+          this.dObject.off('status');
+        } catch (e) {
+          // Ignore errors when unregistering status callback
+        }
+        try {
+          this.dObject.setSessionId('');
+        } catch (e) {
+          // Ignore errors when clearing session
+        }
+        this.dObject = null;
+      }
+    } catch (error) {
+      Logger.error('[HomePage] Error during stop collaboration cleanup: ' + JSON.stringify(error));
     }
     this.isCollaborating = false;
     this.collaborationPeer = '';
@@ -1278,9 +1214,5 @@ struct HomePage {
     } catch (error) {
       Logger.error('[HomePage] Failed to paste from clipboard: ' + JSON.stringify(error));
     }
-=======
-    // Don't call getResult() here - wait for complete fraction input
-    // The calculation will be triggered when user inputs the denominator
->>>>>>> ec2c3a8fa90320418457a7069fe965d421ef26be
   }
 }
